@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="/WEB-INF/tag/customTag.tld" prefix="customTag" %>
 <script>
-
+  
     var noticeList;	//noticeList
     var isTablesDrawed = true;
 
