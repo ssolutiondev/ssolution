@@ -377,7 +377,7 @@
                     type: "linear",
                     gridLines: {display:true, beginAtZero:true, drawTicks:false, tickMarkLength:10, zeroLineColor:"rgba(255, 255, 255, 1.0)", zeroLineWidth:2, drawBorder:true, color:"rgba(255, 255, 255, 1.0)", drawOnChartArea: false},
                     ticks: {padding:10, suggestMin: 100000}
-                }]
+                }]   
             },
             tooltips: {
                 mode: 'index',
