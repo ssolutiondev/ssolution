@@ -1,0 +1,12 @@
+Dockerfile
+.git
+.DS_Store
+*.swp
+.idea
+.project
+target
+*.iml
+/.settings/
+/bin/
+/.classpath
+.factorypath

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.manage.ManagerMngAdminMapper">
+
+    <select id="getUserInfoList" parameterType="userMngAdminVO" resultType="userMngAdminVO">
+        SELECT /* UserMngAdminMapper.getUserInfoList, 윤정환, 2017.10.18 */ 
+             USR.USER_ID
+            ,USR.USER_NM
+            ,USR.PSWD
+            ,USR.USER_GRP_ID
+            ,(SELECT AUTH_GRP_NM 
+              FROM TSYAU_AUTH_GRP AUTHGRP 
+              WHERE USR.USER_GRP_ID = AUTHGRP.AUTH_GRP_ID) AS USER_GRP_NM
+            ,USR.ORG_ID
+            ,ORG.ORG_NM
+            ,USR.USER_TP
+            ,USR.EMP_NO
+            ,USR.PSTN
+            ,USR.RSPOFC
+            ,USR.TEL_NO
+            ,USR.CELL_PHN_NO
+            ,USR.EMAIL
+            ,USR.PERM_IP_BAND
+            ,USR.PSWD_CHG_PLN_DT
+            ,USR.PSWD_CHG_CYCL
+            ,USR.USE_YN
+            ,USR.LOCK_YN
+            ,USR.PSWD1
+            ,USR.PSWD2
+            ,USR.LOGIN_FAIL_CNT
+            ,USR.LAST_LOGIN_DATE1
+            ,USR.LAST_LOGIN_DATE2
+            ,USR.INPT_MENU_ID
+            ,USR.REGR_ID
+            ,FSYUS_USR_NM(USR.REGR_ID) AS REGR_NM
+            ,USR.REG_DATE
+            ,USR.CHGR_ID
+            ,FSYUS_USR_NM(USR.CHGR_ID) AS CHGR_NM
+            ,USR.CHG_DATE
+            ,(SELECT SO_NM 
+             FROM TSYCO_SO_MST SO
+             WHERE SO.SO_ID = ORG.SO_ID 
+                AND ORG.APLY_STRT_DT &lt;= #{user.today} 
+                AND ORG.APLY_END_DT &gt;= #{user.today}) AS SO_NM
+        FROM TSYUS_USER USR
+            ,TSYOR_ORG_INFO ORG
+        WHERE     USR.ORG_ID            = ORG.ORG_ID   
+            AND ORG.APLY_STRT_DT &lt;= #{user.today}
+            AND ORG.APLY_END_DT     &gt;= #{user.today}  
+        <if test="user.soId != null and user.soId != '' and user.soId != 'ALL'" >
+            AND ORG.SO_ID             = #{user.soId}
+        </if>
+         <if test="user.soId != null and user.soId == 'ALL'">
+            AND ORG.SO_ID IN
+            <foreach collection="soAuthList" item="item" index="index" open="(" separator="," close=")">
+                #{item.so_id}
+            </foreach>
+        </if>
+        <if test="user.userNm != null and user.userNm != ''">
+            AND USR.USER_NM LIKE CONCAT(CONCAT( '%',#{user.userNm}) ,'%')
+        </if>
+        <if test="user.orgId != null and user.orgId != ''">
+            AND USR.ORG_ID         = #{user.orgId}
+        </if>
+        <if test="user.useYn !='ALL'">
+            AND USR.USE_YN         = #{user.useYn}
+        </if>  
+        <if test="user.lockYn !='ALL'">
+            AND USR.LOCK_YN     = #{user.lockYn}
+        </if>
+        <if test="user.userId != null and user.userId != ''">
+            AND USR.USER_ID     = #{user.userId}
+        </if>
+        <if test="user.orgNm != null and user.orgNm != ''">
+            AND ORG.ORG_NM LIKE CONCAT(CONCAT( '%' , #{user.orgNm}) , '%')
+        </if>
+        ORDER BY USR.REG_DATE 
+    </select>
+
+    <insert id="insertUserInfo" parameterType="userMngAdminVO">
+        INSERT INTO /* UserMngAdminMapper.insertUserInfo, 윤정환, 2017.10.18 */ 
+            TSYUS_USER
+        (
+             USER_ID
+            ,USER_NM
+            ,PSWD
+            ,USER_GRP_ID
+            ,ORG_ID
+            ,USER_TP
+            ,EMP_NO
+            ,PSTN
+            ,RSPOFC
+            ,TEL_NO
+            ,CELL_PHN_NO
+            ,EMAIL
+            ,PERM_IP_BAND
+            ,PSWD_CHG_PLN_DT
+            ,PSWD_CHG_CYCL
+            ,USE_YN
+            ,LOCK_YN
+            ,PSWD1
+            ,PSWD2
+            ,LOGIN_FAIL_CNT
+            ,LAST_LOGIN_DATE1
+            ,LAST_LOGIN_DATE2
+            ,INPT_MENU_ID
+            ,REGR_ID
+            ,REG_DATE
+            ,CHGR_ID
+            ,CHG_DATE
+        )VALUES(
+              #{userId,jdbcType=VARCHAR}
+             ,#{userNm,jdbcType=VARCHAR}
+             ,#{pswd,jdbcType=VARCHAR}
+             ,#{userGrpId,jdbcType=VARCHAR}
+             ,#{orgId,jdbcType=VARCHAR}
+             ,#{userTp,jdbcType=VARCHAR}
+             ,#{empNo,jdbcType=VARCHAR}
+             ,#{pstn,jdbcType=VARCHAR}
+             ,#{rspofc,jdbcType=VARCHAR}
+             ,#{telNo,jdbcType=VARCHAR}
+             ,#{cellPhnNo,jdbcType=VARCHAR}
+             ,#{email,jdbcType=VARCHAR}
+             ,#{permIpBand,jdbcType=VARCHAR}
+             ,#{pswdChgPlnDt,jdbcType=VARCHAR}
+             ,#{pswdChgCycl}
+             ,#{useYn,jdbcType=VARCHAR}
+             ,#{lockYn,jdbcType=VARCHAR}
+             ,#{pswd1,jdbcType=VARCHAR}
+             ,#{pswd2,jdbcType=VARCHAR}
+             ,#{loginFailCnt}
+             ,null
+             ,null
+             ,#{inptMenuId,jdbcType=VARCHAR}
+             ,#{regrId,jdbcType=VARCHAR}
+             ,#{regDate}
+             ,#{regrId,jdbcType=VARCHAR}
+             ,#{regDate}
+        )
+    </insert>
+    
+    <update id="updateUserInfo" parameterType="userMngAdminVO">
+        UPDATE /* UserMngAdminMapper.updateUserInfo, 윤정환, 2017.10.18 */ 
+            TSYUS_USER
+        SET
+              USER_NM        = #{userNm,jdbcType=VARCHAR}
+             ,PSWD           = #{pswd,jdbcType=VARCHAR}
+             ,USER_GRP_ID    = #{userGrpId,jdbcType=VARCHAR}
+             ,ORG_ID         = #{orgId,jdbcType=VARCHAR}
+             ,USER_TP        = #{userTp,jdbcType=VARCHAR}
+             ,EMP_NO         = #{empNo,jdbcType=VARCHAR}
+             ,PSTN           = #{pstn,jdbcType=VARCHAR}
+             ,RSPOFC         = #{rspofc,jdbcType=VARCHAR}
+             ,TEL_NO         = #{telNo,jdbcType=VARCHAR}
+             ,CELL_PHN_NO    = #{cellPhnNo,jdbcType=VARCHAR}
+             ,EMAIL          = #{email,jdbcType=VARCHAR}
+             ,PERM_IP_BAND   = #{permIpBand,jdbcType=VARCHAR}
+             ,PSWD_CHG_PLN_DT = #{pswdChgPlnDt,jdbcType=VARCHAR}
+             ,PSWD_CHG_CYCL  = #{pswdChgCycl}
+             ,USE_YN         = #{useYn,jdbcType=VARCHAR}
+             ,LOCK_YN        = #{lockYn,jdbcType=VARCHAR}
+             ,LOGIN_FAIL_CNT = #{loginFailCnt}
+             ,INPT_MENU_ID   = #{inptMenuId,jdbcType=VARCHAR}
+             ,CHGR_ID        = #{chgrId,jdbcType=VARCHAR} 
+             ,CHG_DATE       = #{chgDate}
+        WHERE USER_ID        = #{userId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="checkUserId" parameterType="userMngAdminVO" resultType="int">
+        SELECT /* UserMngAdminMapper.checkUserId, 윤정환, 2017.10.18 */ 
+            COUNT(USER_ID) 
+        FROM TSYUS_USER 
+        WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+    </select>
+    
+    <insert id="insertUserAuth" parameterType="userMngAdminVO">
+        INSERT INTO /* UserMngAdminMapper.insertUserAuth, 윤정환, 2017.10.18 */ 
+            TSYAU_AUTH_GRP_USER
+            (
+                 AUTH_GRP_ID
+                ,USER_ID
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+            )VALUES(
+                #{userGrpId,jdbcType=VARCHAR}
+               ,#{userId,jdbcType=VARCHAR}
+               ,#{inptMenuId,jdbcType=VARCHAR}
+               ,#{regrId,jdbcType=VARCHAR}
+               ,#{regDate}
+               ,#{regrId,jdbcType=VARCHAR}
+               ,#{regDate}
+            )
+    </insert>
+    
+    <insert id="insertSoAuth" parameterType="userMngAdminVO">
+        INSERT INTO /* UserMngAdminMapper.insertSoAuth, 윤정환, 2017.10.18 */ 
+            TSYCO_SO_AUTH
+            (
+                 SO_ID
+                ,USER_ID
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+            )VALUES(
+                #{soId,jdbcType=VARCHAR}
+                ,#{userId,jdbcType=VARCHAR}
+                ,#{inptMenuId,jdbcType=VARCHAR}
+                ,#{regrId,jdbcType=VARCHAR}
+                ,#{regDate}
+                ,#{regrId,jdbcType=VARCHAR}
+                ,#{regDate}
+            )
+    </insert>
+    
+    <select id="getUserSoId" parameterType="userMngAdminVO" resultType="string">
+        SELECT  /* UserMngAdminMapper.getUserSoId, 윤정환, 2017.10.18 */  
+             SO_ID 
+        FROM TSYOR_ORG_INFO 
+        WHERE ORG_ID = #{user.orgId,jdbcType=VARCHAR} 
+         AND APLY_STRT_DT &lt;= #{today} 
+         AND APLY_END_DT &gt;= #{today}
+    </select>
+    
+    <select id="userAuthCount" parameterType="userMngAdminVO" resultType="int">
+        SELECT /* UserMngAdminMapper.userAuthCount, 윤정환, 2017.10.18 */  
+            COUNT(*) 
+        FROM TSYAU_AUTH_GRP_USER 
+        WHERE USER_ID=#{userId,jdbcType=VARCHAR} 
+        AND   AUTH_GRP_ID=#{userGrpId,jdbcType=VARCHAR}
+    </select>
+    
+    
+   <select id="getUserInfo" parameterType="String" resultType="userMngAdminVO">
+        SELECT /* UserMngAdminMapper.getUserInfo, 윤정환, 2017.10.18 */ 
+             USR.USER_ID
+            ,USR.USER_NM
+            ,USR.PSWD
+            ,USR.USER_GRP_ID
+            ,(SELECT AUTH_GRP_NM 
+              FROM TSYAU_AUTH_GRP AUTHGRP 
+              WHERE USR.USER_GRP_ID = AUTHGRP.AUTH_GRP_ID) AS USER_GRP_NM
+            ,USR.ORG_ID
+            ,USR.USER_TP
+            ,USR.EMP_NO
+            ,USR.PSTN
+            ,USR.RSPOFC
+            ,USR.TEL_NO
+            ,USR.CELL_PHN_NO
+            ,USR.EMAIL
+            ,USR.PERM_IP_BAND
+            ,USR.PSWD_CHG_PLN_DT
+            ,USR.PSWD_CHG_CYCL
+            ,USR.USE_YN
+            ,USR.LOCK_YN
+            ,USR.PSWD1
+            ,USR.PSWD2
+            ,USR.LOGIN_FAIL_CNT
+            ,USR.LAST_LOGIN_DATE1
+            ,USR.LAST_LOGIN_DATE2
+            ,USR.INPT_MENU_ID
+            ,USR.REGR_ID
+            ,FSYUS_USR_NM(USR.REGR_ID) AS REGR_NM
+            ,USR.REG_DATE
+            ,USR.CHGR_ID
+            ,FSYUS_USR_NM(USR.CHGR_ID) AS CHGR_NM
+            ,USR.CHG_DATE
+        FROM TSYUS_USER USR
+        WHERE USR.USER_ID = #{userId} 
+    </select>
+
+    <update id="updatePassword" parameterType="userMngAdminVO">
+        UPDATE /* UserMngAdminMapper.updatePassword, 윤정환, 2019.04.26 */
+            TSYUS_USER
+        SET
+              PSWD           = #{pswd,jdbcType=VARCHAR}
+             ,PSWD1          = #{pswd1,jdbcType=VARCHAR}
+             ,PSWD2          = #{pswd2,jdbcType=VARCHAR}
+             ,LOCK_YN        = #{lockYn,jdbcType=VARCHAR}
+             ,LOGIN_FAIL_CNT = #{loginFailCnt}
+             ,PSWD_CHG_PLN_DT = #{pswdChgPlnDt,jdbcType=VARCHAR}
+             ,CHGR_ID        = #{chgrId,jdbcType=VARCHAR}
+             ,CHG_DATE       = #{chgDate}
+        WHERE USER_ID        = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.manage.ManagerAuthMngMapper">
+    <select id="getUserList" resultType="managerAuthMngVO">
+        SELECT /* UserAuthMngMapper.getUserList, 윤정환, 2017.10.19 */ 
+             USR.USER_ID
+            ,USR.USER_NM
+            ,ORG.ORG_ID
+            ,ORG.ORG_NM
+        FROM TSYUS_USER USR
+            ,TSYOR_ORG_INFO ORG 
+        WHERE 
+            ORG.SO_ID IN
+            <foreach collection="soAuthList" item="item" index="index" open="(" separator="," close=")">
+                #{item.so_id}
+            </foreach>
+        AND ORG.APLY_STRT_DT &lt;= #{today}
+        AND ORG.APLY_END_DT &gt;= #{today}  
+        AND USR.ORG_ID          = ORG.ORG_ID
+        AND USR.USE_YN='Y'
+        <if test="managerAuth.managerId != null and managerAuth.managerId != ''">
+            AND USR.USER_ID LIKE CONCAT( #{managerAuth.managerId, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="managerAuth.managerNm != null and managerAuth.managerNm != ''">
+            AND USR.USER_NM LIKE CONCAT(CONCAT( '%',#{managerAuth.managerNm, jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="managerAuth.orgId != null and managerAuth.orgId != ''">
+            AND USR.ORG_ID = #{managerAuth.orgId, jdbcType=VARCHAR}
+        </if>
+    </select>    
+    
+    <select id="getUserAuthList" resultType="managerAuthMngVO">
+        SELECT /* UserAuthMngMapper.getUserAuthList, 윤정환, 2017.10.19 */ 
+               MAX(CHECK_YN) AS CHECK_YN
+              ,AUTH_GRP_ID
+              ,AUTH_GRP_NM
+        FROM (
+            SELECT 'N' AS CHECK_YN
+                   ,AUTH_GRP_ID
+                   ,AUTH_GRP_NM
+            FROM TSYAU_AUTH_GRP
+            UNION ALL
+            SELECT 'Y' AS CHECK_YN
+                 , AUTH_GRP_ID
+                 ,(SELECT AUTH_GRP_NM
+                   FROM TSYAU_AUTH_GRP
+                   WHERE AUTH_GRP_ID = AUSER.AUTH_GRP_ID) AS AUTH_GRP_NM
+            FROM TSYAU_AUTH_GRP_USER AUSER
+            WHERE USER_ID = #{managerAuth.managerId, jdbcType=VARCHAR}
+            ) AUTH
+        GROUP BY AUTH_GRP_ID,AUTH_GRP_NM
+        ORDER BY AUTH_GRP_ID
+    </select>
+    
+    <delete id="deleteAllAuth">
+        DELETE /* UserAuthMngMapper.deleteAllAuth, 윤정환, 2017.10.19 */ 
+        FROM
+            TSYAU_AUTH_GRP_USER
+        WHERE USER_ID =  #{managerAuth.managerId, jdbcType=VARCHAR}
+    </delete>
+    
+    <insert id="insertUserAuth">
+        INSERT /* UserAuthMngMapper.insertUserAuth, 윤정환, 2017.10.19 */  
+        INTO TSYAU_AUTH_GRP_USER
+            (
+                 AUTH_GRP_ID
+                ,USER_ID
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+            )VALUES(
+                 #{authGrpId}
+                ,#{managerId}
+                ,#{inptMenuId}
+                ,#{regrId}
+                ,#{regDate}
+                ,#{regrId}
+                ,#{regDate}
+            )
+    </insert>
+</mapper>

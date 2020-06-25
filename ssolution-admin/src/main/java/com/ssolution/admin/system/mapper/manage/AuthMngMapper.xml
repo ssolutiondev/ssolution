@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.manage.AuthMngMapper">
+
+	<select id="getAuthGroupList" parameterType="grpMngVO" resultType="grpMngVO">
+		SELECT /* AuthMngMapper.getAuthGroupList JHLee, 2017.10.24 */
+			AUTH_GRP_ID
+		  , AUTH_GRP_NM
+		  , DASHBOARD_TP
+		  , FSYCD_CODE_NAME('SY00005', DASHBOARD_TP)	AS DASHBOARD_TP_NM
+		  , (SELECT REF_CD1
+		       FROM TSYCD_COMM_CD_DTL
+		      WHERE COMM_CD_GRP = 'SY00005'
+		        AND COMM_CD = DASHBOARD_TP) 			AS MAIN_VIEW
+		  , ORD
+		  , AUTH_GRP_DESC
+		  , INPT_MENU_ID
+		  , REGR_ID
+		  , FSYUS_USR_NM(REGR_ID)						AS REGR_NM
+		  , REG_DATE
+		  , CHGR_ID
+		  , FSYUS_USR_NM(CHGR_ID)						AS CHGR_NM
+		  , CHG_DATE
+		FROM TSYAU_AUTH_GRP
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="auth.authGrpId != null and auth.authGrpId != ''">
+				AND AUTH_GRP_ID = #{auth.authGrpId, jdbcType=VARCHAR}
+			</if>
+			<if test="auth.authGrpNm != null and auth.authGrpNm != ''">
+				AND AUTH_GRP_NM LIKE CONCAT(CONCAT( '%' , #{auth.authGrpNm, jdbcType=VARCHAR}) , '%')
+			</if>
+		</trim>
+		ORDER BY ORD
+	</select>
+
+	<select id="getAuthList" resultType="authMngVO">
+         SELECT /* AuthMngMapper.getAuthList JHLee, 2017.10.24 */
+             #{authGrpId} AS AUTH_GRP_ID
+            ,MENU.MENU_ID
+            ,CASE WHEN CONCAT(CONCAT(CONCAT(CONCAT(AUTH.AUTH_INQ, AUTH.AUTH_REG), AUTH.AUTH_CHG) , AUTH.AUTH_DEL) , AUTH.AUTH_PRT) = 'YYYYY'
+                  THEN 'Y'
+                  ELSE 'N'
+             END AS AUTH_ALL
+            ,CASE WHEN AUTH.AUTH_INQ IS NULL
+                  THEN 'N'
+                  ELSE AUTH.AUTH_INQ
+             END AS AUTH_INQ
+            ,CASE WHEN AUTH.AUTH_REG IS NULL
+                  THEN 'N'
+                  ELSE AUTH.AUTH_REG
+             END AS AUTH_REG
+            ,CASE WHEN AUTH.AUTH_CHG IS NULL
+                  THEN 'N'
+                  ELSE AUTH.AUTH_CHG
+             END AS AUTH_CHG
+            ,CASE WHEN AUTH.AUTH_DEL IS NULL
+                  THEN 'N'
+                  ELSE AUTH.AUTH_DEL
+             END AS AUTH_DEL
+            ,CASE WHEN AUTH.AUTH_PRT IS NULL
+                  THEN 'N'
+                  ELSE AUTH.AUTH_PRT
+             END AS AUTH_PRT
+             ,COALESCE(
+                      (SELECT MENU_NM
+                         FROM TSYMU_MENU_LANG
+                        WHERE MENU_ID = MENU.MENU_ID
+                          AND LANG_TP = #{lng}), MENU.MENU_NM
+                      ) AS MENU_NM
+            ,MENU.UPP_MENU_ID
+            ,MENU.LVL
+            ,MENU.SORT_NO
+            ,MENU.MENU_DESC
+        <if test='condAsgnYn == "Y"'>
+            FROM  TSYAU_AUTH_GRP_DTL AUTH
+                , TSYMU_MENU         MENU
+            WHERE AUTH.MENU_ID     = MENU.MENU_ID
+              AND MENU.LVL         = #{lvl}
+              AND MENU.UPP_MENU_ID = #{uppMenuId}    
+        </if>
+        <if test='condAsgnYn != "Y"'>
+            FROM  TSYAU_AUTH_GRP_DTL AUTH
+            RIGHT OUTER JOIN (
+              SELECT MENU.MENU_ID
+                    ,MENU.MENU_NM
+                    ,MENU.UPP_MENU_ID
+                    ,MENU.LVL
+                    ,MENU.SORT_NO
+                    ,MENU.MENU_DESC
+				FROM TSYMU_MENU MENU
+               WHERE LVL         = #{lvl}
+                 AND UPP_MENU_ID = #{uppMenuId}  
+            ) MENU
+            ON AUTH.MENU_ID=MENU.MENU_ID
+        </if>
+            AND AUTH.AUTH_GRP_ID = #{authGrpId}
+            ORDER BY MENU.LVL, MENU.SORT_NO
+	</select>
+
+    <update id="updateAuth" parameterType="authMngVO">
+		UPDATE /* AuthMngMapper.updateAuth JHLee, 2017.10.24 */
+			TSYAU_AUTH_GRP_DTL
+		SET
+           AUTH_INQ = #{authMng.authInq, jdbcType=VARCHAR}
+         , AUTH_REG = #{authMng.authReg, jdbcType=VARCHAR}
+         , AUTH_CHG = #{authMng.authChg, jdbcType=VARCHAR}
+         , AUTH_DEL = #{authMng.authDel, jdbcType=VARCHAR}
+         , AUTH_PRT = #{authMng.authPrt, jdbcType=VARCHAR}
+         , CHGR_ID  = #{authMng.regrId,  jdbcType=VARCHAR}
+         , CHG_DATE = now()
+        WHERE AUTH_GRP_ID = #{authMng.authGrpId, jdbcType=VARCHAR}
+        AND   MENU_ID     = #{authMng.menuId,    jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteAuth">
+        DELETE /* AuthMngMapper.deleteAuth JHLee, 2017.10.24 */
+        FROM
+        	TSYAU_AUTH_GRP_DTL
+        WHERE AUTH_GRP_ID = #{authGrpId}
+          AND MENU_ID = #{menuId}
+    </delete>
+
+    <select id="getMenuList" resultType="String">
+         SELECT /* AuthMngMapper.getMenuList JHLee, 2017.10.24 */
+            MENU.MENU_ID
+         FROM
+         	TSYMU_MENU MENU
+         WHERE UPP_MENU_ID = #{menuId}
+           AND LVL = #{lvl}
+    </select>
+
+    <select id="getUpMenuNo" resultType="String">
+		SELECT /* AuthMngMapper.getUpMenuNo JHLee, 2017.10.24 */
+			MENU.UPP_MENU_ID
+        FROM
+        	TSYMU_MENU MENU
+        WHERE MENU_ID = #{menuId}
+    </select>
+
+    <insert id="insertAuth" parameterType="authMngVO">
+        INSERT /* AuthMngMapper.insertAuth JHLee, 2017.10.24 */
+        INTO TSYAU_AUTH_GRP_DTL(
+			AUTH_GRP_ID
+          , MENU_ID
+          , AUTH_INQ
+          , AUTH_REG
+          , AUTH_CHG
+          , AUTH_DEL
+          , AUTH_PRT
+          , INPT_MENU_ID
+          , REGR_ID
+          , REG_DATE
+          , CHGR_ID
+          , CHG_DATE
+        )VALUES(
+			#{authMng.authGrpId,  jdbcType=VARCHAR}
+          , #{authMng.menuId,     jdbcType=VARCHAR}
+          , #{authMng.authInq,    jdbcType=VARCHAR}
+          , #{authMng.authReg,    jdbcType=VARCHAR}
+          , #{authMng.authChg,    jdbcType=VARCHAR}
+          , #{authMng.authDel,    jdbcType=VARCHAR}
+          , #{authMng.authPrt,    jdbcType=VARCHAR}
+          , #{authMng.inptMenuId, jdbcType=VARCHAR}
+          , #{authMng.regrId,     jdbcType=VARCHAR}
+          , now()
+          , #{authMng.regrId,     jdbcType=VARCHAR}
+          , now()
+        )
+    </insert>
+
+    <select id="getMenuAuthCnt" resultType="int">
+         SELECT /* AuthMngMapper.getMenuAuthCnt JHLee, 2017.10.24 */
+             COUNT(MENU_ID) AS CNT
+         FROM
+         	TSYAU_AUTH_GRP_DTL
+         WHERE AUTH_GRP_ID = #{authGrpId} 
+           AND MENU_ID     = #{menuId}
+    </select>
+
+</mapper>

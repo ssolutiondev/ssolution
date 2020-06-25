@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+
+	<tlib-version>1.2</tlib-version>
+	<short-name>ssolution</short-name>
+
+	<tag>
+		<!-- top menu -->
+	    <name>topmenu</name>
+	    <tag-class>com.ssolution.core.tag.TopMenuTag</tag-class>
+	    <body-content>empty</body-content>
+	</tag>
+
+	<tag>
+		<!-- menu -->
+	    <name>menu</name>
+	    <tag-class>com.ssolution.core.tag.MenuTag</tag-class>
+	    <body-content>empty</body-content>
+		<attribute>
+		    <name>menuId</name>
+		    <required>true</required>
+		    <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		    <name>selectMenuId</name>
+		    <required>false</required>
+		    <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		    <name>selectMenuNm</name>
+		    <required>false</required>
+		    <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		    <name>topMenuId</name>
+		    <required>false</required>
+		    <rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+		    <name>topMenuNm</name>
+		    <required>false</required>
+		    <rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<!-- auth -->
+	    <name>auth</name>
+	    <tag-class>com.ssolution.core.tag.AuthTag</tag-class>
+	    <body-content>JSP</body-content>
+	    <attribute>
+		    <name>auth</name>
+		    <required>true</required>
+		    <rtexprvalue>true</rtexprvalue>
+		    <!-- auth 지정 : A/R -->
+		</attribute>
+	</tag>
+</taglib>

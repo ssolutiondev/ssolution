@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by unfetter (forcs) -->
+<OZCHARTRESOURCE VERSION="2.0">
+	<CLASS NAME="Vertical line" TYPE="0">
+		<TYPE NAME="Line" IMAGE="Line_0">Displays trend over time or categories</TYPE>
+		<TYPE NAME="Stacked Line" IMAGE="Line_1">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Line" IMAGE="Line_2">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+		<TYPE NAME="Line with markers" IMAGE="Line_3">Displays trend over time or categories. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Stacked Line with markers" IMAGE="Line_4">Displays the trend of the contribution of each value over time or categories. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Percent Stacked Line with markers" IMAGE="Line_5">Displays the trend of the percentage each value contributes over time or categories. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="3D Line" IMAGE="Line_6">Line with a 3D visual effect</TYPE>
+		<TYPE NAME="Rotatable 3D Line" IMAGE="Line_7">Line with a 3D visual effect</TYPE>
+		<TYPE NAME="3D Line" IMAGE="Line_8">Line with a 3D visual effect</TYPE>
+		<TYPE NAME="Rotatable 3D Line" IMAGE="Line_9">Line with a 3D visual effect</TYPE>
+	</CLASS>
+	<CLASS NAME="Horizontal line" TYPE="13">
+		<TYPE NAME="Line" IMAGE="HLine_0">Displays trend over time or categories</TYPE>
+		<TYPE NAME="Stacked Line" IMAGE="HLine_1">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Line" IMAGE="HLine_2">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+		<TYPE NAME="Line with markers" IMAGE="HLine_3">Displays trend over time or categories. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Stacked Line with markers" IMAGE="HLine_4">Displays the trend of the contribution of each value over time or categories. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Percent Stacked Line with markers" IMAGE="HLine_5">Displays the trend of the percentage each value contributes over time or categories. Makers displayed at each data value.</TYPE>
+	</CLASS>
+	<CLASS NAME="Vertical bar" TYPE="1">
+		<TYPE NAME="Clustered Vertical Bar" IMAGE="Bar_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Bar" IMAGE="Bar_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Veritcal Bar" IMAGE="Bar_2">Compares the percentage each value contributes to a total across categories</TYPE>
+		<TYPE NAME="Clustered Vertical Bar with a 3D visual effect" IMAGE="Bar_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Bar with a 3D visual effect" IMAGE="Bar_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Vertical Bar with a 3D visual effect" IMAGE="Bar_5">Cumulative vertical bar graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="3D Vertical Bar" IMAGE="Bar_6">Compares values across categories and across series</TYPE>
+		<TYPE NAME="Rotatable 3D Vertical Bar" IMAGE="Bar_7">Compares values across categories and across series</TYPE>
+		<TYPE NAME="3D Vertical Bar" IMAGE="Bar_8">Compares values across categories and across series</TYPE>
+		<TYPE NAME="Rotatable 3D Vertical Bar" IMAGE="Bar_9">Compares values across categories and across series</TYPE>
+	</CLASS>
+	<CLASS NAME="Horizontal bar" TYPE="2">
+		<TYPE NAME="Clustered Horizontal Bar" IMAGE="HBar_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Bar" IMAGE="HBar_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Veritcal Bar" IMAGE="HBar_2">Compares the percentage each value contributes to a total across categories</TYPE>
+		<TYPE NAME="Clustered Horizontal Bar with a 3D visual effect" IMAGE="HBar_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Bar with a 3D visual effect" IMAGE="HBar_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Horizontal Bar with a 3D visual effect" IMAGE="HBar_5">Cumulative Horizontal bar graph with an effective solid in 100% standard</TYPE>
+	</CLASS>
+	<CLASS NAME="Vertical cylinder" TYPE="3">
+		<TYPE NAME="Clustered Vertical Cylinder" IMAGE="Cylinder_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Cylinder" IMAGE="Cylinder_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Veritcal Cylinder" IMAGE="Cylinder_2">Compares the percentage each value contributes to a total across categories</TYPE>
+		<TYPE NAME="Clustered Vertical Cylinder with a 3D visual effect" IMAGE="Cylinder_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Cylinder with a 3D visual effect" IMAGE="Cylinder_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Vertical Cylinder with a 3D visual effect" IMAGE="Cylinder_5">Cumulative vertical Cylinder graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="3D Vertical Cylinder" IMAGE="Cylinder_6">Compares values across categories and across series</TYPE>
+		<TYPE NAME="3D Vertical Cylinder" IMAGE="Cylinder_7">Compares values across categories and across series</TYPE>
+	</CLASS>
+	<CLASS NAME="Horizontal cylinder" TYPE="4">
+		<TYPE NAME="Clustered Horizontal Cylinder" IMAGE="HCylinder_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Cylinder" IMAGE="HCylinder_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Veritcal Cylinder" IMAGE="HCylinder_2">Compares the percentage each value contributes to a total across categories</TYPE>
+		<TYPE NAME="Clustered Horizontal Cylinder with a 3D visual effect" IMAGE="HCylinder_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Cylinder with a 3D visual effect" IMAGE="HCylinder_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Horizontal Cylinder with a 3D visual effect" IMAGE="HCylinder_5">Cumulative Horizontal Cylinder graph with an effective solid in 100% standard</TYPE>
+	</CLASS>
+	<CLASS NAME="Cone" TYPE="5">
+		<TYPE NAME="Clustered Vertical Cone with a 3D visual effect" IMAGE="Cone_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Cone with a 3D visual effect" IMAGE="Cone_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Vertical Cone with a 3D visual effect" IMAGE="Cone_2">Cumulative vertical Cone graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="Clustered Horizontal Cone with a 3D visual effect" IMAGE="Cone_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Cone with a 3D visual effect" IMAGE="Cone_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Horizontal Cone with a 3D visual effect" IMAGE="Cone_5">Cumulative Horizontal Cone graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="3D Vertical Cone" IMAGE="Cone_6">Compares values across categories and across series</TYPE>
+		<TYPE NAME="3D Vertical Cone" IMAGE="Cone_8">Compares values across categories and across series</TYPE>
+	</CLASS>
+	<CLASS NAME="Pyramid" TYPE="6">
+		<TYPE NAME="Clustered Vertical Pyramid with a 3D visual effect" IMAGE="Pyramid_0">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Vertical Pyramid with a 3D visual effect" IMAGE="Pyramid_1">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Vertical Pyramid with a 3D visual effect" IMAGE="Pyramid_2">Cumulative vertical Pyramid graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="Clustered Horizontal Pyramid with a 3D visual effect" IMAGE="Pyramid_3">Compares values across categories</TYPE>
+		<TYPE NAME="Stacked Horizontal Pyramid with a 3D visual effect" IMAGE="Pyramid_4">Compares the contribution of each value to a total across categories</TYPE>
+		<TYPE NAME="Percent Stacked Horizontal Pyramid with a 3D visual effect" IMAGE="Pyramid_5">Cumulative Horizontal Pyramid graph with an effective solid in 100% standard</TYPE>
+		<TYPE NAME="3D Vertical Pyramid" IMAGE="Pyramid_6">Compares values across categories and across series</TYPE>
+		<TYPE NAME="3D Vertical Pyramid" IMAGE="Pyramid_8">Compares values across categories and across series</TYPE>
+	</CLASS>
+	<CLASS NAME="Vertical area" TYPE="7">
+		<TYPE NAME="Area" IMAGE="Area_0">Displays the trend of values over time or categories</TYPE>
+		<TYPE NAME="Stacked Area" IMAGE="Area_1">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Area" IMAGE="Area_2">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+		<TYPE NAME="3D Area" IMAGE="Area_3">Displays trend over time or categories</TYPE>
+		<TYPE NAME="Stacked Area with a 3D visual effect" IMAGE="Area_4">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Area with a 3D visual effect" IMAGE="Area_5">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+		<TYPE NAME="Rotatable 3D Area" IMAGE="Area_6">Line with a 3D visual effect</TYPE>
+		<TYPE NAME="3D Area" IMAGE="Area_7">Displays trend over time or categories</TYPE>
+		<TYPE NAME="Rotatable 3D Area" IMAGE="Area_8">Line with a 3D visual effect</TYPE>
+	</CLASS>
+	<CLASS NAME="Horizontal area" TYPE="14">
+		<TYPE NAME="Area" IMAGE="HArea_0">Displays the trend of values over time or categories</TYPE>
+		<TYPE NAME="Stacked Area" IMAGE="HArea_1">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Area" IMAGE="HArea_2">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+		<TYPE NAME="Stacked Area with a 3D visual effect" IMAGE="HArea_4">Displays the trend of the contribution of each value over time or categories</TYPE>
+		<TYPE NAME="Percent Stacked Area with a 3D visual effect" IMAGE="HArea_5">Displays the trend of the percentage each value contributes over time or categories</TYPE>
+	</CLASS>
+	<CLASS NAME="Scatter" TYPE="8">
+		<TYPE NAME="Vertical scatter" IMAGE="Scatter_0">Displays trend over time or categories</TYPE>
+		<TYPE NAME="Horizontal scatter" IMAGE="Scatter_1">Displays trend over time or categories</TYPE>
+	</CLASS>
+	<CLASS NAME="Scatter II" TYPE="16">
+		<TYPE NAME="Scatter II" IMAGE="Scatter2_0">Compare the values with markers</TYPE>
+		<TYPE NAME="Scatter linked by lines" IMAGE="Scatter2_1">Scatter linked by lines</TYPE>
+		<TYPE NAME="Scatter linked by lines with no markers" IMAGE="Scatter2_2">Scatter linked by lines with no markers</TYPE>
+	</CLASS>
+	<CLASS NAME="Pie" TYPE="9">
+		<TYPE NAME="Pie" IMAGE="Pie_0">Displays the contribution of each value a total</TYPE>
+		<TYPE NAME="Pie with split" IMAGE="Pie_3">Displays the contribution of each value a total with split</TYPE>
+		<TYPE NAME="Pie with a 3D visual effect" IMAGE="Pie_1">Displays the contribution of each value a total by 3D style</TYPE>
+		<TYPE NAME="Pie with a 3D and split effect" IMAGE="Pie_4">Displays the contribution of each value a total by 3D style with split</TYPE>
+	</CLASS>
+	<CLASS NAME="Radar" TYPE="10">
+		<TYPE NAME="Radar" IMAGE="Radiant_0">Displays changes in values relative to a center point</TYPE>
+		<TYPE NAME="Stacked Radar" IMAGE="Radiant_1">Displays changes in the contribution of each value relative to a center point</TYPE>
+		<TYPE NAME="Percent Stacked Radar" IMAGE="Radiant_2">Displays changes in the percentage each value contributes relative to a center point</TYPE>
+		<TYPE NAME="Radar with markers" IMAGE="Radiant_3">Displays changes in values relative to a center point. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Stacked Radar with markers" IMAGE="Radiant_4">Displays changes in the contribution of each value relative to a center point. Makers displayed at each data value.</TYPE>
+		<TYPE NAME="Percent Stacked Radar with markers" IMAGE="Radiant_5">Displays changes in the percentage each value contributes relative to a center point. Makers displayed at each data value.</TYPE>
+	</CLASS>
+	<CLASS NAME="Gauge" TYPE="15">
+		<TYPE NAME="Gauge" IMAGE="Gauge_0">Gauge</TYPE>
+	</CLASS>
+	<CLASS NAME="Area(Bar Type)" TYPE="11">
+		<TYPE NAME="Vertical Area (Bar Type)" IMAGE="Step_0">Displays the trend of values over time or categories</TYPE>
+		<TYPE NAME="Horizontal Area (Bar Type)" IMAGE="Step_1">Displays the trend of values over time or categories</TYPE>
+	</CLASS>
+	<CLASS NAME="Custom" TYPE="12">
+		<TYPE NAME="Vertical Custom Chart" IMAGE="Custom_0">Displays trend over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="Vertical Stacked Custom Chart" IMAGE="Custom_1">Displays the trend of the percentage each value contributes over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="Vertical Percent Stacked Custom Chart" IMAGE="Custom_2">Displays the trend of the percentage each value contributes over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="Horizontal Custom Chart" IMAGE="Custom_3">Displays trend over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="Horizontal Stacked Custom Chart" IMAGE="Custom_4">Displays the trend of the percentage each value contributes over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="Horizontal Percent Stacked Custom Chart" IMAGE="Custom_5">Displays the trend of the percentage each value contributes over time or categories. Line, Scatter and Bar Combination Chart.</TYPE>
+		<TYPE NAME="3D Vertical Custom Chart" IMAGE="Custom_6">Displays trend over time or categories with a 3D visual effect</TYPE>
+		<TYPE NAME="3D Vertical Custom Chart" IMAGE="Custom_7">Displays trend over time or categories with a 3D visual effect</TYPE>
+	</CLASS>
+</OZCHARTRESOURCE>

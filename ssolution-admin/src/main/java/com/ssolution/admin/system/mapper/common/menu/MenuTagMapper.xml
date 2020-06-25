@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper    namespace="com.ssolution.admin.system.mapper.common.menu.MenuTagMapper">
+    <select id="getTopMenu" resultType="topMenuVO">
+        SELECT /* MenuTagMapper.getTopMenu, 윤정환, 2017.10.17 */ 
+                MENU.MENU_ID
+               ,COALESCE(
+                      (SELECT MENU_NM
+                      FROM TSYMU_MENU_LANG
+                      WHERE  MENU_ID = MENU.MENU_ID
+                       AND LANG_TP = #{sessionLanguage, jdbcType=VARCHAR}), MENU.MENU_NM
+                ) AS MENU_NM
+               ,MENU.LVL
+               ,MENU.SORT_NO
+        FROM    
+             TSYMU_MENU MENU
+            ,(SELECT
+                    GRPD.MENU_ID
+              FROM TSYAU_AUTH_GRP_USER GRPU 
+                  ,TSYAU_AUTH_GRP_DTL GRPD
+              WHERE GRPU.USER_ID     = #{userId, jdbcType=VARCHAR}
+              AND GRPU.AUTH_GRP_ID   = GRPD.AUTH_GRP_ID
+              GROUP BY MENU_ID) AUTH_MENU
+        WHERE   AUTH_MENU.MENU_ID = MENU.MENU_ID
+        AND     MENU.LVL          = 1
+        AND     MENU.USE_YN       = 'Y'
+        ORDER BY MENU.SORT_NO
+    </select>
+     
+    <select id="getTopSubMenu" resultType="topSubMenuVO">
+        SELECT /* MenuTagMapper.getTopSubMenu, 윤정환, 2017.10.17 */ 
+                INFO.MENU_ID
+               ,INFO.MENU_NM
+               ,INFO.LVL
+               ,INFO.SORT_NO
+               ,INFO.TOP_MENU_ID  
+               ,INFO.TOP_MENU_NM     
+             FROM (
+                    SELECT
+                            MENU.MENU_ID
+                           ,COALESCE(
+                                  (SELECT MENU_NM
+                                   FROM TSYMU_MENU_LANG
+                                   WHERE MENU_ID = MENU.MENU_ID
+                                       AND LANG_TP = #{sessionLanguage}), MENU.MENU_NM
+                            ) AS MENU_NM
+                           ,MENU.LVL
+                           ,MENU.SORT_NO
+                           ,MENU.UPP_MENU_ID AS TOP_MENU_ID
+                           ,COALESCE(
+                                  (SELECT MENU_NM
+                                   FROM TSYMU_MENU_LANG
+                                   WHERE MENU_ID = MENU.UPP_MENU_ID
+                                   AND LANG_TP = #{sessionLanguage}),
+                                  (SELECT MENU_NM
+                                   FROM TSYMU_MENU
+                                   WHERE MENU_ID = MENU.UPP_MENU_ID)
+                                ) AS TOP_MENU_NM
+                    FROM    
+                            TSYMU_MENU MENU
+                            ,(SELECT GRPD.MENU_ID
+                              FROM TSYAU_AUTH_GRP_USER GRPU 
+                                  ,TSYAU_AUTH_GRP_DTL GRPD
+                              WHERE GRPU.USER_ID     = #{userId}
+                              AND GRPU.AUTH_GRP_ID   = GRPD.AUTH_GRP_ID
+                              GROUP BY MENU_ID) AUTH_MENU
+                    WHERE   AUTH_MENU.MENU_ID = MENU.MENU_ID
+                    AND     MENU.LVL    = 2
+                    AND     MENU.USE_YN = 'Y'
+                    AND     MENU.UPP_MENU_ID = #{topMenuId, jdbcType=VARCHAR}
+                   ) INFO
+          ORDER BY INFO.SORT_NO
+    </select>
+
+    <select id="getLeftTopMenu" parameterType="map" resultType="leftTopMenuVO">
+        SELECT  /* MenuTagMapper.getLeftTopMenu, 윤정환, 2017.10.17 */ 
+            INFO.MENU_ID
+           ,INFO.MENU_NM
+           ,INFO.LVL
+           ,INFO.SORT_NO
+           ,COALESCE(
+             (SELECT MENU_NM
+              FROM TSYMU_MENU_LANG
+              WHERE MENU_ID = INFO.TOP_MENU_ID
+              AND LANG_TP = #{sessionLanguage}),
+             (SELECT MENU_NM
+              FROM TSYMU_MENU
+              WHERE MENU_ID = INFO.TOP_MENU_ID)
+            ) AS TOP_MENU_NM
+         FROM (
+                SELECT
+                        MENU.MENU_ID
+                       ,COALESCE(
+                              (SELECT MENU_NM
+                              FROM TSYMU_MENU_LANG
+                              WHERE  MENU_ID = MENU.MENU_ID
+                               AND LANG_TP = #{sessionLanguage}), MENU.MENU_NM
+                        ) AS MENU_NM       
+                       ,MENU.LVL
+                       ,MENU.SORT_NO
+                       ,(SELECT
+                              UPP_MENU_ID
+                         FROM TSYMU_MENU
+                         WHERE MENU_ID = MENU.MENU_ID
+                         AND USE_YN = 'Y') AS TOP_MENU_ID
+                FROM    
+                        TSYMU_MENU MENU
+                       ,(SELECT GRPD.MENU_ID
+                         FROM TSYAU_AUTH_GRP_USER GRPU 
+                             ,TSYAU_AUTH_GRP_DTL GRPD
+                          WHERE GRPU.USER_ID     = #{userId}
+                          AND GRPU.AUTH_GRP_ID   = GRPD.AUTH_GRP_ID
+                          GROUP BY MENU_ID) AUTH_MENU
+                WHERE   AUTH_MENU.MENU_ID = MENU.MENU_ID
+                AND     MENU.LVL         = 3
+                AND     MENU.USE_YN      = 'Y'
+                AND     MENU.UPP_MENU_ID = #{uppMenuId}) INFO
+            ORDER BY INFO.SORT_NO
+     </select>
+
+    <select id="getLeftSubMenu" parameterType="map" resultType="leftSubMenuVO">
+        SELECT  /* MenuTagMapper.getLeftSubMenu, 윤정환, 2017.10.17 */ 
+            INFO.MENU_ID
+           ,INFO.MENU_NM
+           ,INFO.LVL
+           ,INFO.VIEW_PATH
+           ,INFO.SORT_NO
+           ,INFO.AUTH_INQ
+           ,INFO.AUTH_REG
+           ,INFO.AUTH_PRT
+           ,INFO.AUTH_CHG
+           ,INFO.AUTH_DEL
+         FROM (
+                SELECT
+                        MENU.MENU_ID
+                       ,COALESCE(
+                              (SELECT MENU_NM
+                               FROM TSYMU_MENU_LANG
+                               WHERE MENU_ID = MENU.MENU_ID
+                                   AND LANG_TP = #{sessionLanguage}), MENU.MENU_NM
+                        ) AS MENU_NM
+                       ,MENU.LVL
+                       ,MENU.SORT_NO
+                       ,FSYCD_CODE_REF2('SY00007', MENU.URL_CD) AS VIEW_PATH
+                       ,AUTH_MENU.AUTH_INQ
+                       ,AUTH_MENU.AUTH_REG
+                       ,AUTH_MENU.AUTH_PRT
+                       ,AUTH_MENU.AUTH_CHG
+                       ,AUTH_MENU.AUTH_DEL
+                FROM    
+                        TSYMU_MENU MENU,
+                        (SELECT MENU.MENU_ID
+                               ,MAX(GRPD.AUTH_INQ) AS AUTH_INQ
+                               ,MAX(GRPD.AUTH_REG) AS AUTH_REG
+                               ,MAX(GRPD.AUTH_PRT) AS AUTH_PRT
+                               ,MAX(GRPD.AUTH_CHG) AS AUTH_CHG
+                               ,MAX(GRPD.AUTH_DEL) AS AUTH_DEL
+                         FROM TSYAU_AUTH_GRP_DTL GRPD
+                             ,TSYMU_MENU MENU
+                             ,TSYAU_AUTH_GRP_USER GRPU
+                         WHERE GRPU.USER_ID     = #{userId}
+                         AND GRPD.AUTH_GRP_ID   = GRPU.AUTH_GRP_ID
+                         AND MENU.LVL           = 4
+                         AND MENU.USE_YN        = 'Y'
+                         AND MENU.UPP_MENU_ID   = #{leftTopMenuId}
+                         AND MENU.MENU_ID = GRPD.MENU_ID          
+                         GROUP BY MENU.MENU_ID) AUTH_MENU
+                WHERE AUTH_MENU.MENU_ID = MENU.MENU_ID
+                ) INFO
+            ORDER BY INFO.SORT_NO
+     </select>
+</mapper>

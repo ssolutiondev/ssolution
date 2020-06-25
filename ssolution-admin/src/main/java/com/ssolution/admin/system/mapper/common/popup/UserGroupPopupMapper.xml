@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.popup.UserGroupPopupMapper">
+    <select id="userGroupList" parameterType="UserGroupPopupVO" resultType="UserGroupPopupVO">
+        SELECT
+               AUTH_GRP_ID AS USER_GROUP_ID
+               ,AUTH_GRP_NM AS USER_GROUP_NAME
+        FROM TSYAU_AUTH_GRP
+        ORDER BY ORD
+    </select>
+</mapper>

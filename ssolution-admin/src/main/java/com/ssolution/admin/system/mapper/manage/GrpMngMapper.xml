@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.manage.GrpMngMapper">
+
+    <select id="getGrpList" parameterType="grpMngVO" resultType="grpMngVO">
+        SELECT /* GrpMngMapper.getGrpList, 윤정환, 2017.10.17 */ 
+             AUTH_GRP_ID
+            ,AUTH_GRP_NM
+            ,DASHBOARD_TP
+            ,FSYCD_CODE_NAME('SY00005', DASHBOARD_TP) AS DASHBOARD_TP_NM
+            ,(SELECT REF_CD1
+               FROM TSYCD_COMM_CD_DTL
+               WHERE COMM_CD_GRP = 'SY00005'
+               AND   COMM_CD  = DASHBOARD_TP
+               ) AS MAIN_VIEW
+            ,AUTH_GRP_DESC
+            ,ORD
+            ,INPT_MENU_ID
+            ,REGR_ID
+            ,FSYUS_USR_NM(REGR_ID) AS REGR_NM
+            ,REG_DATE
+            ,CHGR_ID
+            ,FSYUS_USR_NM(CHGR_ID) AS CHGR_NM
+            ,CHG_DATE
+        FROM TSYAU_AUTH_GRP
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+        <if test="grpMng.authGrpId != null and grpMng.authGrpId != ''">
+            AND AUTH_GRP_ID LIKE CONCAT(CONCAT( '%', #{grpMng.authGrpId, jdbcType=VARCHAR}) ,'%')
+        </if>
+        <if test="grpMng.authGrpNm != null and grpMng.authGrpNm != ''">
+            AND AUTH_GRP_NM LIKE CONCAT(CONCAT('%', #{grpMng.authGrpNm, jdbcType=VARCHAR}) ,'%')
+        </if>
+        </trim>
+        ORDER BY ORD
+    </select>
+    
+    <select id="checkGrpId" parameterType="grpMngVO" resultType="int">
+        SELECT /* GrpMngMapper.checkGrpId, 윤정환, 2017.10.17 */ 
+             COUNT(AUTH_GRP_ID) 
+        FROM TSYAU_AUTH_GRP 
+        WHERE AUTH_GRP_ID = #{authGrpId,jdbcType=VARCHAR}
+    </select>
+    
+    <insert id="insertGrp" parameterType="grpMngVO">
+        INSERT /* GrpMngMapper.insertGrp, 윤정환, 2017.10.17 */  
+        INTO TSYAU_AUTH_GRP(
+             AUTH_GRP_ID
+            ,AUTH_GRP_NM
+            ,DASHBOARD_TP
+            ,AUTH_GRP_DESC
+            ,ORD
+            ,INPT_MENU_ID
+            ,REGR_ID
+            ,REG_DATE
+            ,CHGR_ID
+            ,CHG_DATE
+        )VALUES(
+              #{authGrpId,jdbcType=VARCHAR}
+             ,#{authGrpNm,jdbcType=VARCHAR}
+             ,#{dashboardTp,jdbcType=VARCHAR}
+             ,#{authGrpDesc,jdbcType=VARCHAR}
+             ,#{ord}
+             ,#{inptMenuId,jdbcType=VARCHAR}
+             ,#{regrId,jdbcType=VARCHAR}
+             ,#{regDate}
+             ,#{regrId,jdbcType=VARCHAR}
+             ,#{regDate}
+        )
+    </insert>
+    
+    <update id="updateGrp" parameterType="grpMngVO">
+        UPDATE /* GrpMngMapper.insertGrp, 윤정환, 2017.10.17 */ 
+             TSYAU_AUTH_GRP 
+        SET
+               AUTH_GRP_NM       = #{authGrpNm,jdbcType=VARCHAR}
+            ,DASHBOARD_TP      = #{dashboardTp,jdbcType=VARCHAR}
+            ,AUTH_GRP_DESC     = #{authGrpDesc,jdbcType=VARCHAR}
+            ,ORD               = #{ord}
+            ,INPT_MENU_ID      = #{inptMenuId,jdbcType=VARCHAR}
+            ,CHGR_ID           = #{chgrId,jdbcType=VARCHAR} 
+            ,CHG_DATE          = #{chgDate}    
+        WHERE AUTH_GRP_ID      = #{authGrpId,jdbcType=VARCHAR}
+    </update>
+    
+    <delete id="deleteGrpDtl" parameterType="grpMngVO">
+        DELETE /* GrpMngMapper.deleteGrpDtl, 윤정환, 2017.10.17 */ 
+        FROM TSYAU_AUTH_GRP_DTL 
+        WHERE AUTH_GRP_ID = #{authGrpId,jdbcType=VARCHAR}
+    </delete>
+    
+    <delete id="deleteGrpUser" parameterType="grpMngVO">
+        DELETE /* GrpMngMapper.deleteGrpUser, 윤정환, 2017.10.17 */ 
+        FROM TSYAU_AUTH_GRP_USER 
+        WHERE AUTH_GRP_ID = #{authGrpId,jdbcType=VARCHAR}
+    </delete>
+    
+    <delete id="deleteGrp" parameterType="grpMngVO">
+        DELETE /* GrpMngMapper.deleteGrp, 윤정환, 2017.10.17 */ 
+        FROM TSYAU_AUTH_GRP 
+        WHERE AUTH_GRP_ID = #{authGrpId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

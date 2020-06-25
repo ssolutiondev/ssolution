@@ -1,0 +1,28 @@
+<configuration debug="true" packagingData="true" scan="true">
+
+    <!-- use Spring default values -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <!-- 로그를 콘솔에 출력한다. -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.zaxxer.hikari.HikariConfig" level="info"/>
+    <logger name="net.sf.log4jdbc" level="info" additivity="false" />
+    <logger name="org.mybatis" level="warn" />
+    <logger name="jdbc" level="off" />
+    <logger name="jdbc.sqlonly" level="off" />
+    <logger name="jdbc.sqltiming" level="info" />
+    <logger name="jdbc.audit" level="warn" />
+    <logger name="jdbc.resultset" level="warn" />
+    <logger name="jdbc.resultsettable" level="info" />
+    <logger name="jdbc.connection" level="warn" />
+
+    <root level="${APP_LOGGING_LEVEL:-INFO}">
+        <appender-ref ref="console" />
+    </root>
+</configuration>

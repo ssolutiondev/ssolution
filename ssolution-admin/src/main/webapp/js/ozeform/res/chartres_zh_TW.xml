@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by . (.) -->
+<OZCHARTRESOURCE VERSION="2.0">
+	<CLASS NAME="直折線圖" TYPE="0">
+		<TYPE NAME="折線圖" IMAGE="Line_0">折線圖: 可顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="堆疊折線圖" IMAGE="Line_1">堆積折線圖: 可顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="100%堆疊折線圖" IMAGE="Line_2">100%堆積折線圖: 以百分比方式，顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="折線圖" IMAGE="Line_3">帶有資料標記的折線圖</TYPE>
+		<TYPE NAME="堆積折線圖" IMAGE="Line_4">帶有資料標記的堆積折線圖</TYPE>
+		<TYPE NAME="100%堆積折線圖" IMAGE="Line_5">帶有資料標記的100%堆積折線圖</TYPE>
+		<TYPE NAME="折線圖(立體)-類別" IMAGE="Line_6">立體折線圖:立體折線圖</TYPE>
+		<TYPE NAME="折線圖(立體):可旋轉" IMAGE="Line_7">立體折線圖-類別:可旋轉</TYPE>
+		<TYPE NAME="折線圖(立體)-系列" IMAGE="Line_8">立體折線圖:立體折線圖</TYPE>
+		<TYPE NAME="折線圖(立體):可旋轉" IMAGE="Line_9">立體折線圖-系列:可旋轉</TYPE>
+	</CLASS>
+	<CLASS NAME="橫折線圖" TYPE="13">
+		<TYPE NAME="折線圖" IMAGE="HLine_0">折線圖:可顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="堆疊折線圖" IMAGE="HLine_1">堆積折線圖:可顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="100%堆積折線圖" IMAGE="HLine_2">100%堆積折線圖:以百分比方式，顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="折線圖" IMAGE="HLine_3">帶有資料標記的折線圖</TYPE>
+		<TYPE NAME="堆疊折線圖" IMAGE="HLine_4">帶有資料標記的堆積折線圖</TYPE>
+		<TYPE NAME="100%堆積折線圖" IMAGE="HLine_5">帶有資料標記的100%堆積折線圖</TYPE>
+	</CLASS>
+	<CLASS NAME="直條圖" TYPE="1">
+		<TYPE NAME="群組直條圖" IMAGE="Bar_0">群組直條圖: 可比較不同群組中的同一項目的值。</TYPE>
+		<TYPE NAME="堆疊直條圖" IMAGE="Bar_1">堆積直條圖: 可比較不同群組中在某一個項目所佔的比重。</TYPE>
+		<TYPE NAME="100%堆積直條圖" IMAGE="Bar_2">100%堆積直條圖:可比較不同群組中在某一個項目所佔的比重。</TYPE>
+		<TYPE NAME="群組直條圖(立體)" IMAGE="Bar_3">立體群組直條圖</TYPE>
+		<TYPE NAME="堆積直條圖(立體)" IMAGE="Bar_4">立體堆積直條圖</TYPE>
+		<TYPE NAME="100%堆積直條圖(立體)" IMAGE="Bar_5">立體100%堆積直條圖</TYPE>
+		<TYPE NAME="直條圖(立體)-類別" IMAGE="Bar_6">立體直條圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="直條圖(立體):可旋轉" IMAGE="Bar_7">立體直條圖-類別: 可旋轉</TYPE>
+		<TYPE NAME="直條圖(立體)-系列" IMAGE="Bar_8">立體直條圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="直條圖(立體):可旋轉" IMAGE="Bar_9">立體直條圖-系列: 可旋轉</TYPE>
+	</CLASS>
+	<CLASS NAME="橫條圖" TYPE="2">
+		<TYPE NAME="群組橫條圖" IMAGE="HBar_0">群組橫條圖:可比較多種類及多數列的值</TYPE>
+		<TYPE NAME="堆疊橫條圖" IMAGE="HBar_1">堆積橫條圖:可顯示個別項目與整體之間的關系</TYPE>
+		<TYPE NAME="100%堆積橫條圖" IMAGE="HBar_2">100%堆積橫條圖:可顯示個別項目與整體之間的關系</TYPE>
+		<TYPE NAME="群組橫條圖(立體)" IMAGE="HBar_3">可比較多種類及多數列的值的立體圖</TYPE>
+		<TYPE NAME="堆積橫條圖(立體)" IMAGE="HBar_4">可顯示個別項目與整體之間的關系的立體圖</TYPE>
+		<TYPE NAME="100%堆積橫條圖(立體)" IMAGE="HBar_5">可顯示個別項目與整體之間的關系的立體圖</TYPE>
+	</CLASS>
+	<CLASS NAME="直圓柱圖" TYPE="3">
+		<TYPE NAME="群組直圓柱圖" IMAGE="Cylinder_0">群組直圓柱圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="堆疊直圓柱圖" IMAGE="Cylinder_1">堆積直圓柱圖:可顯示個別項目與整體之間的關系。</TYPE>
+		<TYPE NAME="100%堆積直圓柱圖" IMAGE="Cylinder_2">100%堆積直圓柱圖:可顯示個別項目與整體之間的關系。</TYPE>
+		<TYPE NAME="群組直圓柱圖(立體)" IMAGE="Cylinder_3">立體群組直圓柱圖</TYPE>
+		<TYPE NAME="堆積直圓柱圖(立體)" IMAGE="Cylinder_4">立體堆積直圓柱圖</TYPE>
+		<TYPE NAME="100%堆積直圓柱圖(立體)" IMAGE="Cylinder_5">立體100%堆積直圓柱圖</TYPE>
+		<TYPE NAME="直圓柱圖(立體)-類別" IMAGE="Cylinder_6">立體直圓柱圖: 可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="直圓柱圖(立體)-系列" IMAGE="Cylinder_7">立體直圓柱圖: 可比較多種類及多數列的值。</TYPE>
+	</CLASS>
+	<CLASS NAME="橫圓柱圖" TYPE="4">
+		<TYPE NAME="群組橫圓柱圖" IMAGE="HCylinder_0">群組橫圓柱圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="堆疊橫圓柱圖" IMAGE="HCylinder_1">堆積橫圓柱圖:可顯示個別項目與整體之間的關系。</TYPE>
+		<TYPE NAME="100%堆積橫圓柱圖" IMAGE="HCylinder_2">100%堆積橫圓柱圖:可顯示個別項目與整體之間的關系。</TYPE>
+		<TYPE NAME="群組橫圓柱圖(立體)" IMAGE="HCylinder_3">立體群組橫圓柱圖</TYPE>
+		<TYPE NAME="堆積橫圓柱圖(立體)" IMAGE="HCylinder_4">立體堆積橫圓柱圖</TYPE>
+		<TYPE NAME="100%堆積橫圓柱圖(立體)" IMAGE="HCylinder_5">立體100%堆積橫圓柱圖</TYPE>
+	</CLASS>
+	<CLASS NAME="圓錐圖" TYPE="5">
+		<TYPE NAME="群組直圓錐圖(立體)" IMAGE="Cone_0">立體群組直圓錐圖</TYPE>
+		<TYPE NAME="堆積直圓錐圖(立體)" IMAGE="Cone_1">立體堆積直圓錐圖</TYPE>
+		<TYPE NAME="100%堆積直圓錐圖(立體)" IMAGE="Cone_2">立體100%堆積直圓錐圖</TYPE>
+		<TYPE NAME="群組橫圓錐圖(立體)" IMAGE="Cone_3">立體群組橫圓錐圖</TYPE>
+		<TYPE NAME="堆積橫圓錐圖(立體)" IMAGE="Cone_4">立體群組橫圓錐圖</TYPE>
+		<TYPE NAME="100%堆積橫圓錐圖(立體)" IMAGE="Cone_5">立體100%堆積橫圓錐圖</TYPE>
+		<TYPE NAME="直圓錐圖(立體)-類別" IMAGE="Cone_6">立體直圓錐圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="直圓錐圖(立體)-系列" IMAGE="Cone_7">立體直圓錐圖: 可比較多種類及多數列的值。</TYPE>
+	</CLASS>
+	<CLASS NAME="金字塔圖" TYPE="6">
+		<TYPE NAME="群組直金字塔圖(立體)" IMAGE="Pyramid_0">立體群組直金字塔圖</TYPE>
+		<TYPE NAME="堆積直金字塔圖(立體)" IMAGE="Pyramid_1">立體堆積直金字塔圖</TYPE>
+		<TYPE NAME="100%堆積直金字塔圖(立體)" IMAGE="Pyramid_2">立體100%堆積直金字塔圖</TYPE>
+		<TYPE NAME="群組橫金字塔圖(立體)" IMAGE="Pyramid_3">立體群組橫金字塔圖</TYPE>
+		<TYPE NAME="堆積橫金字塔圖(立體)" IMAGE="Pyramid_4">立體堆積橫金字塔圖</TYPE>
+		<TYPE NAME="100%堆積橫金字塔圖(立體)" IMAGE="Pyramid_5">立體100%堆積橫金字塔圖</TYPE>
+		<TYPE NAME="直金字塔圖(立體)-系列" IMAGE="Pyramid_6">立體直金字塔圖:可比較多種類及多數列的值。</TYPE>
+		<TYPE NAME="直金字塔圖(立體)-類別" IMAGE="Pyramid_7">立體直金字塔圖:可比較多種類及多數列的值。</TYPE>
+	</CLASS>
+	<CLASS NAME="直區域圖" TYPE="7">
+		<TYPE NAME="區域圖" IMAGE="Area_0">區域圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="堆積區域圖" IMAGE="Area_1">堆積區域圖:顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="100%堆積區域圖" IMAGE="Area_2">100%堆積區域圖:以百分比的方式，顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="區域圖(立體)" IMAGE="Area_3">立體區域圖</TYPE>
+		<TYPE NAME="堆積圖(立體)" IMAGE="Area_4">立體堆積圖</TYPE>
+		<TYPE NAME="100%堆積區域圖(立體)" IMAGE="Area_5">立體100%堆積區域圖</TYPE>
+		<TYPE NAME="區域圖(立體):可旋轉" IMAGE="Area_6">立體區域圖-類別:可旋轉</TYPE>
+		<TYPE NAME="區域圖(立體)" IMAGE="Area_6">立體區域圖</TYPE>
+		<TYPE NAME="區域圖(立體):可旋轉" IMAGE="Area_7">立體區域圖-系列:可旋轉</TYPE>
+	</CLASS>
+	<CLASS NAME="橫區域圖" TYPE="14">
+		<TYPE NAME="區域圖" IMAGE="HArea_0">區域圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="堆積區域圖" IMAGE="HArea_1">堆積區域圖:顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="100%堆積區域圖" IMAGE="HArea_2">100%堆積區域圖:以百分比的方式，顯示一數列在各種類或時間上的比重趨勢。</TYPE>
+		<TYPE NAME="堆積區域圖(立體)" IMAGE="HArea_4">立體堆積區域圖</TYPE>
+		<TYPE NAME="100%堆積區域圖(立體)" IMAGE="HArea_5">立體100%堆積區域圖</TYPE>
+	</CLASS>
+	<CLASS NAME="散佈圖" TYPE="8">
+		<TYPE NAME="直散佈圖" IMAGE="Scatter_0">直散佈圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="橫散佈圖" IMAGE="Scatter_1">橫散佈圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+	</CLASS>
+	<CLASS NAME="圓形圖" TYPE="9">
+		<TYPE NAME="圓形圖" IMAGE="Pie_0">圓形圖:以圓形方式顯示各項目佔總合的比重。</TYPE>
+		<TYPE NAME="分裂式圓形圖" IMAGE="Pie_3">分裂式圓形圖:以圓形方式顯示各項目佔總合的比重，但叫圓形圖更能強調個別的資料值。</TYPE>
+		<TYPE NAME="圓形圖(立體)" IMAGE="Pie_1">立體圓形圖</TYPE>
+		<TYPE NAME="分裂式圓形圖(立體)" IMAGE="Pie_4">分裂式立體圓形圖</TYPE>
+	</CLASS>
+	<CLASS NAME="錶盤圖" TYPE="15">
+		<TYPE NAME="錶盤圖" IMAGE="Gauge_0">錶盤圖</TYPE>
+	</CLASS>	
+	<CLASS NAME="雷達圖" TYPE="10">
+		<TYPE NAME="雷達圖" IMAGE="Radiant_0">可顯示距離中心點的偏離情形。</TYPE>
+		<TYPE NAME="堆疊雷達圖" IMAGE="Radiant_1">堆積:可顯示距離中心點的偏離情形。</TYPE>
+		<TYPE NAME="100%堆積雷達圖" IMAGE="Radiant_2">100%:可顯示距離中心點的偏離情形。</TYPE>
+		<TYPE NAME="帶有資料標記的雷達圖" IMAGE="Radiant_3">可顯示距離中心點的偏離情形且有資料標記。</TYPE>
+		<TYPE NAME="帶有資料標記的堆積雷達圖" IMAGE="Radiant_4">堆積:可顯示距離中心點的偏離情形且有資料標記。</TYPE>
+		<TYPE NAME="帶有資料標記的100%堆積雷達圖" IMAGE="Radiant_5">100%:可顯示距離中心點的偏離情形且有資料標記。</TYPE>
+	</CLASS>
+	<CLASS NAME="階段圖" TYPE="11">
+		<TYPE NAME="直階段圖" IMAGE="Step_0">階梯圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+		<TYPE NAME="橫階段圖" IMAGE="Step_1">階梯圖:顯示一數列在各種類或時間上的趨勢。</TYPE>
+	</CLASS>
+	<CLASS NAME="自訂類型" TYPE="12">
+		<TYPE NAME="直自訂類型" IMAGE="Custom_0">自訂類型:用戶自訂類型。</TYPE>
+		<TYPE NAME="直堆積自訂類型" IMAGE="Custom_1">堆積自訂類型:用戶自訂堆積型。</TYPE>
+		<TYPE NAME="直100%堆積自訂類型" IMAGE="Custom_2">100%堆積自訂類型:顯示用戶自訂類型的每一數值的100%趨勢。</TYPE>
+		<TYPE NAME="橫自訂類型" IMAGE="Custom_3">自訂類型:用戶自訂類型。</TYPE>
+		<TYPE NAME="橫堆積自訂類型" IMAGE="Custom_4">堆積自訂類型:用戶自訂堆積型。</TYPE>
+		<TYPE NAME="橫100%堆積自訂類型" IMAGE="Custom_5">100%堆積自訂類型:顯示用戶自訂類型的每一數值的100%趨勢。</TYPE>
+		<TYPE NAME="直自訂類型(立體)" IMAGE="Custom_6">立體的自訂類型。</TYPE>
+		<TYPE NAME="直自訂類型(立體)" IMAGE="Custom_7">立體的自訂類型。</TYPE>		
+	</CLASS>
+</OZCHARTRESOURCE>

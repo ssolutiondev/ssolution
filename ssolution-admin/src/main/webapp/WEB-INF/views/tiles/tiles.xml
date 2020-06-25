@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <!-- 로그인 화면 템플릿 -->
+    <definition name="login" template="/WEB-INF/views/tiles/layout/layout-login.jsp">
+        <put-attribute name="body" value="" />
+        <put-attribute name="js" value="/WEB-INF/views/tiles/attribute/default-javascript.jsp" />
+    </definition>
+
+    <!-- 메인 화면 템플릿 -->
+    <definition name="main" template="/WEB-INF/views/tiles/layout/layout-main.jsp">
+        <put-attribute name="navibarTop" value="/WEB-INF/views/tiles/attribute/main-navibarTop.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/attribute/default-footer.jsp" />
+        <put-attribute name="js" value="/WEB-INF/views/tiles/attribute/default-javascript.jsp" />
+    </definition>
+
+    <!-- 기본 업무 화면 템플릿 -->
+    <definition name="default" template="/WEB-INF/views/tiles/layout/layout-default.jsp">
+        <put-attribute name="navibar" value="/WEB-INF/views/tiles/attribute/default-navibar.jsp" />
+        <put-attribute name="navibarTop" value="/WEB-INF/views/tiles/attribute/default-navibarTop.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/attribute/default-header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="css" value="/WEB-INF/views/tiles/attribute/default-css.jsp" />
+        <put-attribute name="js" value="/WEB-INF/views/tiles/attribute/default-javascript.jsp" />
+    </definition>
+
+    <!-- 에러 페이지 템플릿 -->
+    <definition name="exception" template="/WEB-INF/views/tiles/layout/layout-exception.jsp">
+        <put-attribute name="body" value="" />
+    </definition>
+
+    <!-- only body 호출 템플릿 -->
+    <definition name="onlybody" template="/WEB-INF/views/tiles/layout/layout-onlybody.jsp">
+        <put-attribute name="body" value="" />
+    </definition>
+
+    <!-- 에러 페이지 화면 -->
+    <definition name="error/*" extends="exception">
+        <put-attribute name="body" value="/WEB-INF/views/error/{1}.jsp" />
+    </definition>
+
+    <!-- 로그인 화면 -->
+    <definition name="system/login/login" extends="login">
+        <put-attribute name="body" value="/WEB-INF/views/system/login/login.jsp" />
+    </definition>
+
+    <!-- 메인 화면 -->
+    <definition name="system/main/*" extends="main">
+        <put-attribute name="body" value="/WEB-INF/views/system/main/{1}.jsp" />
+    </definition>
+
+    <!-- 공통 -->
+    <definition name="system/*/*/*/*" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/system/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+
+    <!-- VOC -->
+    <definition name="customer/*/*/*/*" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/customer/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+    
+    <!-- 공통 -->
+    <definition name="system/*/*/*/popup/*" extends="onlybody">
+        <put-attribute name="body" value="/WEB-INF/views/system/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+
+    <!-- VOC -->
+    <definition name="customer/*/*/*/popup/*" extends="onlybody">
+        <put-attribute name="body" value="/WEB-INF/views/customer/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+    
+    <!-- 샘플 -->
+    <definition name="sample/*/*" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/sample/{1}/{2}.jsp" />
+    </definition>
+
+</tiles-definitions>

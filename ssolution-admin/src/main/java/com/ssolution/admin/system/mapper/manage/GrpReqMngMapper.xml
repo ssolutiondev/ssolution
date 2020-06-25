@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.manage.GrpReqMngMapper">
+    <select id="getGrpReqList" parameterType="grpReqMngVO" resultType="grpReqMngVO">
+        SELECT             /*GrpReqMngMapper.getGrpReqList    , Jeong Ki Nam , 2017-10-20*/
+                REQ_ID
+                ,REQ_DT
+                ,REQ_USER_ID
+                ,FSYUS_USR_NM(REQ_USER_ID) REQ_USER_NM
+                ,REQ_DATE
+                ,REQ_CT
+                ,REQ_STAT
+                ,FSYCD_CODE_NAME('SY00010', REQ_STAT) AS REQ_STAT_NM
+                ,PROC_DT
+                ,PROC_USER_ID
+                ,FSYUS_USR_NM(PROC_USER_ID) PROC_USER_NM 
+                ,PROC_DATE
+                ,PROC_CT
+                ,INPT_MENU_ID
+                ,FSYUS_USR_NM(REGR_ID) REGR_ID
+                ,REG_DATE
+                ,FSYUS_USR_NM(CHGR_ID) CHGR_ID
+                ,CHG_DATE
+        FROM TSYAU_AUTH_GRP_REQ
+        WHERE 1 = 1
+            AND REQ_DT &gt;= #{grpReqMngVO.start}
+            AND REQ_DT &lt;= #{grpReqMngVO.end}
+        <if test="grpReqMngVO.condReqUserId != null || grpReqMngVO.condReqUserId = '' ">
+            AND REQ_USER_ID LIKE CONCAT(CONCAT( '%' , #{grpReqMngVO.condReqUserId}) , '%')
+        </if>
+        <if test="grpReqMngVO.condReqStat != 'ALL' ">
+            AND REQ_STAT = #{grpReqMngVO.condReqStat}
+        </if>
+        ORDER BY REQ_ID 
+    </select>
+    
+    <insert id="insertGrpReqInfo" parameterType="grpReqMngVO">
+    <selectKey keyProperty="reqId" order="BEFORE" resultType="String">
+    	SELECT FSYCO_SEQ('REQ','SEQ_SYAU_REQ_ID') REQ_ID
+    </selectKey>
+        INSERT INTO     /*GrpReqMngMapper.insertGrpReqInfo    , Jeong Ki Nam , 2017-10-20*/
+            TSYAU_AUTH_GRP_REQ
+        (
+             REQ_ID
+            ,REQ_DT
+            ,REQ_USER_ID
+            ,REQ_DATE
+            ,REQ_CT
+            ,REQ_STAT
+            ,INPT_MENU_ID
+            ,REGR_ID
+            ,REG_DATE
+            ,CHGR_ID
+            ,CHG_DATE
+        )
+        VALUES
+        (
+             #{reqId}
+            ,#{grpReqMngVO.reqDt}
+            ,#{grpReqMngVO.reqUserId}
+            ,#{grpReqMngVO.reqDate}
+            ,#{grpReqMngVO.reqCt}
+            ,#{grpReqMngVO.reqStat}
+            ,#{grpReqMngVO.inptMenuId}
+            ,#{grpReqMngVO.regrId}
+            ,#{grpReqMngVO.regDate}
+            ,#{grpReqMngVO.regrId}
+            ,#{grpReqMngVO.regDate}
+        )
+    </insert>
+    
+    <update id="updateGrpReqInfo" parameterType="grpReqMngVO">
+        UPDATE         /*GrpReqMngMapper.updateGrpReqInfo    , Jeong Ki Nam , 2017-10-20*/
+            TSYAU_AUTH_GRP_REQ
+        SET 
+            REQ_STAT         = #{grpReqMngVO.reqStat}
+            ,PROC_DT         = #{grpReqMngVO.procDt}
+            ,PROC_USER_ID    = #{grpReqMngVO.procUserId}
+            ,PROC_DATE       = #{grpReqMngVO.procDate}
+            ,PROC_CT         = #{grpReqMngVO.procCt}
+            ,INPT_MENU_ID    = #{grpReqMngVO.inptMenuId}
+            ,CHGR_ID         = #{grpReqMngVO.chgrId}
+            ,CHG_DATE        = #{grpReqMngVO.chgDate}
+        WHERE
+            REQ_ID           = #{grpReqMngVO.reqId}
+    </update>
+    
+</mapper>

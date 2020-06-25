@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.menu.MenuNavigationMapper">
+
+    <select id="getMenuList" resultType="MenuVO">
+        SELECT /* MenuNavigationMapper.getMenuList, 윤정환, 2017.10.17 */
+                MENU.MENU_ID
+               ,COALESCE(
+                 (
+                    SELECT
+                            MENU_NM
+                    FROM    TSYMU_MENU_LANG                     
+                    WHERE   MENU_ID = MENU.MENU_ID 
+                    AND     LANG_TP = #{sessionLanguage, jdbcType=VARCHAR}
+                ),MENU.MENU_NM) AS MENU_NM
+              , MENU.UPP_MENU_ID
+              , FSYCD_CODE_REF2('SY00007', MENU.URL_CD) AS VIEW_PATH
+        FROM    TSYMU_MENU MENU
+        WHERE  MENU.USE_YN  = 'Y'
+        AND    MENU.MENU_ID = #{selectMenuId, jdbcType=VARCHAR}
+        AND    MENU.LVL     = #{lvl, jdbcType=VARCHAR}
+        
+    </select>
+    
+    <!-- 메뉴접속로그 등록 -->
+	<insert id="insertMenuAcsHist" parameterType="MenuConnLogVO">
+		INSERT INTO /* MenuNavigationMapper.insertMenuAcsHist, 윤정환, 2017.10.17 */
+			TSYLG_MENU_ACS_HIST( 
+			    USER_ID
+				, ACS_DT
+				, ACS_TM
+				, SESSION_ID
+                , SEQ_NO
+				, LVL1_MENU_ID
+				, LVL2_MENU_ID
+				, LVL3_MENU_ID
+				, LVL4_MENU_ID
+				, MENU_ACS_URL
+			) VALUES (
+				#{userId}
+				, #{acsDt}
+				, #{acsTm}
+				, #{sessionId}
+                , nextval('tsylg_menu_acs_hist_seq_no_seq')
+				, #{lvl1MenuId}
+				, #{lvl2MenuId}
+				, #{lvl3MenuId}
+				, #{lvl4MenuId}
+				, #{menuAcsUrl}
+		)
+	</insert>
+	
+</mapper>

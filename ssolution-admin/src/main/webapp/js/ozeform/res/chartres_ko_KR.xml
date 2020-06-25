@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by kck123 (forcs) -->
+<OZCHARTRESOURCE VERSION="2.0">
+	<CLASS NAME="세로 꺾은선형" TYPE="0">
+		<TYPE NAME="꺾은 선형" IMAGE="Line_0">꺾은 선형 : 시간이나 항목에 따른 추세를 보여줍니다.</TYPE>
+		<TYPE NAME="누적 꺾은 선형" IMAGE="Line_1">누적 꺾은 선형 : 시간이나 항목에  따른 각 값의 기여도 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 꺾은 선 형" IMAGE="Line_2">100% 기준 누적 꺾은 선형 : 시간이나 항목에 따른 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 꺾은선 형." IMAGE="Line_3">데이터 표식이 있는 꺾은 선형.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 누적 꺾은선 형" IMAGE="Line_4">데이터 표식이 있는 누적 꺾은 선형</TYPE>
+		<TYPE NAME="데이터 표식이 있는 100%기준 누적 꺾은선 형" IMAGE="Line_5">데이터 표식이 있는 100%기준 누적 꺾은 선형</TYPE>
+		<TYPE NAME="꺾은 선형 (입체) - 항목별 " IMAGE="Line_6">입체 효과 꺾은 선형 : 입체 효과의 꺾은 선형을 보여 줍니다.</TYPE>
+		<TYPE NAME="꺾은 선형 (입체) - 회전 가능" IMAGE="Line_7">입체 효과 꺾은 선형 - 항목별 : 회전 가능.</TYPE>
+		<TYPE NAME="꺾은 선형 (입체) - 계열별" IMAGE="Line_8">입체 효과 꺾은 선형 : 입체 효과의 꺾은 선형을 보여 줍니다.</TYPE>
+		<TYPE NAME="꺾은 선형 (입체) - 회전 가능" IMAGE="Line_9">입체 효과 꺾은 선형 - 계열별 : 회전 가능.</TYPE>
+	</CLASS>
+	<CLASS NAME="가로 꺾은선형" TYPE="13">
+		<TYPE NAME="꺾은 선형" IMAGE="HLine_0">꺾은 선형 : 시간이나 항목에 따른 추세를 보여줍니다.</TYPE>
+		<TYPE NAME="누적 꺾은 선형" IMAGE="HLine_1">누적 꺾은 선형 : 시간이나 항목에  따른 각 값의 기여도 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 꺾은 선 형" IMAGE="HLine_2">100% 기준 누적 꺾은 선형 : 시간이나 항목에 따른 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 꺾은선 형." IMAGE="HLine_3">데이터 표식이 있는 꺾은 선형.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 누적 꺾은선 형" IMAGE="HLine_4">데이터 표식이 있는 누적 꺾은 선형</TYPE>
+		<TYPE NAME="데이터 표식이 있는 100%기준 누적 꺾은선 형" IMAGE="HLine_5">데이터 표식이 있는 100%기준 누적 꺾은 선형</TYPE>
+	</CLASS>
+	<CLASS NAME="세로 막대형" TYPE="1">
+		<TYPE NAME="묶은 세로 막대형" IMAGE="Bar_0">묶은 세로 막대형 : 항목 간의 값을 비교합니다.</TYPE>
+		<TYPE NAME="누적 세로 막대형" IMAGE="Bar_1">누적 세로 막대형 : 전체 항목 중에서 각 값의 기여도를 비교합니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 막대형" IMAGE="Bar_2">100% 기준 누적 세로 막대형 : 전체 항목 중에서 각 값의 백분율을 비교합니다.</TYPE>
+		<TYPE NAME="묶은 세로 막대형 (입체)" IMAGE="Bar_3">입체 효과의 묶은 세로 막대형</TYPE>
+		<TYPE NAME="누적 세로 막대형 (입체)" IMAGE="Bar_4">입체 효과의 누적 세로 막대형</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 막대형 (입체)" IMAGE="Bar_5">입체 효과의 100% 기준 누적 세로 막대형</TYPE>
+		<TYPE NAME="세로 막대형 (입체) - 항목별" IMAGE="Bar_6">입체 효과 세로 막대형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+		<TYPE NAME="세로 막대형 (입체) - 회전 가능" IMAGE="Bar_7">입체 효과 세로 막대형 - 항목별 : 회전 가능</TYPE>
+		<TYPE NAME="세로 막대형 (입체) - 계열별" IMAGE="Bar_8">입체 효과 세로 막대형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+		<TYPE NAME="세로 막대형 (입체) - 회전 가능" IMAGE="Bar_9">입체 효과 세로 막대형 - 계열별 : 회전 가능</TYPE>
+	</CLASS>
+	<CLASS NAME="가로 막대형" TYPE="2">
+		<TYPE NAME="묶은 가로 막대형" IMAGE="HBar_0">묶은 가로 막대형 : 항목 간의 값을 비교합니다.</TYPE>
+		<TYPE NAME="누적 가로 막대형" IMAGE="HBar_1">누적 가로 막대형 : 전체 항목 중에서 각 값의 기여도를 비교합니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 막대형" IMAGE="HBar_2">100% 기준 누적 가로 막대형 : 전체 항목 중에서 각 값의 백분율을 비교합니다.</TYPE>
+		<TYPE NAME="묶은 가로 막대형 (입체)" IMAGE="HBar_3">입체 효과의 묶은 가로 막대형</TYPE>
+		<TYPE NAME="누적 가로 막대형 (입체)" IMAGE="HBar_4">입체 효과의 누적 가로 막대형</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 막대형 (입체)" IMAGE="HBar_5">입체 효과의 100% 기준 누적 가로 막대형</TYPE>
+	</CLASS>
+	<CLASS NAME="세로 원통형" TYPE="3">
+		<TYPE NAME="묶은 세로 원통형" IMAGE="Cylinder_0">묶은 세로 원통형 : 항목 간의 값을 비교합니다.</TYPE>
+		<TYPE NAME="누적 세로 원통형" IMAGE="Cylinder_1">누적 세로 원통형 : 전체 항목 중에서 각 값의 기여도를 비교합니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 원통형" IMAGE="Cylinder_2">100% 기준 누적 세로 원통형 : 전체 항목 중에서 각 값의 백분율을 비교합니다.</TYPE>
+		<TYPE NAME="묶은 세로 원통형 (입체)" IMAGE="Cylinder_3">입체 효과의 묶은 세로 원통형</TYPE>
+		<TYPE NAME="누적 세로 원통형 (입체)" IMAGE="Cylinder_4">입체 효과의 누적 세로 원통형</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 원통형 (입체)" IMAGE="Cylinder_5">입체 효과의 100% 기준 누적 세로 원통형</TYPE>
+		<TYPE NAME="세로 원통형 (입체) - 항목별" IMAGE="Cylinder_6">입체 효과 세로 원통형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+		<TYPE NAME="세로 원통형 (입체) - 계열별" IMAGE="Cylinder_7">입체 효과 세로 원통형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="가로 원통형" TYPE="4">
+		<TYPE NAME="묶은 가로 원통형" IMAGE="HCylinder_0">묶은 가로 원통형 : 항목 간의 값을 비교합니다.</TYPE>
+		<TYPE NAME="누적 가로 원통형" IMAGE="HCylinder_1">누적 가로 원통형 : 전체 항목 중에서 각 값의 기여도를 비교합니다.</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 원통형" IMAGE="HCylinder_2">100% 기준 누적 가로 원통형 : 전체 항목 중에서 각 값의 백분율을 비교합니다.</TYPE>
+		<TYPE NAME="묶은 가로 원통형 (입체)" IMAGE="HCylinder_3">입체 효과의 묶은 가로 원통형</TYPE>
+		<TYPE NAME="누적 가로 원통형 (입체)" IMAGE="HCylinder_4">입체 효과의 누적 가로 원통형</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 원통형 (입체)" IMAGE="HCylinder_5">입체 효과의 100% 기준 누적 가로 원통형</TYPE>
+	</CLASS>
+	<CLASS NAME="원뿔형" TYPE="5">
+		<TYPE NAME="묶은 세로 원뿔형 (입체)" IMAGE="Cone_0">입체 효과의 묶은 세로 원뿔형</TYPE>
+		<TYPE NAME="누적 세로 원뿔형 (입체)" IMAGE="Cone_1">입체 효과의 누적 세로 원뿔형</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 원뿔형 (입체)" IMAGE="Cone_2">입체 효과의 100% 기준 누적 세로 원뿔형</TYPE>
+		<TYPE NAME="묶은 가로 원뿔형 (입체)" IMAGE="Cone_3">입체 효과의 묶은 가로 원뿔형</TYPE>
+		<TYPE NAME="누적 가로 원뿔형 (입체)" IMAGE="Cone_4">입체 효과의 누적 가로 원뿔형</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 원뿔형 (입체)" IMAGE="Cone_5">입체 효과의 100% 기준 누적 가로 원뿔형</TYPE>
+		<TYPE NAME="세로 원뿔형 (입체) - 항목별" IMAGE="Cone_6">입체 효과 세로 원뿔형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+		<TYPE NAME="세로 원뿔형 (입체) - 계열별" IMAGE="Cone_8">입체 효과 세로 원뿔형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="피라미드형" TYPE="6">
+		<TYPE NAME="묶은 세로 피라미드형 (입체)" IMAGE="Pyramid_0">입체 효과의 묶은 세로 피라미드형</TYPE>
+		<TYPE NAME="누적 세로 피라미드형 (입체)" IMAGE="Pyramid_1">입체 효과의 누적 세로 피라미드형</TYPE>
+		<TYPE NAME="100% 기준 누적 세로 피라미드형 (입체)" IMAGE="Pyramid_2">입체 효과의 100% 기준 누적 세로 피라미드형</TYPE>
+		<TYPE NAME="묶은 가로 피라미드형 (입체)" IMAGE="Pyramid_3">입체 효과의 묶은 가로 피라미드형</TYPE>
+		<TYPE NAME="누적 가로 피라미드형 (입체)" IMAGE="Pyramid_4">입체 효과의 누적 가로 피라미드형</TYPE>
+		<TYPE NAME="100% 기준 누적 가로 피라미드형 (입체)" IMAGE="Pyramid_5">입체 효과의 100% 기준 누적 가로 피라미드형</TYPE>
+		<TYPE NAME="세로 피라미드형 (입체) - 항목별" IMAGE="Pyramid_6">입체 효과 세로 피라미드형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+		<TYPE NAME="세로 피라미드형 (입체) - 계열별" IMAGE="Pyramid_8">입체 효과 세로 피라미드형 : 계열 및 항목 간의 값을 비교 합니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="세로 영역형" TYPE="7">
+		<TYPE NAME="영역형" IMAGE="Area_0">영역형 : 시간이나 항목에 따른 값의 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="누적 영역형" IMAGE="Area_1">누적 영역형 : 시간이나 항목에 따른 각 값의 기여도 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="100%기준 누적 영역형" IMAGE="Area_2">100%기준 누적 영역형 : 시간이나 항목에 따른 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="영역형 (입체)" IMAGE="Area_3">입체 효과의 영역형</TYPE>
+		<TYPE NAME="누적형 (입체)" IMAGE="Area_4">입체 효과의 누적형</TYPE>
+		<TYPE NAME="100%누적형 (입체)" IMAGE="Area_5">입체 효과의 100%누적형</TYPE>
+		<TYPE NAME="영역형 (입체) : 회전 가능" IMAGE="Area_6">입체 효과의 영역형 - 항목별 : 회전 가능</TYPE>
+		<TYPE NAME="영역형 (입체)" IMAGE="Area_7">입체 효과의 영역형</TYPE>
+		<TYPE NAME="영역형 (입체) : 회전 가능" IMAGE="Area_8">입체 효과의 영역형 - 계열별 : 회전 가능</TYPE>
+	</CLASS>
+	<CLASS NAME="가로 영역형" TYPE="14">
+		<TYPE NAME="영역형" IMAGE="HArea_0">영역형 : 시간이나 항목에 따른 값의 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="누적 영역형" IMAGE="HArea_1">누적 영역형 : 시간이나 항목에 따른 각 값의 기여도 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="100%기준 누적 영역형" IMAGE="HArea_2">100%기준 누적 영역형 : 시간이나 항목에 따른 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="누적형 (입체)" IMAGE="HArea_4">입체 효과의 누적형</TYPE>
+		<TYPE NAME="100%누적형 (입체)" IMAGE="HArea_5">입체 효과의 100%누적형</TYPE>
+	</CLASS>
+	<CLASS NAME="산포형" TYPE="8">
+		<TYPE NAME="세로 산포형" IMAGE="Scatter_0">산포형 : 시간이나 항목에 따른 추세를 보여줍니다.</TYPE>
+		<TYPE NAME="가로 산포형" IMAGE="Scatter_1">산포형 : 시간이나 항목에 따른 추세를 보여줍니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="분산형" TYPE="16">
+		<TYPE NAME="분산형" IMAGE="Scatter2_0">분산형 : 값을 점으로 비교합니다.</TYPE>
+		<TYPE NAME="꺾은선으로 연결된 분산형" IMAGE="Scatter2_1">꺾은선으로 연결된 분산형</TYPE>
+		<TYPE NAME="데이터 표식 없이 꺾은선으로 연결된 분산형" IMAGE="Scatter2_2">데이터 표식 없이 꺾은선으로 연결된 분산형</TYPE>
+	</CLASS>
+	<CLASS NAME="원형" TYPE="9">
+		<TYPE NAME="원형" IMAGE="Pie_0">원형 : 전체에 대한 각 값의 기여도를 보여 줍니다.</TYPE>
+		<TYPE NAME="분리된 원형" IMAGE="Pie_3">분리된 원형 : 전체에 대한 각 값의 기여도를 보여 줍니다.</TYPE>
+		<TYPE NAME="원형 (입체)" IMAGE="Pie_1">입체 효과의 원형</TYPE>
+		<TYPE NAME="분리된 원형 (입체)" IMAGE="Pie_4">분리된 입체 효과의 원형</TYPE>
+	</CLASS>
+	<CLASS NAME="게이지" TYPE="15">
+		<TYPE NAME="게이지" IMAGE="Gauge_0">게이지</TYPE>
+	</CLASS>
+	<CLASS NAME="방사형" TYPE="10">
+		<TYPE NAME="방사형" IMAGE="Radiant_0">거미줄 모양의 분산형 데이터를 Point을 제외 하고 보여 줍니다.</TYPE>
+		<TYPE NAME="누적 방사형" IMAGE="Radiant_1">누적형 : 거미줄 모양의 분산형 데이터를 Point을 제외 하고 보여 줍니다.</TYPE>
+		<TYPE NAME="100%기준 누적 방사형" IMAGE="Radiant_2">퍼센트형 : 거미줄 모양의 분산형 데이터를 Point을 제외 하고 보여 줍니다.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 방사형" IMAGE="Radiant_3">거미줄 모양의 분산형 데이터를 Point와 함께 보여 줍니다.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 누적 방사형" IMAGE="Radiant_4">누적형 : 거미줄 모양의 분산형 데이터를 Point와 함께 보여 줍니다.</TYPE>
+		<TYPE NAME="데이터 표식이 있는 100%기준 누적 방사형" IMAGE="Radiant_5">퍼센트형 : 거미줄 모양의 분산형 데이터를 Point와 함께 보여 줍니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="계단형" TYPE="11">
+		<TYPE NAME="세로 계단형" IMAGE="Step_0">계단형 : 시간이나 항목에 따른 값의 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="가로 계단형" IMAGE="Step_1">계단형 : 시간이나 항목에 따른 값의 추세를 보여 줍니다.</TYPE>
+	</CLASS>
+	<CLASS NAME="사용자형" TYPE="12">
+		<TYPE NAME="세로 사용자형" IMAGE="Custom_0">사용자형 : 사용자가 정의한 타입</TYPE>
+		<TYPE NAME="세로 누적 사용자형" IMAGE="Custom_1">누적 사용자형 : 사용자가 정의한 타입을 누적형태로 보여 줍니다.</TYPE>
+		<TYPE NAME="세로 100%기준 누적 사용자형" IMAGE="Custom_2">100%기준 누적 사용자형 : 사용자가 정의한 타입을 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="가로 사용자형" IMAGE="Custom_3">사용자형 : 사용자가 정의한 타입</TYPE>
+		<TYPE NAME="가로 누적 사용자형" IMAGE="Custom_4">누적 사용자형 : 사용자가 정의한 타입을 누적형태로 보여 줍니다.</TYPE>
+		<TYPE NAME="가로 100%기준 누적 사용자형" IMAGE="Custom_5">100%기준 누적 사용자형 : 사용자가 정의한 타입을 각 값의 백분율 추세를 보여 줍니다.</TYPE>
+		<TYPE NAME="세로 사용자형 (입체)" IMAGE="Custom_6">입체 효과 사용자형</TYPE>		
+		<TYPE NAME="세로 사용자형 (입체)" IMAGE="Custom_7">입체 효과 사용자형</TYPE>		
+	</CLASS>
+</OZCHARTRESOURCE>

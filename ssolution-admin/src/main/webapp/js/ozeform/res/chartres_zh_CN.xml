@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.3 U (http://www.xmlspy.com) by lijingji (lijingji) -->
+<OZCHARTRESOURCE VERSION="2.0">
+	<CLASS NAME="折线图" TYPE="0">
+		<TYPE NAME="折线图" IMAGE="Line_0">折线图:显示随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="堆积折线图" IMAGE="Line_1">堆积折线图:显示每一数值所占大小随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="百分比堆积折线图" IMAGE="Line_2">百分比堆积折线图:显示每一数值所占百分比随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="数据点折线图" IMAGE="Line_3">数据点折线图</TYPE>
+		<TYPE NAME="堆积数据点折线图" IMAGE="Line_4">堆积数据点折线图</TYPE>
+		<TYPE NAME="百分比堆积数据点折线图" IMAGE="Line_5">百分比堆积数据点折线图</TYPE>
+		<TYPE NAME="折线图(三维)- 类别" IMAGE="Line_6">三维折线图:三维折线图</TYPE>
+		<TYPE NAME="折线图(三维): 可旋转" IMAGE="Line_7">三维折线图-类别:可旋转</TYPE>
+		<TYPE NAME="折线图(三维)- 系列" IMAGE="Line_8">三维折线图:三维折线图</TYPE>
+		<TYPE NAME="折线图(三维): 可旋转" IMAGE="Line_9">三维折线图-系列:可旋转</TYPE>
+	</CLASS>
+	<CLASS NAME="水平折线图" TYPE="13">
+		<TYPE NAME="折线图" IMAGE="HLine_0">折线图:显示随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="堆积折线图" IMAGE="HLine_1">堆积折线图:显示每一数值所占大小随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="百分比堆积折线图" IMAGE="HLine_2">百分比堆积折线图:显示每一数值所占百分比随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="数据点折线图" IMAGE="HLine_3">数据点折线图</TYPE>
+		<TYPE NAME="堆积数据点折线图" IMAGE="HLine_4">堆积数据点折线图</TYPE>
+		<TYPE NAME="百分比堆积数据点折线图" IMAGE="HLine_5">百分比堆积数据点折线图</TYPE>
+	</CLASS>
+	<CLASS NAME="柱形图" TYPE="1">
+		<TYPE NAME="簇状柱形图" IMAGE="Bar_0">簇状柱形图:比较相交于类别轴上的数值大小。</TYPE>
+		<TYPE NAME="堆积柱形图" IMAGE="Bar_1">堆积柱形图:比较相交于类别轴上的每一数值所占总数值的大小。</TYPE>
+		<TYPE NAME="百分比堆积柱形图" IMAGE="Bar_2">百分比堆积柱形图:比较相交于类别轴上的每一数值所占总数值的百分比大小。</TYPE>
+		<TYPE NAME="簇状柱形图(三维)" IMAGE="Bar_3">三维簇状柱形图</TYPE>
+		<TYPE NAME="堆积柱形图(三维)" IMAGE="Bar_4">三维堆积柱形图</TYPE>
+		<TYPE NAME="百分比堆积柱形图(三维)" IMAGE="Bar_5">三维百分比堆积柱形图</TYPE>
+		<TYPE NAME="柱形图(三维)- 类别" IMAGE="Bar_6">三维柱形图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+		<TYPE NAME="柱形图(三维): 可旋转" IMAGE="Bar_7">三维柱形图-类别:可旋转</TYPE>
+		<TYPE NAME="柱形图(三维)- 系列" IMAGE="Bar_8">三维柱形图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+		<TYPE NAME="柱形图(三维): 可旋转" IMAGE="Bar_9">三维柱形图-系列: 可旋转</TYPE>
+	</CLASS>
+	<CLASS NAME="条形图" TYPE="2">
+		<TYPE NAME="簇状条形图" IMAGE="HBar_0">簇状条形图:比较相交于类别轴上的数值大小。</TYPE>
+		<TYPE NAME="堆积条形图" IMAGE="HBar_1">堆积条形图:比较相交于类别轴上的每一数值数值总数值的大小。</TYPE>
+		<TYPE NAME="百分比堆积条形图" IMAGE="HBar_2">百分比堆积条形图:比较相交于类别轴上的每一数值数值总数值的百分比大小。</TYPE>
+		<TYPE NAME="簇状条形图(三维)" IMAGE="HBar_3">三维簇状条形图</TYPE>
+		<TYPE NAME="堆积条形图(三维)" IMAGE="HBar_4">三维堆积条形图</TYPE>
+		<TYPE NAME="百分比堆积条形图(三维)" IMAGE="HBar_5">三维百分比堆积条形图</TYPE>
+	</CLASS>
+	<CLASS NAME="圆柱图" TYPE="3">
+		<TYPE NAME="簇状圆柱图" IMAGE="Cylinder_0">簇状圆柱图:比较相交于类别轴上的数值大小。</TYPE>
+		<TYPE NAME="堆积圆柱图" IMAGE="Cylinder_1">堆积圆柱图:比较相交于类别轴上的每一数值数值总数值的大小。</TYPE>
+		<TYPE NAME="百分比堆积圆柱图" IMAGE="Cylinder_2">百分比堆积圆柱图: 比较相交于类别轴上的每一数值数值总数值的百分比大小。</TYPE>
+		<TYPE NAME="簇状圆柱图(三维)" IMAGE="Cylinder_3">三维簇状圆柱图</TYPE>
+		<TYPE NAME="堆积圆柱图(三维)" IMAGE="Cylinder_4">三维堆积圆柱图</TYPE>
+		<TYPE NAME="百分比堆积圆柱图(三维)" IMAGE="Cylinder_5">三维百分比堆积圆柱图</TYPE>
+		<TYPE NAME="圆柱图(三维)-类别" IMAGE="Cylinder_6">三维圆柱图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+		<TYPE NAME="圆柱图(三维)-系列" IMAGE="Cylinder_7">三维圆柱图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+	</CLASS>
+	<CLASS NAME="水平圆柱图" TYPE="4">
+		<TYPE NAME="簇状水平圆柱图" IMAGE="HCylinder_0">簇状水平圆柱图:比较相交于类别轴上的数值大小。</TYPE>
+		<TYPE NAME="堆积水平圆柱图" IMAGE="HCylinder_1">堆积水平圆柱图:比较相交于类别轴上的每一数值数值总数值的大小。</TYPE>
+		<TYPE NAME="百分比堆积水平圆柱图" IMAGE="HCylinder_2">百分比堆积水平圆柱图:比较相交于类别轴上的每一数值数值总数值的百分比大小。</TYPE>
+		<TYPE NAME="簇状水平圆柱图(三维)" IMAGE="HCylinder_3">三维簇状水平圆柱图</TYPE>
+		<TYPE NAME="堆积水平圆柱图(三维)" IMAGE="HCylinder_4">三维堆积水平圆柱图</TYPE>
+		<TYPE NAME="百分比堆积水平圆柱图(三维)" IMAGE="HCylinder_5">三维百分比堆积水平圆柱图</TYPE>
+	</CLASS>
+	<CLASS NAME="圆锥图" TYPE="5">
+		<TYPE NAME="簇状圆锥图(三维)" IMAGE="Cone_0">三维簇状圆锥图</TYPE>
+		<TYPE NAME="堆积圆锥图(三维)" IMAGE="Cone_1">三维堆积圆锥图</TYPE>
+		<TYPE NAME="百分比堆积圆锥图(三维)" IMAGE="Cone_2">三维百分比堆积圆锥图</TYPE>
+		<TYPE NAME="簇状圆锥图(三维)" IMAGE="Cone_3">三维簇状水平圆锥图</TYPE>
+		<TYPE NAME="堆积圆锥图(三维)" IMAGE="Cone_4">三维堆积水平圆锥图</TYPE>
+		<TYPE NAME="百分比堆积圆锥图(三维)" IMAGE="Cone_5">三维百分比堆积水平圆锥图</TYPE>
+		<TYPE NAME="圆锥图(三维)- 类别" IMAGE="Cone_6">三维圆锥图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+		<TYPE NAME="圆锥图(三维)- 系列" IMAGE="Cone_7">三维圆锥图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+	</CLASS>
+	<CLASS NAME="棱椎图" TYPE="6" type="">
+		<TYPE NAME="簇状棱锥图(三维)" IMAGE="Pyramid_0">三维簇状棱锥图</TYPE>
+		<TYPE NAME="堆积棱锥图(三维)" IMAGE="Pyramid_1">三维堆积棱锥图</TYPE>
+		<TYPE NAME="百分比堆积棱锥图(三维)" IMAGE="Pyramid_2">三维百分比堆积棱锥图</TYPE>
+		<TYPE NAME="簇状水平棱锥图(三维)" IMAGE="Pyramid_3">三维簇状水平棱锥图</TYPE>
+		<TYPE NAME="堆积水平棱锥图(三维)" IMAGE="Pyramid_4">三维堆积水平棱锥图</TYPE>
+		<TYPE NAME="百分比堆积水平棱锥图(三维)" IMAGE="Pyramid_5">三维百分比堆积水平棱锥图</TYPE>
+		<TYPE NAME="棱锥图(三维)- 系列" IMAGE="Pyramid_6">三维棱锥图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+		<TYPE NAME="棱锥图(三维)- 类别" IMAGE="Pyramid_7">三维棱锥图:比较相交于类别轴和相交于系列轴的数值。</TYPE>
+	</CLASS>
+	<CLASS NAME="面积图" TYPE="7">
+		<TYPE NAME="面积图" IMAGE="Area_0">面积图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="堆积面积图" IMAGE="Area_1">堆积面积图:显示每一数值所占大小随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="百分比堆积面积图" IMAGE="Area_2">百分比堆积面积图:显示每一数值所占百分比随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="面积图(三维)" IMAGE="Area_3">三维面积图</TYPE>
+		<TYPE NAME="堆积图(三维)" IMAGE="Area_4">三维堆积图</TYPE>
+		<TYPE NAME="百分比堆积面积图(三维)" IMAGE="Area_5">三维百分比堆积面积图</TYPE>
+		<TYPE NAME="面积图(三维): 可旋转" IMAGE="Area_6">三维面积图-类别:可旋转</TYPE>
+		<TYPE NAME="面积图(三维)" IMAGE="Area_7">三维面积图</TYPE>
+		<TYPE NAME="面积图(三维): 可旋转" IMAGE="Area_8">三维面积图-系列:可旋转</TYPE>
+	</CLASS>
+	<CLASS NAME="水平面积图" TYPE="14">
+		<TYPE NAME="面积图" IMAGE="HArea_0">面积图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="堆积面积图" IMAGE="HArea_1">堆积面积图:显示每一数值所占大小随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="百分比堆积面积图" IMAGE="HArea_2">百分比堆积面积图:显示每一数值所占百分比随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="堆积面积图(三维)" IMAGE="HArea_4">三维堆积面积图</TYPE>
+		<TYPE NAME="百分比堆积面积图(三维)" IMAGE="HArea_5">三维百分比堆积面积图</TYPE>
+	</CLASS>
+	<CLASS NAME="散点图" TYPE="8">
+		<TYPE NAME="散点图" IMAGE="Scatter_0">散点图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="水平散点图" IMAGE="Scatter_1">散点图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+	</CLASS>
+	<CLASS NAME="散点图  II" TYPE="16">
+		<TYPE NAME="散点图  II" IMAGE="Scatter2_0">散点图:显示随时间或类别而变化的趋势</TYPE>
+		<TYPE NAME="散点图" IMAGE="Scatter2_1">散点图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="水平散点图" IMAGE="Scatter2_2">散点图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+	</CLASS>
+	<CLASS NAME="饼图" TYPE="9">
+		<TYPE NAME="饼图" IMAGE="Pie_0">饼图:显示每一数值相对于总数值的大小。</TYPE>
+		<TYPE NAME="分离型饼图" IMAGE="Pie_3">分离型饼图:显示每一数值相对于总数值的大小。</TYPE>
+		<TYPE NAME="饼图(三维)" IMAGE="Pie_1">三维饼图</TYPE>
+		<TYPE NAME="分离型饼图(三维)" IMAGE="Pie_4">分离型三维饼图</TYPE>
+	</CLASS>
+	<CLASS NAME="雷达图" TYPE="10">
+		<TYPE NAME="雷达图" IMAGE="Radiant_0">显示相对于中心点的数值变化。</TYPE>
+		<TYPE NAME="堆积雷达图" IMAGE="Radiant_1">堆积:显示相对于中心点的数值变化。</TYPE>
+		<TYPE NAME="百分比堆积雷达图" IMAGE="Radiant_2">百分比:显示相对于中心点的数值变化。</TYPE>
+		<TYPE NAME="数据点雷达图" IMAGE="Radiant_3">显示相对于中心点的数值变化。</TYPE>
+		<TYPE NAME="数据点堆积雷达图" IMAGE="Radiant_4">堆积:显示相对于中心点的数值变化。</TYPE>
+		<TYPE NAME="数据点百分比堆积雷达图" IMAGE="Radiant_5">百分比:显示相对于中心点的数值变化。</TYPE>
+	</CLASS>
+	<CLASS NAME="仪表盘图" TYPE="15">
+		<TYPE NAME="仪表盘图" IMAGE="Gauge_0">仪表盘图</TYPE>
+	</CLASS>
+	<CLASS NAME="阶梯图" TYPE="11">
+		<TYPE NAME="阶梯图" IMAGE="Step_0">阶梯图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+		<TYPE NAME="水平阶梯图" IMAGE="Step_1">阶梯图:显示各种数值随时间或类别而变化的趋势线。</TYPE>
+	</CLASS>
+	<CLASS NAME="自定义类型" TYPE="12">
+		<TYPE NAME="自定义类型" IMAGE="Custom_0">自定义类型:用户自定义类型。</TYPE>
+		<TYPE NAME="堆积" IMAGE="Custom_1">堆积自定义类型:用户自定义堆积型。</TYPE>
+		<TYPE NAME="百分比堆积" IMAGE="Custom_2">百分比堆积自定义类型:显示用户自定义类型的每一数值的百分比趋势。</TYPE>
+		<TYPE NAME="水平" IMAGE="Custom_3">自定义类型:用户自定义类型。</TYPE>
+		<TYPE NAME="水平堆积" IMAGE="Custom_4">堆积自定义类型:用户自定义堆积型。</TYPE>
+		<TYPE NAME="水平百分比堆积" IMAGE="Custom_5">百分比堆积自定义类型:显示用户自定义类型的每一数值的百分比趋势。</TYPE>
+		<TYPE NAME="水平(三维)" IMAGE="Custom_6">三维的自定义类型。</TYPE>
+		<TYPE NAME="水平(三维)" IMAGE="Custom_7">三维的自定义类型。</TYPE>
+	</CLASS>
+</OZCHARTRESOURCE>

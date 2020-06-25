@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.menumng.MenuMngMapper">
+
+	<select id="getAuthList" parameterType="MenuMngVO" resultType="MenuMngVO">
+		SELECT /* MenuMngMapper.getAuthList, JHLee, 2017.10.23 */
+			A.MENU_ID
+			,COALESCE(
+            	(SELECT MENU_NM
+                 	FROM    TSYMU_MENU_LANG B
+                    WHERE   B.MENU_ID = A.MENU_ID
+                    AND B.LANG_TP = #{lng, jdbcType=VARCHAR}), A.MENU_NM
+                    ) AS MENU_NM
+			,A.UPP_MENU_ID
+			,COALESCE(
+            	(SELECT MENU_NM
+                 	FROM    TSYMU_MENU_LANG B
+                    WHERE   B.MENU_ID = A.UPP_MENU_ID
+                    AND B.LANG_TP = #{lng, jdbcType=VARCHAR}), A.MENU_NM
+                    ) AS UPP_MENU_NM
+			,A.URL_CD
+			,FSYCD_CODE_NAME('SY00007', A.URL_CD)	AS URL_NM
+			,(SELECT REF_CD2
+			    FROM TSYCD_COMM_CD_DTL      DTL
+			       , TSYCD_COMM_CD_DTL_LANG LANG
+			   WHERE DTL.COMM_CD_GRP = 'SY00007'
+			     AND DTL.COMM_CD_GRP = LANG.COMM_CD_GRP
+			     AND DTL.COMM_CD     = LANG.COMM_CD
+			     AND LANG.LANG_TP    = #{lng, jdbcType=VARCHAR}
+			     AND DTL.COMM_CD     = A.URL_CD)	AS URL_PATH
+			,A.LVL
+			,A.SORT_NO
+			,A.MENU_DESC
+			,A.USE_YN
+			,A.INPT_MENU_ID
+			,A.REGR_ID
+			,FSYUS_USR_NM(A.REGR_ID)				AS REGR_NM
+			,A.REG_DATE
+			,A.CHGR_ID
+			,FSYUS_USR_NM(A.CHGR_ID)				AS CHGR_NM
+			,A.CHG_DATE
+		FROM TSYMU_MENU A
+		WHERE A.LVL = CAST(#{lvl} AS integer)
+        AND   A.UPP_MENU_ID = #{uppMenuId, jdbcType=VARCHAR}
+        ORDER BY A.SORT_NO,A.MENU_ID
+	</select>
+
+	<select id="getDownMenuList" resultType="MenuMngVO">
+		SELECT /* MenuMngMapper.getDownMenuList, JHLee, 2017.10.23 */
+			A.MENU_ID
+			,COALESCE(
+            	(SELECT MENU_NM
+                 	FROM    TSYMU_MENU_LANG B
+                    WHERE   B.MENU_ID = A.MENU_ID
+                    AND B.LANG_TP = #{menuMngVO.lng}), A.MENU_NM
+                    ) AS CD_MENU_NM
+            ,A.MENU_NM
+			,A.UPP_MENU_ID
+			,COALESCE(
+            	(SELECT MENU_NM
+                 	FROM    TSYMU_MENU_LANG B
+                    WHERE   B.MENU_ID = A.UPP_MENU_ID
+                    AND B.LANG_TP = #{menuMngVO.lng}), A.MENU_NM
+                    ) AS UPP_MENU_NM
+			,A.URL_CD
+			,FSYCD_CODE_NAME('SY00007', A.URL_CD)	AS URL_NM
+			,(SELECT REF_CD2
+			    FROM TSYCD_COMM_CD_DTL      DTL
+			       , TSYCD_COMM_CD_DTL_LANG LANG
+			   WHERE DTL.COMM_CD_GRP = 'SY00007'
+			     AND DTL.COMM_CD_GRP = LANG.COMM_CD_GRP
+			     AND DTL.COMM_CD     = LANG.COMM_CD
+			     AND LANG.LANG_TP    = #{menuMngVO.lng, jdbcType=VARCHAR}
+			     AND DTL.COMM_CD     = A.URL_CD)	AS URL_PATH
+			,A.LVL
+			,A.SORT_NO
+			,A.MENU_DESC
+			,A.USE_YN
+			,A.INPT_MENU_ID
+			,A.REGR_ID
+			,FSYUS_USR_NM(A.REGR_ID)	AS REGR_NM
+			,A.REG_DATE
+			,A.CHGR_ID
+			,FSYUS_USR_NM(A.CHGR_ID)	AS CHGR_NM
+			,A.CHG_DATE
+		FROM TSYMU_MENU A
+		WHERE A.LVL = CAST(#{menuMngVO.lvl} AS integer)
+			AND A.UPP_MENU_ID = #{menuMngVO.condUppMenuId}
+ 		ORDER BY A.SORT_NO ASC
+	</select>
+	
+	<insert id="insertMenuAction" parameterType="MenuMngVO">
+		INSERT INTO TSYMU_MENU ( /* MenuMngMapper.insertMenuAction, JHLee, 2017.10.23 */
+			 MENU_ID
+			,MENU_NM
+			,UPP_MENU_ID
+			,URL_CD
+			,LVL
+			,SORT_NO
+			,MENU_DESC
+			,USE_YN
+			,INPT_MENU_ID
+			,REGR_ID
+			,REG_DATE
+			,CHGR_ID
+			,CHG_DATE
+		)VALUES(
+			 #{menu.menuId, jdbcType=VARCHAR}
+			,#{menu.menuNm, jdbcType=VARCHAR}
+			,#{menu.uppMenuId, jdbcType=VARCHAR}
+			,#{menu.urlCd, jdbcType=VARCHAR}
+			,CAST(#{menu.lvl, jdbcType=VARCHAR} AS integer)
+			,CAST(#{menu.sortNo, jdbcType=VARCHAR} AS integer)
+			,#{menu.menuDesc, jdbcType=VARCHAR}
+			,#{menu.useYn, jdbcType=VARCHAR}
+			,#{menu.inptMenuId, jdbcType=VARCHAR}
+			,#{menu.regrId, jdbcType=VARCHAR}
+			,now()
+			,#{menu.regrId, jdbcType=VARCHAR}
+			,now()
+			)
+	</insert>
+
+	<insert id="insertLngMenu" parameterType="MenuMngVO">
+		INSERT INTO TSYMU_MENU_LANG ( /* MenuMngMapper.insertLngMenu, JHLee, 2017.10.23 */
+			 MENU_ID
+			,LANG_TP
+			,MENU_NM
+			,INPT_MENU_ID
+			,REGR_ID
+			,REG_DATE
+			,CHGR_ID
+			,CHG_DATE
+		)VALUES(
+			 #{menu.menuId, jdbcType=VARCHAR}
+			,#{menu.langTp, jdbcType=VARCHAR}
+			,#{menu.menuNm, jdbcType=VARCHAR}
+			,#{menu.inptMenuId, jdbcType=VARCHAR}
+			,#{menu.regrId, jdbcType=VARCHAR}
+			,now()
+			,#{menu.regrId, jdbcType=VARCHAR}
+			,now()
+		)
+	</insert>
+
+	<update id="updateMenuAction"  parameterType="MenuMngVO">
+		UPDATE /* MenuMngMapper.updateMenuAction, JHLee, 2017.10.23 */
+			TSYMU_MENU 
+		SET
+			 MENU_NM   = #{menu.menuNm, jdbcType=VARCHAR}
+			,URL_CD    = #{menu.urlCd, jdbcType=VARCHAR}
+			,SORT_NO   = CAST(#{menu.sortNo, jdbcType=VARCHAR} AS integer)
+			,MENU_DESC = #{menu.menuDesc, jdbcType=VARCHAR}
+			,USE_YN    = #{menu.useYn, jdbcType=VARCHAR}
+			,CHGR_ID   = #{menu.regrId, jdbcType=VARCHAR}
+			,CHG_DATE  = now()
+		WHERE MENU_ID  = #{menu.menuId, jdbcType=VARCHAR}
+	</update>
+
+	<delete id="deleteMenuAction" parameterType="MenuMngVO">
+		DELETE  /* MenuMngMapper.deleteMenuAction, JHLee, 2017.10.23 */
+		  FROM TSYMU_MENU_LANG
+		 WHERE MENU_ID = #{menuId}
+	</delete>
+
+	<select id="getMenuNoList" resultType="MenuMngVO">
+		SELECT /* MenuMngMapper.getMenuNoList, JHLee, 2017.10.23 */
+			MENU_ID
+			,UPP_MENU_ID
+			,MENU_NM
+			,LVL
+		FROM TSYMU_MENU WHERE UPP_MENU_ID = #{menuId}
+	</select>
+
+	<delete id="deleteAction" parameterType="MenuMngVO">
+		DELETE /* MenuMngMapper.deleteAction, JHLee, 2017.10.23 */ 
+		  FROM TSYMU_MENU WHERE MENU_ID= #{menuId, jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deleteUpAction" parameterType="MenuMngVO">
+		DELETE /* MenuMngMapper.deleteUpAction, JHLee, 2017.10.23 */
+		  FROM TSYMU_MENU
+		 WHERE UPP_MENU_ID= #{menuId, jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deleteMenuAuth" parameterType="MenuMngVO">
+		DELETE /* MenuMngMapper.deleteMenuAuth, JHLee, 2017.10.23 */
+		  FROM TSYAU_AUTH_GRP_DTL A 
+		 WHERE A.MENU_ID IN (SELECT MENU_ID FROM TSYMU_MENU B WHERE B.UPP_MENU_ID= #{menuId, jdbcType=VARCHAR})
+	</delete>
+
+	<delete id="deleteLastMenuAuth" parameterType="MenuMngVO">
+		DELETE /* MenuMngMapper.deleteLastMenuAuth, JHLee, 2017.10.23 */
+		  FROM TSYAU_AUTH_GRP_DTL 
+		 WHERE MENU_ID= #{menuId, jdbcType=VARCHAR}
+	</delete>
+
+	<delete id="deleteLastLng" parameterType="MenuMngVO">
+		DELETE /* MenuMngMapper.deleteLastLng, JHLee, 2017.10.23 */
+		  FROM TSYMU_MENU_LANG A 
+		 WHERE A.MENU_ID IN (SELECT MENU_ID FROM TSYMU_MENU B WHERE B.UPP_MENU_ID= #{menuId, jdbcType=VARCHAR})
+	</delete>
+
+	<select id="checkMenu" resultType="int" parameterType="MenuMngVO">
+		SELECT /* MenuMngMapper.checkMenu, JHLee, 2017.10.23 */
+			COUNT(MENU_ID)
+		FROM
+			TSYMU_MENU
+		WHERE MENU_ID = #{menu.menuId, jdbcType=VARCHAR}
+	</select>
+
+	<select id="getProgListPopup" parameterType="ProgListPopupVO" resultType="ProgListPopupVO">
+		SELECT	/* MenuMngMapper.getProgListPopup, JHLee, 2017.10.23 */
+			SDTL.COMM_CD	AS SYS_TP_CD
+		  , SDTL.COMM_NM	AS SYS_TP_NM
+		  , PDTL.COMM_CD	AS PROG_ID
+		  , PDTL.COMM_NM	AS PROG_NM
+		  , PDTL.REF_CD2	AS VIEW_PATH_URL
+		  , SDTL.SORT_NO
+		  , PDTL.SORT_NO
+		FROM TSYCD_COMM_CD_GRP      SGRP
+		   , TSYCD_COMM_CD_GRP_LANG SGLA
+		   , TSYCD_COMM_CD_DTL      SDTL
+		   , TSYCD_COMM_CD_DTL_LANG SDLA
+		   , TSYCD_COMM_CD_GRP      PGRP
+		   , TSYCD_COMM_CD_GRP_LANG PGLA
+		   , TSYCD_COMM_CD_DTL      PDTL
+		   , TSYCD_COMM_CD_DTL_LANG PDLA
+		WHERE SGRP.COMM_CD_GRP = 'SY00006'
+		  AND PGRP.COMM_CD_GRP = 'SY00007'
+		  AND SGLA.LANG_TP = #{langTp, jdbcType=VARCHAR}
+		  AND SDLA.LANG_TP = #{langTp, jdbcType=VARCHAR}
+		  AND PGLA.LANG_TP = #{langTp, jdbcType=VARCHAR}
+		  AND PDLA.LANG_TP = #{langTp, jdbcType=VARCHAR}
+		  AND SDTL.USE_YN = 'Y'
+		  AND PDTL.USE_YN = 'Y'
+		  AND SGRP.COMM_CD_GRP = SDTL.COMM_CD_GRP
+		  AND SGRP.COMM_CD_GRP = SGLA.COMM_CD_GRP
+		  AND SDTL.COMM_CD_GRP = SDLA.COMM_CD_GRP
+		  AND SDTL.COMM_CD     = SDLA.COMM_CD
+		  AND PGRP.COMM_CD_GRP = PDTL.COMM_CD_GRP
+		  AND PGRP.COMM_CD_GRP = PGLA.COMM_CD_GRP
+		  AND PDTL.COMM_CD_GRP = PDLA.COMM_CD_GRP
+		  AND PDTL.COMM_CD     = PDLA.COMM_CD
+		  AND SDTL.COMM_CD = PDTL.REF_CD1
+		<if test="sysTpCd != null and sysTpCd != '' and sysTpCd != 'SEL'" >
+		  AND SDTL.COMM_CD = #{sysTpCd, jdbcType=VARCHAR}
+		</if>
+		<if test="viewPathUrl != null and viewPathUrl != ''">
+		  AND PDTL.REF_CD2 LIKE CONCAT(CONCAT( '%' , #{viewPathUrl, jdbcType=VARCHAR}), '%')
+		</if>
+		ORDER BY SDTL.SORT_NO, PDTL.SORT_NO
+	</select>
+
+</mapper>

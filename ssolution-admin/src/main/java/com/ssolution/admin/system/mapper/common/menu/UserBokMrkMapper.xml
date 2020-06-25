@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.menu.UserBokMrkMapper">
+
+	<select id="getUserBokMrkList" parameterType="UserBokMrkVO" resultType="UserBokMrkVO">
+		SELECT	/* UserBokMrkMapper.getUserBokList, 김정호, 2017.11.01 */
+				A.USER_ID
+				, A.MENU_ID
+				, A.INPT_MENU_ID
+				, A.REGR_ID
+				, A.REG_DATE
+				, A.CHGR_ID
+				, A.CHG_DATE
+		FROM	TSYUS_USER_BOKMRK A
+		WHERE	A.USER_ID	= #{userBokMrkVO.userId}
+	
+	</select>
+	
+	<insert id="insertUserBokMrk" parameterType="UserBokMrkVO">
+		INSERT INTO	/* UserBokMrkMapper.insertUserBokMrk, 김정호, 2017.11.01 */
+			TSYUS_USER_BOKMRK(
+				USER_ID
+				, MENU_ID
+				, INPT_MENU_ID
+				, REGR_ID
+				, REG_DATE
+				, CHGR_ID
+				, CHG_DATE
+			)VALUES(
+                 #{userBokMrkVO.userId, jdbcType=VARCHAR}
+                ,#{userBokMrkVO.menuId, jdbcType=VARCHAR}
+                ,#{userBokMrkVO.inptMenuId, jdbcType=VARCHAR}
+                ,#{userBokMrkVO.regrId, jdbcType=VARCHAR}
+                ,#{userBokMrkVO.regDate}
+                ,#{userBokMrkVO.chgrId, jdbcType=VARCHAR}
+                ,#{userBokMrkVO.chgDate}
+			)
+    </insert>
+    
+    <delete id="deleteUserBokMrk" parameterType="UserBokMrkVO">
+		DELETE	/* UserBokMrkMapper.deleteUserBokMrk, 김정호, 2017.11.01 */
+		FROM	TSYUS_USER_BOKMRK
+		WHERE	USER_ID		= #{userBokMrkVO.userId}
+			AND MENU_ID		= #{userBokMrkVO.menuId}
+    </delete>
+    
+    <delete id="deleteUserBokMrkAuth" parameterType="UserBokMrkVO">
+		DELETE	/* UserBokMrkMapper.deleteUserBokMrkAuth, 김정호, 2017.11.01 */
+		FROM	TSYUS_USER_BOKMRK
+		WHERE	USER_ID		= #{userBokMrkVO.userId}
+		<if test="userBokMrkVO.menuIdList != null and userBokMrkVO.menuIdList.size != 0 ">
+			AND MENU_ID		NOT IN
+			<foreach collection="userBokMrkVO.menuIdList" item="item" index="index" open="(" separator="," close=")">
+        		#{item}
+        	</foreach>
+        </if>
+    </delete>
+</mapper>

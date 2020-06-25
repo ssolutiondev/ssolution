@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.page.CommonCfgMapper">
+
+    <sql id="paging_head">
+        <choose>
+            <when test="'${dbmsType}' == 'MYSQL'">
+                SELECT *
+                  FROM (
+                        SELECT @rownum := @rownum + 1 AS rownum, listA.*
+                          FROM (SELECT @rownum := 0) r
+                             , (
+            </when>
+            <when test="'${dbmsType}' == 'ORACLE'">
+                SELECT *
+                FROM (
+                    SELECT originalQuery.*, ROWNUM AS RNUM
+                    FROM (
+            </when>
+            <when test="'${dbmsType}' == 'ALTIBASE'">
+                SELECT *
+                FROM (
+                    SELECT originalQuery.*, ROWNUM AS RNUM
+                    FROM (
+            </when>
+            <when test="'${dbmsType}' == 'TIBERO'">
+                SELECT *
+                FROM (
+                    SELECT originalQuery.*, ROWNUM AS RNUM
+                    FROM (
+            </when>
+            <when test="'${dbmsType}' == 'POSTGRESQL'">
+                SELECT result.*
+                FROM (
+                    SELECT originalQuery.*, (ROW_NUMBER() OVER()) AS RNUM
+                    FROM (
+            </when>
+        </choose>
+    </sql>
+
+    <sql id="paging_foot">
+        <choose>
+            <when test="'${dbmsType}' == 'MYSQL'">
+                                ) listA
+                        ) listB
+                  WHERE
+                <![CDATA[
+                        listB.rownum <= (#{end, jdbcType=VARCHAR}+#{start, jdbcType=VARCHAR})
+                    AND listB.rownum > #{start, jdbcType=VARCHAR}
+                ]]>
+            </when>
+            <when test="'${dbmsType}' == 'ORACLE'">
+                    ) originalQuery
+                <![CDATA[
+                    WHERE ROWNUM <= (#{end, jdbcType=VARCHAR}+#{start, jdbcType=VARCHAR})
+                    )
+                WHERE RNUM > #{start, jdbcType=VARCHAR}
+                ]]>
+            </when>
+            <when test="'${dbmsType}' == 'ALTIBASE'">
+                    ) originalQuery
+                <![CDATA[
+                    WHERE ROWNUM <= (#{end, jdbcType=VARCHAR}+#{start, jdbcType=VARCHAR})
+                    )
+                WHERE RNUM > #{start, jdbcType=VARCHAR}
+                ]]>
+            </when>
+            <when test="'${dbmsType}' == 'TIBERO'">
+                    ) originalQuery
+                <![CDATA[
+                    WHERE ROWNUM <= (#{end, jdbcType=VARCHAR}+#{start, jdbcType=VARCHAR})
+                    )
+                WHERE RNUM > #{start, jdbcType=VARCHAR}
+                ]]>
+            </when>
+            <when test="'${dbmsType}' == 'POSTGRESQL'">
+                ) originalQuery
+                <![CDATA[
+                    LIMIT (CAST(#{end, jdbcType=VARCHAR} AS integer) + CAST(#{start, jdbcType=VARCHAR} AS integer))
+                    ) result
+                WHERE RNUM > CAST(#{start, jdbcType=VARCHAR} AS integer)
+                ]]>
+            </when>
+        </choose>
+    </sql>
+</mapper>

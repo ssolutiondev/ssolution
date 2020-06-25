@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.board.BoardMapper">
+    <select id="getNoticeList" parameterType="boardVO" resultType="boardVO">
+        SELECT 			/* NoticeMapper.getNoticeList, Jeong Ki Nam, 2017.10.25 */ 
+            	 NTCE.NTCE_ID
+	            ,NTCE.NTCE_TP
+	            ,FSYCD_CODE_NAME('SY00016', NTCE.NTCE_TP) AS NTCE_TP_NM
+	            ,NTCE.TITLE
+	            ,NTCE.NTCE_CT
+	            ,NTCE.NTCE_STRT_DT
+	            ,NTCE.NTCE_END_DT
+	            ,(
+	            	SELECT 
+						COUNT(NTCE_ID)
+					FROM
+						TSYBD_NTCE_READ_HIST
+					WHERE
+						NTCE_ID = NTCE.NTCE_ID
+           		) AS READ_CNT
+	            ,NTCE.POPUP_YN
+	            ,NTCE.INPT_MENU_ID
+	            ,NTCE.REGR_ID
+	            ,FSYUS_USR_NM(NTCE.REGR_ID) AS REGR_NM
+	            ,NTCE.REG_DATE
+	            ,NTCE.CHGR_ID
+	            ,FSYUS_USR_NM(NTCE.CHGR_ID) AS CHGR_NM
+	            ,NTCE.CHG_DATE
+        FROM
+           ( 
+				SELECT 			 
+		            NTCE.NTCE_ID
+		            ,NTCE.NTCE_TP
+		            ,NTCE.TITLE
+		            ,NTCE.NTCE_CT
+		            ,NTCE.NTCE_STRT_DT
+		            ,NTCE.NTCE_END_DT		            
+		            ,NTCE.POPUP_YN
+		            ,NTCE.INPT_MENU_ID
+		            ,NTCE.REGR_ID
+		            ,FSYUS_USR_NM(NTCE.REGR_ID) AS REGR_NM
+		            ,NTCE.REG_DATE
+		            ,NTCE.CHGR_ID
+		            ,FSYUS_USR_NM(NTCE.CHGR_ID) AS CHGR_NM
+		            ,NTCE.CHG_DATE
+				FROM TSYBD_NTCE_INFO NTCE 
+	        ) NTCE
+	        WHERE 1 = 1
+        	AND 
+        		(
+	        		NTCE.NTCE_STRT_DT &gt;= #{boardVO.start}
+	        	 OR 
+	        	    NTCE.NTCE_END_DT &lt;= #{boardVO.end}
+	        	)
+        <if test="boardVO.condTitle !='' ">
+        	AND NTCE.TITLE LIKE CONCAT(CONCAT( '%' , #{boardVO.condTitle} ), '%')
+        </if>
+		<if test="boardVO.ntceId !='' ">
+			AND NTCE.NTCE_ID = #{boardVO.ntceId}
+		</if>
+         ORDER BY NTCE.NTCE_ID DESC
+    </select>
+    
+    <select id="getNoticeFileList" parameterType="boardVO" resultType="fileVO">
+    	SELECT		/*NoticeMapper.getNoticeFileList	, Jeong Ki Nam , 2017-10-30*/
+             FILES.NTCE_ID
+            ,FILES.NTCE_ORD
+            ,FILES.FILE_NM
+            ,FILES.UUID
+    	FROM TSYBD_NTCE_ATTCH_FILE_INFO FILES
+		   , TSYBD_NTCE_INFO NTCE
+    	WHERE FILES.NTCE_ID = NTCE.NTCE_ID
+    	<if test="boardVO.ntceId != '' ">
+    		AND FILES.NTCE_ID = #{boardVO.ntceId}
+    	</if>
+    	<if test="boardVO.ntceOrd != null and boardVO.ntceOrd != 0">
+    		AND FILES.NTCE_ORD = CAST(#{boardVO.ntceOrd} AS integer)
+    	</if>
+    	ORDER BY FILES.NTCE_ORD
+    </select>
+    
+    <select id="getNoticeFileInfo" parameterType="int" resultType="fileVO">
+    	SELECT		/*NoticeMapper.getNoticeFileInfo	, Jeong Ki Nam , 2018-01-24 */
+            FILES.FILE_PATH
+            ,FILES.FILE_NM
+            ,FILES.UUID
+    	FROM TSYBD_NTCE_ATTCH_FILE_INFO FILES
+   		WHERE 
+   			FILES.NTCE_ID = #{ntceId}
+    		AND FILES.NTCE_ORD = #{ntceOrd}
+    </select>
+
+	<select id="getNtceId" resultType="int">
+		select nextval('seq_sybd_ntce_id')
+	</select>
+    
+    <insert id="insertNoticeInfo" parameterType="boardVO">
+    	INSERT INTO 	/*NoticeMapper.insertNoticeInfo	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_INFO
+    	(
+    		NTCE_ID
+    		,NTCE_TP
+    		,TITLE
+    		,NTCE_CT
+    		,NTCE_STRT_DT
+    		,NTCE_END_DT
+    		,POPUP_YN
+    		,INPT_MENU_ID
+    		,REGR_ID
+    		,REG_DATE
+    		,CHGR_ID
+    		,CHG_DATE
+    	)VALUES(
+			 #{boardVO.ntceId}
+    		,#{boardVO.ntceTp}
+    		,#{boardVO.title}
+    		,#{boardVO.ntceCt}
+    		,#{boardVO.ntceStrtDt}
+    		,#{boardVO.ntceEndDt}
+    		,#{boardVO.popupYn}
+    		,#{boardVO.inptMenuId}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+    	)
+    </insert>
+    
+    <insert id="insertNoticeTgtInfo" parameterType="boardVO">
+    	INSERT INTO		/*NoticeMapper.insertNoticeTgtInfo	, Jeong Ki Nam , 2017-10-27*/
+    		TSYBD_NTCE_TGT_INFO
+    	(
+    		NTCE_ID
+    		,TGT_TP
+    		,TGT_ID
+    		,INPT_MENU_ID
+    		,REGR_ID
+    		,REG_DATE
+    		,CHGR_ID
+    		,CHG_DATE
+    	)VALUES(
+		     #{boardVO.ntceId}
+    		,#{boardVO.ntceTgtVO.tgtTp}
+    		,#{boardVO.ntceTgtVO.tgtId}
+    		,#{boardVO.inptMenuId}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+    	)
+    </insert>
+    
+    <insert id="insertNoticeFile" parameterType="boardVO">
+    	INSERT INTO 		/*NoticeMapper.insertNoticeFile	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_ATTCH_FILE_INFO
+   		(
+   			NTCE_ID
+   			,NTCE_ORD
+   			,FILE_PATH
+   			,FILE_NM
+   			,UUID
+   			,INPT_MENU_ID
+   			,REGR_ID
+   			,REG_DATE
+   			,CHGR_ID
+   			,CHG_DATE
+   		)VALUES(
+		     #{boardVO.ntceId}
+   			,#{boardVO.fileVO.ntceOrd}
+   			,#{boardVO.fileVO.filePath}
+   			,#{boardVO.fileVO.fileNm}
+   			,#{boardVO.fileVO.uuid}
+    		,#{boardVO.inptMenuId}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+    		,#{boardVO.regrId}
+    		,#{boardVO.regDate}
+   		)
+    </insert>
+    
+    <update id="updateNoticeInfo" parameterType="boardVO">
+    	UPDATE		/*NoticeMapper.updateNoticeInfo	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_INFO
+    	SET
+    		NTCE_TP 		=	#{boardVO.ntceTp}
+    		,TITLE 			= 	#{boardVO.title}
+    		,NTCE_CT 		=	#{boardVO.ntceCt}
+    		,NTCE_STRT_DT 	=	#{boardVO.ntceStrtDt}
+    		,NTCE_END_DT 	=	#{boardVO.ntceEndDt}
+    		,POPUP_YN 		= 	#{boardVO.popupYn}
+    		,INPT_MENU_ID 	=	#{boardVO.inptMenuId}
+    		,CHGR_ID 		= 	#{boardVO.chgrId}
+    		,CHG_DATE 		= 	#{boardVO.chgDate}
+    	WHERE
+    		NTCE_ID 		=	#{boardVO.ntceId}
+    </update>
+    
+    <delete id="deleteNoticeTgtInfo" parameterType="boardVO">
+    	DELETE FROM		 /*NoticeMapper.deleteNoticeTgtInfo	, Jeong Ki Nam , 2017-10-30*/
+    		TSYBD_NTCE_TGT_INFO
+    	WHERE NTCE_ID 	=	#{boardVO.ntceId}
+    </delete>
+    
+    <update id="updateNoticeFile" parameterType="boardVO">
+    	UPDATE		/*NoticeMapper.updateNoticeFile	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_ATTCH_FILE_INFO
+    	SET
+    		FILE_NM 		=	#{boardVO.fileVO.fileNm}
+    		,FILE_PATH 		=	#{boardVO.fileVO.filePath}
+    		,UUID			=	#{boardVO.fileVO.uuid}
+    		,INPT_MENU_ID 	=	#{boardVO.inptMenuId}
+    		,CHGR_ID 		=	#{boardVO.chgrId}
+   			,CHG_DATE		=	#{boardVO.chgDate}
+    	WHERE	NTCE_ID	 	=	#{boardVO.ntceId}
+    		AND NTCE_ORD	=	#{boardVO.fileVO.ntceOrd}
+    </update>
+    
+    <delete id="deleteNoticeInfo" parameterType="boardVO">
+    	DELETE FROM 	/*NoticeMapper.deleteNoticeInfo	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_INFO
+    	WHERE NTCE_ID	 = 	#{boardVO.ntceId}
+    </delete>
+    
+    <delete id="deleteNoticeAllFile" parameterType="boardVO">
+    	DELETE FROM		/*NoticeMapper.deleteNoticeAllFile	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_ATTCH_FILE_INFO
+    	WHERE	NTCE_ID	 	=	#{boardVO.ntceId}
+    </delete>
+    
+    <delete id="deleteNoticeFile" parameterType="boardVO">
+    	DELETE FROM		/*NoticeMapper.deleteNoticeFile	, Jeong Ki Nam , 2017-10-26*/
+    		TSYBD_NTCE_ATTCH_FILE_INFO
+    	WHERE	NTCE_ID	 	=	#{boardVO.ntceId}
+    		AND NTCE_ORD	=	#{boardVO.fileVO.ntceOrd}
+    </delete>
+    
+    <select id="getDashboardNoticeList" parameterType="boardVO" resultType="boardVO">
+    	SELECT 	/* NoticeMapper.getDashboardNoticeList, Jeong Ki Nam, 2017.10.25 */
+            	 NTCE.NTCE_ID
+	            ,NTCE.NTCE_TP
+	            ,FSYCD_CODE_NAME('SY00016', NTCE.NTCE_TP) AS NTCE_TP_NM
+	            ,NTCE.TITLE
+	            ,NTCE.NTCE_CT
+	            ,NTCE.NTCE_STRT_DT
+	            ,NTCE.NTCE_END_DT
+	            ,(
+	            	SELECT
+						COUNT(NTCE_ID)
+					FROM
+						TSYBD_NTCE_READ_HIST
+					WHERE
+						NTCE_ID = NTCE.NTCE_ID
+           		) AS READ_CNT
+	            ,NTCE.POPUP_YN
+	            ,NTCE.INPT_MENU_ID
+	            ,NTCE.REGR_ID
+	            ,FSYUS_USR_NM(NTCE.REGR_ID) AS REGR_NM
+	            ,NTCE.REG_DATE
+	            ,NTCE.CHGR_ID
+	            ,FSYUS_USR_NM(NTCE.CHGR_ID) AS CHGR_NM
+	            ,NTCE.CHG_DATE
+        FROM
+           (
+				SELECT
+		            NTCE.NTCE_ID
+		            ,NTCE.NTCE_TP
+		            ,NTCE.TITLE
+		            ,NTCE.NTCE_CT
+		            ,NTCE.NTCE_STRT_DT
+		            ,NTCE.NTCE_END_DT
+		            ,NTCE.POPUP_YN
+		            ,NTCE.INPT_MENU_ID
+		            ,NTCE.REGR_ID
+		            ,FSYUS_USR_NM(NTCE.REGR_ID) AS REGR_NM
+		            ,NTCE.REG_DATE
+		            ,NTCE.CHGR_ID
+		            ,FSYUS_USR_NM(NTCE.CHGR_ID) AS CHGR_NM
+		            ,NTCE.CHG_DATE
+				FROM TSYBD_NTCE_INFO NTCE
+	        ) NTCE
+	        WHERE 1 = 1
+        	AND NTCE.NTCE_STRT_DT &lt;= #{boardVO.start}
+		    AND NTCE.NTCE_END_DT &gt;= #{boardVO.start}
+        	AND NTCE.NTCE_TP = #{boardVO.ntceTp}
+         ORDER BY NTCE.NTCE_ID DESC
+    </select>
+    
+    <select id="getNoticeDetail" parameterType="boardVO" resultType="boardVO">
+        SELECT  /* NoticeMapper.getNoticeDetail, Jeong Ki Nam, 2017.11.02 */
+            	 NTCE.NTCE_ID
+	            ,NTCE.NTCE_TP
+	            ,FSYCD_CODE_NAME('SY00016', NTCE.NTCE_TP) AS NTCE_TP_NM
+	            ,NTCE.TITLE
+	            ,NTCE.NTCE_CT
+	            ,NTCE.NTCE_STRT_DT
+	            ,NTCE.NTCE_END_DT
+	            ,(
+	            	SELECT 
+						COUNT(NTCE_ID)
+					FROM
+						TSYBD_NTCE_READ_HIST
+					WHERE
+						NTCE_ID = #{boardVO.ntceId}
+	            	) AS READ_CNT
+	            ,NTCE.POPUP_YN
+	            ,NTCE.INPT_MENU_ID
+	            ,NTCE.REGR_ID
+	            ,FSYUS_USR_NM(NTCE.REGR_ID) AS REGR_NM
+	            ,NTCE.REG_DATE
+	            ,NTCE.CHGR_ID
+	            ,FSYUS_USR_NM(NTCE.CHGR_ID) AS CHGR_NM
+	            ,NTCE.CHG_DATE
+        FROM TSYBD_NTCE_INFO NTCE
+        WHERE NTCE.NTCE_ID = #{boardVO.ntceId}
+	</select>
+	
+	<select id="getNoticeReadCount" parameterType="boardVO" resultType="int">
+		SELECT 		/* NoticeMapper.getNoticeReadCount, Jeong Ki Nam, 2017.12.13 */ 
+			COUNT(NTCE_ID)
+		FROM
+			TSYBD_NTCE_READ_HIST
+		WHERE
+			NTCE_ID = #{boardVO.ntceId}
+			AND USER_ID = #{boardVO.regrId}
+	</select>
+	
+	<update id="addNoticeReadInfo" parameterType="boardVO">
+		INSERT INTO			/* NoticeMapper.addNoticeReadInfo, Jeong Ki Nam, 2017.12.13 */ 
+			TSYBD_NTCE_READ_HIST 
+		(
+			 NTCE_ID
+			,USER_ID
+			,INQ_DATE
+			,INPT_MENU_ID
+			,REGR_ID
+			,REG_DATE
+			,CHGR_ID
+			,CHG_DATE
+		)VALUES(
+			#{boardVO.ntceId}
+			,#{boardVO.regrId}
+			,#{boardVO.regDate}
+			,#{boardVO.inptMenuId}
+			,#{boardVO.regrId}
+			,#{boardVO.regDate}
+			,#{boardVO.regrId}
+			,#{boardVO.regDate}
+		)
+	</update>
+
+	<select id="getNtceTgtList" resultType="ntceTgtVO">
+		SELECT /* NoticeMapper.getNtceTgtList, JH.YUN, 2019.4.19 */
+			 NTCE_ID
+			,TGT_TP
+			,TGT_ID
+		FROM
+			TSYBD_NTCE_TGT_INFO
+		WHERE
+			NTCE_ID = #{ntceId}
+	</select>
+
+	<select id="getReadNotice" resultType="int">
+		SELECT /* NoticeMapper.getReadNotice, JH.YUN, 2019.4.19 */
+			 COUNT(NTCE_ID)
+		FROM
+			TSYBD_NTCE_READ_HIST
+		WHERE
+			NTCE_ID = #{ntceId}
+		AND USER_ID = #{userId}
+	</select>
+
+	<select id="getPushTmpl" resultType="hashmap">
+		SELECT
+		 	 TITLE_NM
+			,CT
+		FROM TCMCS_PUSH_TMPLT
+		WHERE SO_ID = '00'
+		AND   TMPLT_ID = #{tmpltId}
+	</select>
+
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.login.LoginMapper">
+    <select id="getLoginUser" parameterType="String" resultType="LoginVO">
+        SELECT /* LoginMapper.getLoginUser, 윤정환, 2017.10.23 */
+             TUSER.USER_ID
+            ,TUSER.USER_NM
+            ,TUSER.PSWD
+            ,TUSER.USER_TP
+            ,TUSER.PERM_IP_BAND
+            ,TUSER.PSWD_CHG_PLN_DT
+            ,TUSER.LOCK_YN
+            ,TUSER.LOGIN_FAIL_CNT
+        FROM
+            TSYUS_USER TUSER
+         WHERE 1=1
+        AND TUSER.USER_ID     = #{userId, jdbcType=VARCHAR}
+        AND TUSER.USE_YN      = 'Y'
+     </select>
+
+
+
+    <update id="updateFailCount" parameterType="String">
+        UPDATE /* LoginMapper.updateFailCount, 윤정환, 2019.01.30 */
+            TSYUS_USER
+        SET  LOGIN_FAIL_CNT   = COALESCE(LOGIN_FAIL_CNT,0) + 1
+        WHERE USER_ID         = #{userId}
+    </update>
+
+    <update id="updateAccountLock" parameterType="String">
+        UPDATE /* LoginMapper.updateAccountLock, 윤정환, 2019.01.30 */
+            TSYUS_USER
+        SET  LOCK_YN          = 'Y'
+        WHERE USER_ID         = #{userId}
+    </update>
+
+
+    <update id="updateLastLoginDateTime">
+        UPDATE /* LoginMapper.updateLastLoginDateTime, 윤정환, 2019.01.30 */
+            TSYUS_USER
+        SET
+             LAST_LOGIN_DATE1 = NOW()
+            ,LAST_LOGIN_DATE2 = LAST_LOGIN_DATE1
+            ,LOGIN_FAIL_CNT   = 0
+        WHERE
+            USER_ID = #{userId}
+    </update>
+
+    <select id="getAuthGrpList" resultType="String">
+        SELECT /* LoginMapper.getAuthGrpList, 윤정환, 2017.10.23 */
+            AUTH_GRP_ID
+        FROM
+            TSYAU_AUTH_GRP_USER
+        WHERE
+            USER_ID = #{userId}
+
+    </select>
+
+
+    <select id="getSessionUser" resultType="SessionUserVO">
+        SELECT /* LoginMapper.getSessionUser, 윤정환, 2019.01.30 */
+             TUSER.USER_ID
+            ,TUSER.USER_NM
+            ,TAUTH.AUTH_GRP_ID
+            ,TAUTH.AUTH_GRP_NM
+            ,FSYCD_CODE_REF1('SY00005', TAUTH.DASHBOARD_TP) AS DASHBOARD_URL
+            ,TUSER.PERM_IP_BAND
+            ,TUSER.LOGIN_FAIL_CNT
+            ,TUSER.RSPOFC
+            ,TUSER.USER_TP
+            ,TO_CHAR(TUSER.LAST_LOGIN_DATE1,'YYYYMMDDHH24MISS') AS LAST_LOGIN_DATE1
+            ,TO_CHAR(TUSER.LAST_LOGIN_DATE2,'YYYYMMDDHH24MISS') AS LAST_LOGIN_DATE2
+        FROM
+             TSYUS_USER TUSER
+            ,TSYAU_AUTH_GRP TAUTH
+        WHERE 1=1
+        AND TUSER.USER_GRP_ID = TAUTH.AUTH_GRP_ID
+        AND TUSER.USER_ID     = #{userId}
+    </select>
+
+    <select id="getLoginDate" parameterType="String" resultType="java.util.Map">
+        SELECT /* LoginMapper.getLoginDate, 윤정환, 2017.10.23 */
+              TO_CHAR(LAST_LOGIN_DATE1,'YYYYMMDD') AS LOGIN_DT
+             ,TO_CHAR(LAST_LOGIN_DATE1,'HH24MISS') AS LOGIN_TM
+        FROM
+            TSYUS_USER
+        WHERE
+            USER_ID = #{userId, jdbcType=VARCHAR}
+    </select>
+
+    <select id="getOrgInfo" resultType="java.util.Map">
+        SELECT /* LoginMapper.getOrgInfo, 윤정환, 2017.10.23 */
+             ORG.SO_ID
+            ,FSYCO_SO_NM(ORG.SO_ID) AS SO_NM
+            ,ORG.ORG_ID AS ORG_ID
+            ,ORG.ORG_NM
+            ,ORG.ORG_AUTH_ORG_ID AS AUTH_ORG_ID
+            ,FSYOR_ORG_NM(ORG.ORG_AUTH_ORG_ID) AS AUTH_ORG_NM
+        FROM
+             TSYUS_USER USR
+            ,TSYOR_ORG_INFO ORG
+        WHERE
+        USR.USER_ID          = #{userId}
+        AND ORG.SO_ID        ='00'
+        AND USR.ORG_ID       = ORG.ORG_ID
+        AND ORG.APLY_STRT_DT &lt;= #{today}
+        AND ORG.APLY_END_DT  &gt;= #{today}
+    </select>
+
+    <select id="getSoAuthList" resultType="java.util.Map">
+        SELECT /* LoginMapper.getSoAuthList, 윤정환, 2017.10.23 */
+             SO.SO_ID
+            ,SO.SO_NM
+        FROM
+             TSYCO_SO_AUTH AUTH
+            ,TSYCO_SO_MST SO
+        WHERE
+            SO.SO_ID   = AUTH.SO_ID
+        AND SO.USE_YN  = 'Y'
+        AND USER_ID    = #{userId}
+        ORDER BY SO.SO_ID
+    </select>
+
+</mapper>

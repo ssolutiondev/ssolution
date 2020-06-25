@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.login.UserConnLogMapper">
+
+	<!-- 접속 로그 조회 조건 -->
+	<sql id="userConnLogWhere">
+		FROM	TSYLG_LOGIN_HIST A
+				, TSYUS_USER B
+		WHERE	A.USER_ID	= B.USER_ID
+			AND A.LOGIN_DT BETWEEN #{userConnLogVO.startDt} AND #{userConnLogVO.endDt}
+			
+			<if test="userConnLogVO.userId != null and userConnLogVO.userId != ''">
+				AND A.USER_ID LIKE CONCAT( #{userConnLogVO.userId},'%')
+			</if>
+			<if test="userConnLogVO.userNm != null and userConnLogVO.userNm != ''">
+				AND B.USER_NM LIKE CONCAT(#{userConnLogVO.userNm},'%')
+			</if>
+			
+    </sql>
+
+	<select id="getUserConnLogListCount" parameterType="UserConnLogVO" resultType="int">
+		SELECT	/* UserConnLogMapper.getUserConnLogListCount, 김정호, 2017.10.25 */
+				COUNT(*)
+		<include refid="com.ssolution.admin.system.mapper.login.UserConnLogMapper.userConnLogWhere"/>
+    </select>
+
+	<select id="getUserConnLogList" parameterType="UserConnLogVO" resultType="UserConnLogVO">
+        <include refid="com.ssolution.admin.system.mapper.common.page.CommonCfgMapper.paging_head"/>
+			SELECT	/* UserConnLogMapper.getUserConnLogList, 김정호, 2017.10.25 */
+					LOG.*
+			FROM	(
+						SELECT	A.USER_ID
+								, B.USER_NM
+								, B.ORG_ID
+								, FSYOR_ORG_NM(B.ORG_ID) 		AS ORG_NM
+								, (A.LOGIN_DT || A.LOGIN_TM) 	AS LOGIN_DT
+								, A.SESSION_ID
+								, A.LOGIN_IP
+								, (A.LOGOUT_DT || A.LOGOUT_TM)	AS LOGOUT_DT
+								, A.LOGOUT_STAT
+								, FSYCD_CODE_NAME('SY00008', A.LOGOUT_STAT) 	AS LOGOUT_STAT_NM
+						<include refid="com.ssolution.admin.system.mapper.login.UserConnLogMapper.userConnLogWhere"/>
+        
+        				<if test="userConnLogVO.sidx == null or userConnLogVO.sidx == ''">
+						ORDER BY A.LOGIN_DT DESC, A.LOGIN_TM DESC
+						</if>
+				) LOG
+        
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'userId'">
+			ORDER BY USER_ID ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'userNm'">
+			ORDER BY USER_NM ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'orgId'">
+			ORDER BY ORG_ID ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'orgNm'">
+			ORDER BY ORG_NM ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'loginIp'">
+			ORDER BY LOGIN_IP ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'sessionId'">
+			ORDER BY SESSION_ID ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'loginDt'">
+			ORDER BY LOGIN_DT ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'logoutDt'">
+			ORDER BY LOGOUT_DT ${userConnLogVO.sort}
+		</if>
+		<if test="userConnLogVO.sidx != null and userConnLogVO.sidx == 'logoutStatNm'">
+			ORDER BY LOGOUT_STAT_NM ${userConnLogVO.sort}
+		</if>
+
+		<include refid="com.ssolution.admin.system.mapper.common.page.CommonCfgMapper.paging_foot"/>
+	</select>
+	
+	<select id="getUserConnLogExcelList" parameterType="UserConnLogVO" resultType="java.util.HashMap">
+	
+		SELECT	/* UserConnLogMapper.getUserConnLogExcelList, 김정호, 2017.10.25 */
+				  A.USER_ID
+				, B.USER_NM
+				, B.ORG_ID
+				, FSYOR_ORG_NM(B.ORG_ID) 		AS ORG_NM
+				, (A.LOGIN_DT || A.LOGIN_TM) 	AS LOGIN_DT
+				, A.SESSION_ID
+				, A.LOGIN_IP
+				, (A.LOGOUT_DT || A.LOGOUT_TM)	AS LOGOUT_DT
+				, A.LOGOUT_STAT
+				, FSYCD_CODE_NAME('SY00008', A.LOGOUT_STAT) 	AS LOGOUT_STAT_NM
+		<include refid="com.ssolution.admin.system.mapper.login.UserConnLogMapper.userConnLogWhere"/>
+    
+		ORDER BY A.LOGIN_DT DESC, A.LOGIN_TM DESC
+
+	</select>
+
+	<insert id="insertLoginHistory" parameterType="loginHistoryVO">
+        INSERT INTO /* UserConnLogMapper.insertLoginHistory, 윤정환, 2017.10.23 */
+            TSYLG_LOGIN_HIST
+        (
+             USER_ID
+            ,LOGIN_DT
+            ,LOGIN_TM
+            ,SESSION_ID
+            ,LOGIN_IP
+        )
+        VALUES
+        (
+             #{loginHistory.userId}
+            ,#{loginHistory.loginDt}
+            ,#{loginHistory.loginTm}
+            ,#{loginHistory.sessionId}
+            ,#{loginHistory.loginIp}
+        )
+    </insert>
+
+    <update id="updateLogoutHistory">
+        UPDATE /* UserConnLogMapper.updateLogoutHistory, 윤정환, 2017.10.23 */
+            TSYLG_LOGIN_HIST
+        SET
+            LOGOUT_DT     = #{logoutDt}
+           ,LOGOUT_TM     = #{logoutTm}
+           ,LOGOUT_STAT   = #{logoutStatus}
+        WHERE
+            USER_ID       = #{sessionUser.userId}
+        AND SESSION_ID    = #{sessionUser.sessionId}
+        AND LOGOUT_STAT IS NULL
+     </update>
+
+</mapper>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.code.CommonDataMapper">
+
+    <select id="getCommonGrpList"  resultType="CommCdGrpVO">
+        SELECT    /* CommonDataMapper.getCommonGrpList, 윤정환, 2017.11.17 */
+                 MAST.COMM_CD_GRP
+                ,COALESCE((SELECT COMM_CD_GRP_NM
+                  FROM TSYCD_COMM_CD_GRP_LANG NAME
+                  WHERE NAME.COMM_CD_GRP = MAST.COMM_CD_GRP
+                  AND   NAME.LANG_TP    =#{lng} ),MAST.COMM_CD_GRP_NM) AS COMM_CD_GRP_NM
+                ,MAST.SYS_ID
+                ,MAST.LEN
+                ,MAST.REF_CD1
+                ,MAST.REF_CD2
+                ,MAST.REF_CD3
+                ,MAST.RMRK
+                ,MAST.USE_YN
+                ,MAST.SYS_USE_YN
+                ,MAST.REGR_ID
+                ,MAST.REG_DATE
+                ,MAST.CHGR_ID
+                ,MAST.CHG_DATE
+        FROM TSYCD_COMM_CD_GRP MAST
+        WHERE MAST.SYS_ID    = #{codeType}
+        <if test="commCdGrp != null and commCdGrp != ''">
+        AND   MAST.COMM_CD_GRP = #{commCdGrp}
+        </if>
+        ORDER BY MAST.COMM_CD_GRP
+    </select>
+
+    <select id="getCommonGrp"  resultType="CommCdGrpVO">
+        SELECT    /* CommonDataMapper.getCommonGrp, 전수완, 2018.09.05 */
+                 MAST.COMM_CD_GRP
+                ,COALESCE((SELECT COMM_CD_GRP_NM
+                  FROM TSYCD_COMM_CD_GRP_LANG NAME
+                  WHERE NAME.COMM_CD_GRP = MAST.COMM_CD_GRP
+                  AND   NAME.LANG_TP    =#{lng} ),MAST.COMM_CD_GRP_NM) AS COMM_CD_GRP_NM
+                ,MAST.SYS_ID
+                ,MAST.LEN
+                ,MAST.REF_CD1
+                ,MAST.REF_CD2
+                ,MAST.REF_CD3
+                ,MAST.RMRK
+                ,MAST.USE_YN
+                ,MAST.SYS_USE_YN
+                ,MAST.REGR_ID
+                ,MAST.REG_DATE
+                ,MAST.CHGR_ID
+                ,MAST.CHG_DATE
+        FROM TSYCD_COMM_CD_GRP MAST
+        WHERE   MAST.COMM_CD_GRP = #{commCdGrp}
+        ORDER BY MAST.COMM_CD_GRP
+    </select>
+
+    <!-- 공통코드 조회 -->
+    <select id="getCommonCode" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCode, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.COMM_CD      = #{code}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+    </select>
+
+    <!-- 공통코드 리스트 조회 -->
+    <select id="getCommonCodeList" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeList, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.SORT_NO
+    </select>
+
+
+    <!-- 공통코드 리스트 조회 - 기본값 사용 -->
+    <select id="getCommonCodeListDefaultUse" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeListDefaultUse, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.DEFLT_YN DESC, DTL.SORT_NO
+    </select>
+
+
+    <!-- 공통코드 리스트 조회 Ref1 -->
+    <select id="getCommonCodeListByRef1" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeListByRef1, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.REF_CD1      = #{ref1}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.SORT_NO
+    </select>
+
+
+    <!-- 공통코드 리스트 조회 Ref2 -->
+    <select id="getCommonCodeListByRef2" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeListByRef1, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.REF_CD2      = #{ref2}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.SORT_NO
+    </select>
+
+    <!-- 공통코드 리스트 조회 Ref3 -->
+    <select id="getCommonCodeListByRef3" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeListByRef3, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.REF_CD3      = #{ref3}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.SORT_NO
+    </select>
+
+   <!-- 공통코드 리스트 조회 Ref4 -->
+    <select id="getCommonCodeListByRef4" resultType="commonDataVO">
+        SELECT /* CommonDataMapper.getCommonCodeListByRef4, 윤정환, 2017.10.17 */
+                 GRP.COMM_CD_GRP
+                ,DTL.COMM_CD
+                ,COALESCE((SELECT COMM_NM
+                  FROM TSYCD_COMM_CD_DTL_LANG LANG
+                  WHERE LANG.COMM_CD_GRP = DTL.COMM_CD_GRP
+                  AND   LANG.COMM_CD     = DTL.COMM_CD
+                  AND   LANG.LANG_TP     = #{lng}),DTL.COMM_NM) AS COMM_NM
+                ,DTL.REF_CD1
+                ,DTL.REF_CD2
+                ,DTL.REF_CD3
+                ,DTL.REF_CD4
+                ,DTL.DEFLT_YN
+                ,DTL.RMRK
+                ,DTL.SORT_NO
+                ,DTL.USE_YN
+        FROM  TSYCD_COMM_CD_GRP GRP
+            , TSYCD_COMM_CD_DTL DTL
+        WHERE   GRP.COMM_CD_GRP  = DTL.COMM_CD_GRP
+            AND GRP.COMM_CD_GRP  = #{grpCd}
+            AND DTL.REF_CD4      = #{ref4}
+            AND DTL.USE_YN       = 'Y'
+            AND GRP.USE_YN       = 'Y'
+        ORDER BY DTL.SORT_NO
+    </select>
+</mapper>

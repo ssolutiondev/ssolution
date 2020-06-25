@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OZCHARTRESOURCE VERSION="2.0">
+	<CLASS NAME="折れ線" TYPE="0">
+		<TYPE NAME="折れ線グラフ" IMAGE="Line_0">時間や項目による傾向を表します。</TYPE>
+		<TYPE NAME="積み上げ折れ線グラフ" IMAGE="Line_1">時間や項目による各値の傾向を相対関係で表します。</TYPE>
+		<TYPE NAME="100%積み上げ折れ線グラフ" IMAGE="Line_2">時間や項目による各値の傾向の割合を表します。</TYPE>
+		<TYPE NAME="データポイント付き折れ線グラフ" IMAGE="Line_3">データポイント付きの折れ線グラフです。</TYPE>
+		<TYPE NAME="データポイント付き積み上げ折れ線グラフ" IMAGE="Line_4">データポイント付きの積み上げ折れ線グラフです。</TYPE>
+		<TYPE NAME="データポイント付き100%積み上げ折れ線グラフ" IMAGE="Line_5">データポイント付きの100%積み上げ折れ線グラフです。</TYPE>
+		<TYPE NAME="3D効果付き折れ線グラフ" IMAGE="Line_6">3D効果付きの折れ線グラフです。</TYPE>
+		<TYPE NAME="3D効果付き折れ線グラフ(回転)" IMAGE="Line_7">回転可能な3D効果付き折れ線グラフです。</TYPE>
+		<TYPE NAME="3D効果付き折れ線グラフ(縦系列)" IMAGE="Line_8">3D効果付きの折れ線グラフです。</TYPE>
+		<TYPE NAME="3D効果付き折れ線グラフ(回転/縦系列)" IMAGE="Line_9">回転可能な3D効果付き折れ線グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="横向き折れ線" TYPE="13">
+		<TYPE NAME="横向き折れ線グラフ" IMAGE="HLine_0">時間や項目による傾向を表します。</TYPE>
+		<TYPE NAME="積み上げ横向き折れ線グラフ" IMAGE="HLine_1">時間や項目による各値の傾向を相対関係で表します。</TYPE>
+		<TYPE NAME="100%積み上げ横向き折れ線グラフ" IMAGE="HLine_2">時間や項目による各値の傾向の割合を表します。</TYPE>
+		<TYPE NAME="データポイント付き横向き折れ線グラフ" IMAGE="HLine_3">データポイント付きの横向き折れ線グラフです。</TYPE>
+		<TYPE NAME="データポイント付き積み上げ横向き折れ線グラフ" IMAGE="HLine_4">データポイント付きの積み上げ横向き折れ線グラフです。</TYPE>
+		<TYPE NAME="データポイント付き100%積み上げ横向き折れ線グラフ" IMAGE="HLine_5">データポイント付きの100%積み上げ横向き折れ線グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="縦棒" TYPE="1">
+		<TYPE NAME="集合縦棒グラフ" IMAGE="Bar_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="積み上げ縦棒グラフ" IMAGE="Bar_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="100%積み上げ縦棒グラフ" IMAGE="Bar_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合縦棒グラフ" IMAGE="Bar_3">3D効果の付いた集合縦棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ縦棒グラフ" IMAGE="Bar_4">3D効果の付いた積み上げ縦棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ縦棒グラフ" IMAGE="Bar_5">3D効果の付いた100%積み上げ縦棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き縦棒グラフ" IMAGE="Bar_6">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き縦棒グラフ(回転)" IMAGE="Bar_7">回転可能な3D効果付き縦棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き縦棒グラフ(縦系列)" IMAGE="Bar_8">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き縦棒グラフ(回転/縦系列)" IMAGE="Bar_9">回転可能な3D効果付き縦棒グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="横棒" TYPE="2">
+		<TYPE NAME="集合横棒グラフ" IMAGE="HBar_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="積み上げ横棒グラフ" IMAGE="HBar_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="100%積み上げ横棒グラフ" IMAGE="HBar_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合横棒グラフ" IMAGE="HBar_3">3D効果の付いた集合横棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ横棒グラフ" IMAGE="HBar_4">3D効果の付いた積み上げ横棒グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ横棒グラフ" IMAGE="HBar_5">3D効果の付いた100%積み上げ横棒グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="円柱" TYPE="3">
+		<TYPE NAME="集合円柱グラフ" IMAGE="Cylinder_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="積み上げ円柱グラフ" IMAGE="Cylinder_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="100%積み上げ円柱グラフ" IMAGE="Cylinder_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合円柱グラフ" IMAGE="Cylinder_3">3D効果の付いた集合円柱グラフです。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ円柱グラフ" IMAGE="Cylinder_4">3D効果の付いた積み上げ円柱グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ円柱グラフ" IMAGE="Cylinder_5">3D効果の付いた100%積み上げ円柱グラフです。</TYPE>
+		<TYPE NAME="3D効果付き円柱グラフ" IMAGE="Cylinder_6">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き円柱グラフ(縦系列)" IMAGE="Cylinder_7">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+	</CLASS>
+	<CLASS NAME="横向き円柱" TYPE="4">
+		<TYPE NAME="集合横向き円柱グラフ" IMAGE="HCylinder_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="積み上げ横向き円柱グラフ" IMAGE="HCylinder_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="100%積み上げ横向き円柱グラフ" IMAGE="HCylinder_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合横向き円柱グラフ" IMAGE="HCylinder_3">3D効果の付いた集合横向き円柱グラフです。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ横向き円柱グラフ" IMAGE="HCylinder_4">3D効果の付いた積み上げ横向き円柱グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ横向き円柱グラフ" IMAGE="HCylinder_5">3D効果の付いた100%積み上げ横向き円柱グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="円錐" TYPE="5">
+		<TYPE NAME="3D効果付き集合円錐グラフ" IMAGE="Cone_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ円錐グラフ" IMAGE="Cone_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ円錐グラフ" IMAGE="Cone_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合横向き円錐グラフ" IMAGE="Cone_3">項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ横向き円錐グラフ" IMAGE="Cone_4">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ横向き円錐グラフ" IMAGE="Cone_5">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き円錐グラフ" IMAGE="Cone_6">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き円錐グラフ(縦系列)" IMAGE="Cone_8">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+	</CLASS>
+	<CLASS NAME="角錐" TYPE="6">
+		<TYPE NAME="3D効果付き集合角錐グラフ" IMAGE="Pyramid_0">項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ角錐グラフ" IMAGE="Pyramid_1">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ角錐グラフ" IMAGE="Pyramid_2">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き集合横向き角錐グラフ" IMAGE="Pyramid_3">項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ横向き角錐グラフ" IMAGE="Pyramid_4">全項目の中で各値の相対関係を表します。</TYPE>
+		<TYPE NAME="3D効果付き100%積み上げ横向き角錐グラフ" IMAGE="Pyramid_5">全項目の中で各値の割合を比較します。</TYPE>
+		<TYPE NAME="3D効果付き角錐グラフ" IMAGE="Pyramid_6">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+		<TYPE NAME="3D効果付き角錐グラフ(縦系列)" IMAGE="Pyramid_8">3D効果の付いたグラフで系列間と項目間の値を比較します。</TYPE>
+	</CLASS>
+	<CLASS NAME="面" TYPE="7">
+		<TYPE NAME="面グラフ" IMAGE="Area_0">時間や項目による値の傾向を表します。</TYPE>
+		<TYPE NAME="積み上げ面グラフ" IMAGE="Area_1">時間や項目による各値の傾向を相対関係で表します。</TYPE>
+		<TYPE NAME="100%積み上げ面グラフ" IMAGE="Area_2">時間や項目による各値の傾向の割合を表します。</TYPE>
+		<TYPE NAME="3D効果付き面グラフ" IMAGE="Area_3">3D効果の付いた面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ面グラフ" IMAGE="Area_4">3D効果の付いた積み上げ面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100% 積み上げ面グラフ" IMAGE="Area_5">3D効果の付いた100%積み上げ面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き面グラフ(回転)" IMAGE="Area_6">回転可能な3D効果付き面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き面グラフ(縦系列)" IMAGE="Area_7">3D効果の付いた面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き面グラフ(回転/縦系列)" IMAGE="Area_8">回転可能な3D効果付き面グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="横向き面" TYPE="14">
+		<TYPE NAME="横向き面グラフ" IMAGE="HArea_0">時間や項目による値の傾向を表します。</TYPE>
+		<TYPE NAME="積み上げ横向き面グラフ" IMAGE="HArea_1">時間や項目による各値の傾向を相対関係で表します。</TYPE>
+		<TYPE NAME="100%積み上げ横向き面グラフ" IMAGE="HArea_2">時間や項目による各値の傾向の割合を表します。</TYPE>
+		<TYPE NAME="3D効果付き積み上げ横向き面グラフ" IMAGE="HArea_4">3D効果の付いた積み上げ横向き面グラフです。</TYPE>
+		<TYPE NAME="3D効果付き100% 積み上げ横向き面グラフ" IMAGE="HArea_5">3D効果の付いた100%積み上げ横向き面グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="散布図" TYPE="8">
+		<TYPE NAME="散布図" IMAGE="Scatter_0">時間や項目による傾向を表します。</TYPE>
+		<TYPE NAME="横向き散布図" IMAGE="Scatter_1">時間や項目による傾向を表します。</TYPE>
+	</CLASS>
+	<CLASS NAME="散布図 II" TYPE="16">
+		<TYPE NAME="散布図 II" IMAGE="Scatter2_0">値を点で比較します。</TYPE>
+		<TYPE NAME="折れ線で連結された散布図" IMAGE="Scatter2_1">折れ線で連結された散布図</TYPE>
+		<TYPE NAME="データポイントなし折れ線で連結された散布図" IMAGE="Scatter2_2">データポイントなし折れ線で連結された散布図</TYPE>
+	</CLASS>
+	<CLASS NAME="円" TYPE="9">
+		<TYPE NAME="円グラフ" IMAGE="Pie_0">全体に対する各値の相対関係を表します。</TYPE>
+		<TYPE NAME="分割円グラフ" IMAGE="Pie_3">項目ごとに分割した円グラフです。</TYPE>
+		<TYPE NAME="3D効果付き円グラフ" IMAGE="Pie_1">3D効果の付いた円グラフです。</TYPE>
+		<TYPE NAME="3D効果付き分割円グラフ" IMAGE="Pie_4">3D効果の付いた分割円グラフです。</TYPE>
+	</CLASS>
+	<CLASS NAME="ゲージ" TYPE="15">
+		<TYPE NAME="ゲージ" IMAGE="Gauge_0">指定した範囲の中に現在のデータの数値情報をゲージ型で表示します。</TYPE>
+	</CLASS>
+	<CLASS NAME="レーダー" TYPE="10">
+		<TYPE NAME="レーダーチャート" IMAGE="Radiant_0">レーダー形式の分散データを表示します。</TYPE>
+		<TYPE NAME="積み上げレーダーチャート" IMAGE="Radiant_1">レーダー形式の分散データの相対関係を表示します。</TYPE>
+		<TYPE NAME="100% 積み上げレーダーチャート" IMAGE="Radiant_2">レーダー形式の分散データを全体に対する割合で表示します。</TYPE>
+		<TYPE NAME="データポイント付きレーダーチャート" IMAGE="Radiant_3">データポイント付きのレーダーチャートです。</TYPE>
+		<TYPE NAME="データポイント付き積み上げレーダーチャート" IMAGE="Radiant_4">データポイント付きの積み上げレーダーチャートです。</TYPE>
+		<TYPE NAME="データポイント付き100%積み上げレーダーチャート" IMAGE="Radiant_5">データポイント付きの100%積み上げレーダーチャートです。</TYPE>
+	</CLASS>
+	<CLASS NAME="階段" TYPE="11">
+		<TYPE NAME="階段グラフ" IMAGE="Step_0">時間や項目による値の傾向を表示します。</TYPE>
+		<TYPE NAME="横向き階段グラフ" IMAGE="Step_1">時間や項目による値の傾向を表示します。</TYPE>
+	</CLASS>
+	<CLASS NAME="ユーザー定義" TYPE="12">
+		<TYPE NAME="ユーザー定義グラフ" IMAGE="Custom_0">ユーザーが定義したグラフを表示します。</TYPE>
+		<TYPE NAME="積み上げユーザー定義グラフ" IMAGE="Custom_1">ユーザーが定義したグラフを相対関係で表示します。</TYPE>
+		<TYPE NAME="100%積み上げユーザー定義グラフ" IMAGE="Custom_2">ユーザーが定義したグラフで各値の傾向を割合で表します。</TYPE>
+		<TYPE NAME="横向きユーザー定義グラフ" IMAGE="Custom_3">ユーザーが定義したグラフを表示します。</TYPE>
+		<TYPE NAME="積み上げ横向きユーザー定義グラフ" IMAGE="Custom_4">ユーザーが定義したグラフを相対関係で表示します。</TYPE>
+		<TYPE NAME="100%積み上げ横向きユーザー定義グラフ" IMAGE="Custom_5">ユーザーが定義したグラフで各値の傾向を割合で表します。</TYPE>
+		<TYPE NAME="縦向きユーザー定義(3D効果)" IMAGE="Custom_6">3D効果ユーザー定義。</TYPE>
+		<TYPE NAME="縦向きユーザー定義(3D効果)" IMAGE="Custom_7">3D効果ユーザー定義。</TYPE>
+	</CLASS>
+</OZCHARTRESOURCE>

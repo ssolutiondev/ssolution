@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.code.CommCdMngMapper">
+
+    <select id="getCdGrpList"  resultType="CommCdGrpVO">
+        SELECT    /* CommCdMngMapper.getCdGrpList, 김정호, 2017.10.23 */
+                 MAST.COMM_CD_GRP
+                ,COALESCE((SELECT COMM_CD_GRP_NM 
+                  FROM TSYCD_COMM_CD_GRP_LANG NAME
+                  WHERE NAME.COMM_CD_GRP = MAST.COMM_CD_GRP
+                  AND   NAME.LANG_TP    =#{lng} ),MAST.COMM_CD_GRP_NM) AS COMM_CD_GRP_NM
+                ,MAST.SYS_ID
+                ,MAST.LEN
+                ,MAST.REF_CD1
+                ,MAST.REF_CD2
+                ,MAST.REF_CD3
+                ,MAST.RMRK
+                ,MAST.USE_YN
+                ,MAST.SYS_USE_YN
+                ,MAST.REGR_ID
+                ,MAST.REG_DATE
+                ,MAST.CHGR_ID
+                ,MAST.CHG_DATE
+        FROM TSYCD_COMM_CD_GRP MAST
+        WHERE MAST.SYS_ID    = #{codeType}
+        ORDER BY MAST.COMM_CD_GRP    
+    </select>
+    
+    <!-- 공통코드 리스트 조회 -->
+    <select id="getCommCdList" resultType="CommCdDtlVO">
+    SELECT    /* CommCdMngMapper.getCommCdList, 김정호, 2017.10.23 */
+            DATA.COMM_CD_GRP
+            ,DATA.COMM_CD_GRP_NM
+            ,DATA.COMM_CD
+            ,DATA.COMM_NM
+            ,DATA.ORG_COMM_NM
+            ,DATA.REF_CD1
+            ,DATA.REF_CD2
+            ,DATA.REF_CD3
+            ,DATA.REF_CD4
+            ,DATA.DEFLT_YN
+            ,DATA.RMRK
+            ,DATA.SORT_NO
+            ,DATA.USE_YN
+            ,DATA.CHG_DATE
+            ,DATA.CHGR_ID
+            ,DATA.CHGR_NM
+            ,DATA.REG_DATE
+            ,DATA.REGR_ID
+            ,DATA.REGR_NM
+     FROM    (
+            SELECT 
+                     MAST.COMM_CD_GRP
+                    ,COALESCE((SELECT COMM_CD_GRP_NM 
+                               FROM TSYCD_COMM_CD_GRP_LANG NAME
+                               WHERE NAME.COMM_CD_GRP = MAST.COMM_CD_GRP
+                               AND   NAME.LANG_TP    =#{lng}),MAST.COMM_CD_GRP_NM) AS COMM_CD_GRP_NM
+                    ,DTL.COMM_CD
+                    ,COALESCE((SELECT COMM_NM 
+                               FROM TSYCD_COMM_CD_DTL_LANG NAME
+                               WHERE NAME.COMM_CD_GRP = DTL.COMM_CD_GRP
+                               AND   NAME.COMM_CD  = DTL.COMM_CD
+                                AND   NAME.LANG_TP    =#{lng}),DTL.COMM_NM) AS COMM_NM
+                    ,DTL.COMM_NM AS ORG_COMM_NM
+                    ,DTL.REF_CD1
+                    ,DTL.REF_CD2
+                    ,DTL.REF_CD3
+                    ,DTL.REF_CD4
+                    ,DTL.DEFLT_YN
+                    ,DTL.RMRK
+                    ,DTL.SORT_NO
+                    ,DTL.USE_YN
+                    ,DTL.CHG_DATE
+                    ,DTL.CHGR_ID
+                    ,FSYUS_USR_NM(DTL.CHGR_ID) AS CHGR_NM
+                    ,DTL.REG_DATE
+                    ,DTL.REGR_ID
+                    ,FSYUS_USR_NM(DTL.REGR_ID) AS REGR_NM
+            FROM TSYCD_COMM_CD_GRP MAST
+                , TSYCD_COMM_CD_DTL DTL
+            WHERE   MAST.COMM_CD_GRP   =DTL.COMM_CD_GRP
+                AND MAST.COMM_CD_GRP   =#{condGroupId}) DATA
+
+        ORDER BY CAST(DATA.SORT_NO AS integer)
+                
+    </select>
+    
+    <select id="getCdDtlLngList" resultType="java.util.HashMap">
+        SELECT    /* CommCdMngMapper.getCdDtlLngList, 김정호, 2017.10.23 */
+                 'ko' AS LANGUAGE_CODE
+                ,'Korean' AS LANGUAGE_NAME
+                ,NAME.COMM_CD_GRP
+                ,NAME.COMM_CD
+                ,NAME.COMM_NM
+        FROM TSYCD_COMM_CD_DTL_LANG NAME
+        WHERE 1=1
+         AND  NAME.COMM_CD_GRP   = #{commCdGrp}
+         AND  NAME.COMM_CD    = #{commCd}
+    </select>
+    
+    <select id="getLngList" resultType="java.util.HashMap">
+        SELECT     /* CommCdMngMapper.getLngList, 김정호, 2017.10.23 */ 
+                 'ko' AS LANGUAGE_CODE
+                ,'Korean' AS LANGUAGE_NAME
+                ,'' AS COMM_NM
+        FROM DUAL
+    </select>
+    
+    <select id="getCdDtlCnt" resultType="int">
+        SELECT     /* CommCdMngMapper.getCdDtlCnt, 김정호, 2017.10.23 */
+                COUNT(COMM_CD)
+        FROM TSYCD_COMM_CD_DTL
+        WHERE COMM_CD_GRP = #{commCdGrp}
+        AND   COMM_CD  = #{commCd}
+    </select>
+    
+    
+    <insert id="insertCdDtl" parameterType="CommCdDtlVO">
+        INSERT INTO    /* CommCdMngMapper.insertCdDtl, 김정호, 2017.10.23 */
+            TSYCD_COMM_CD_DTL(
+                 COMM_CD_GRP
+                ,COMM_CD
+                ,COMM_NM
+                ,REF_CD1
+                ,REF_CD2
+                ,REF_CD3
+                ,REF_CD4
+                ,DEFLT_YN
+                ,RMRK
+                ,SORT_NO
+                ,USE_YN
+                ,SYS_USE_YN
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+                ,ID
+            )VALUES(
+                 #{commCdDtlVO.commCdGrp, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.commCd, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.commNm, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.refCd1, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.refCd2, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.refCd3, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.refCd4, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.defltYn, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.rmrk, jdbcType=VARCHAR}
+                ,CAST(#{commCdDtlVO.sortNo, jdbcType=VARCHAR} AS integer)
+                ,#{commCdDtlVO.useYn, jdbcType=VARCHAR}
+                ,'Y'
+                ,#{commCdDtlVO.inptMenuId, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.regrId, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.regDate}
+                ,#{commCdDtlVO.chgrId, jdbcType=VARCHAR}
+                ,#{commCdDtlVO.chgDate}
+                ,nextval('tsycd_comm_cd_dtl_id_seq')
+            )
+    </insert>
+    
+    
+    <insert id="insertCdDtlLang" parameterType="CommCdDtlLangVO">
+        INSERT INTO    /* CommCdMngMapper.insertCdDtlLang, 김정호, 2017.10.23 */
+            TSYCD_COMM_CD_DTL_LANG(
+                 LANG_TP
+                ,COMM_CD_GRP
+                ,COMM_CD
+                ,COMM_NM
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+                ,ID
+            )VALUES(
+                 #{commCdDtlLangVO.langTp, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.commCdGrp, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.commCd, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.commNm, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.inptMenuId, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.regrId, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.regDate}
+                ,#{commCdDtlLangVO.chgrId, jdbcType=VARCHAR}
+                ,#{commCdDtlLangVO.chgDate}
+                ,nextval('tsycd_comm_cd_dtl_lang_id_seq')
+            )
+    </insert>
+    
+    <update id="updateCdDtl" parameterType="CommCdDtlVO">
+        UPDATE TSYCD_COMM_CD_DTL    /* CommCdMngMapper.updateCdDtl, 김정호, 2017.10.23 */
+            SET
+                COMM_NM      = #{commCdDtlVO.commNm, jdbcType=VARCHAR}
+               ,REF_CD1      = #{commCdDtlVO.refCd1, jdbcType=VARCHAR}
+               ,REF_CD2      = #{commCdDtlVO.refCd2, jdbcType=VARCHAR}
+               ,REF_CD3      = #{commCdDtlVO.refCd3, jdbcType=VARCHAR}
+               ,REF_CD4      = #{commCdDtlVO.refCd4, jdbcType=VARCHAR}
+               ,DEFLT_YN     = #{commCdDtlVO.defltYn, jdbcType=VARCHAR}
+               ,RMRK         = #{commCdDtlVO.rmrk, jdbcType=VARCHAR}
+               ,SORT_NO      = CAST(#{commCdDtlVO.sortNo, jdbcType=VARCHAR} AS integer)
+               ,USE_YN       = #{commCdDtlVO.useYn, jdbcType=VARCHAR}
+               ,INPT_MENU_ID = #{commCdDtlVO.inptMenuId, jdbcType=VARCHAR}
+               ,CHGR_ID      = #{commCdDtlVO.chgrId, jdbcType=VARCHAR}
+               ,CHG_DATE     = #{commCdDtlVO.chgDate}
+        WHERE COMM_CD_GRP    = #{commCdDtlVO.commCdGrp, jdbcType=VARCHAR}
+        AND   COMM_CD        = #{commCdDtlVO.commCd, jdbcType=VARCHAR}
+    </update>
+    
+    
+    <update id="updateCdDtlLang" parameterType="CommCdDtlLangVO">
+        UPDATE TSYCD_COMM_CD_DTL_LANG    /* CommCdMngMapper.updateCdDtlLang, 김정호, 2017.10.23 */
+            SET
+                 COMM_NM     = #{commCdDtlLangVO.commNm, jdbcType=VARCHAR}
+                ,INPT_MENU_ID = #{commCdDtlLangVO.inptMenuId, jdbcType=VARCHAR}
+                ,CHGR_ID     = #{commCdDtlLangVO.chgrId, jdbcType=VARCHAR}
+                ,CHG_DATE    = #{commCdDtlLangVO.chgDate}
+        WHERE LANG_TP        = #{commCdDtlLangVO.langTp, jdbcType=VARCHAR}
+        AND   COMM_CD_GRP     = #{commCdDtlLangVO.commCdGrp, jdbcType=VARCHAR}
+        AND   COMM_CD      = #{commCdDtlLangVO.commCd, jdbcType=VARCHAR}
+    </update>
+    
+    <delete id="deleteCdDtl" parameterType="CommCdDtlVO">
+        DELETE     /* CommCdMngMapper.deleteCdDtl, 김정호, 2017.10.23 */
+        FROM TSYCD_COMM_CD_DTL
+        WHERE COMM_CD_GRP = #{commCdDtlVO.commCdGrp}
+         AND  COMM_CD  = #{commCdDtlVO.commCd}
+    </delete>
+    
+    <delete id="deleteCdDtlLng" parameterType="CommCdDtlVO">
+        DELETE     /* CommCdMngMapper.deleteCdDtlLng, 김정호, 2017.10.23 */
+        FROM TSYCD_COMM_CD_DTL_LANG
+        WHERE COMM_CD_GRP = #{commCdDtlVO.commCdGrp}
+         AND  COMM_CD  = #{commCdDtlVO.commCd}
+    </delete>
+        
+    <select id="getCdGrpCnt" resultType="int">
+        SELECT     /* CommCdMngMapper.getCdGrpCnt, 김정호, 2017.10.23 */
+                COUNT(COMM_CD_GRP)
+        FROM TSYCD_COMM_CD_GRP
+        WHERE COMM_CD_GRP = #{commCdGrp}
+    </select>
+    
+    <insert id="insertCdGrp" parameterType="CommCdGrpVO">
+        INSERT INTO    /* CommCdMngMapper.insertCdGrp, 김정호, 2017.10.23 */
+            TSYCD_COMM_CD_GRP(
+                 COMM_CD_GRP
+                ,COMM_CD_GRP_NM
+                ,SYS_ID
+                ,LEN
+                ,REF_CD1
+                ,REF_CD2
+                ,REF_CD3
+                ,RMRK
+                ,USE_YN
+                ,SYS_USE_YN
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+
+            )VALUES(
+                 #{commCdGrpVO.commCdGrp, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.commCdGrpNm, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.sysId, jdbcType=VARCHAR}
+                ,CAST(#{commCdGrpVO.len, jdbcType=VARCHAR} AS integer)
+                ,#{commCdGrpVO.refCd1, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.refCd2, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.refCd3, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.rmrk, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.useYn, jdbcType=VARCHAR}
+                ,'Y'
+                ,#{commCdGrpVO.inptMenuId, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.regrId, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.regDate}
+                ,#{commCdGrpVO.chgrId, jdbcType=VARCHAR}
+                ,#{commCdGrpVO.chgDate}
+            )
+    </insert>
+    
+    <insert id="insertCdGrpLang" parameterType="CommCdGrpLangVO">
+        INSERT INTO    /* CommCdMngMapper.insertCdGrpLang, 김정호, 2017.10.23 */
+            TSYCD_COMM_CD_GRP_LANG(
+                 LANG_TP
+                ,COMM_CD_GRP
+                ,COMM_CD_GRP_NM
+                ,INPT_MENU_ID
+                ,REGR_ID
+                ,REG_DATE
+                ,CHGR_ID
+                ,CHG_DATE
+            )VALUES(
+                 #{commCdGrpLangVO.langTp, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.commCdGrp, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.commCdGrpNm, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.inptMenuId, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.regrId, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.regDate}
+                ,#{commCdGrpLangVO.chgrId, jdbcType=VARCHAR}
+                ,#{commCdGrpLangVO.chgDate}
+            )
+    </insert>
+    
+    <select id="getCdGrpInfo" resultType="CommCdGrpVO">
+        SELECT    /* CommCdMngMapper.getCdGrpInfo, 김정호, 2017.10.23 */
+             COMM_CD_GRP
+            ,COMM_CD_GRP_NM
+            ,SYS_ID
+            ,LEN
+            ,REF_CD1
+            ,REF_CD2
+            ,REF_CD3
+            ,RMRK
+            ,USE_YN
+            ,SYS_USE_YN
+            ,REGR_ID
+            ,REG_DATE
+            ,CHGR_ID
+            ,CHG_DATE
+       FROM 
+            TSYCD_COMM_CD_GRP
+       WHERE
+            COMM_CD_GRP = #{commCdGrpVO.commCdGrp}
+    </select>
+    
+    <select id="getCdGrpLngList" resultType="java.util.HashMap">
+        SELECT     /* CommCdMngMapper.getCdGrpLngList, 김정호, 2017.10.23 */
+               'ko' AS LANGUAGE_CODE
+              ,'Korean' AS LANGUAGE_NAME
+              ,NAME.COMM_CD_GRP
+              ,NAME.COMM_CD_GRP_NM AS COMM_NM
+        FROM TSYCD_COMM_CD_GRP_LANG NAME
+        WHERE 1=1
+         AND NAME.COMM_CD_GRP   = #{commCdGrp}
+    </select>
+    
+    <update id="updateCdGrp" parameterType="CommCdGrpVO">
+        UPDATE TSYCD_COMM_CD_GRP    /* CommCdMngMapper.updateCdGrp, 김정호, 2017.10.23 */
+            SET
+                 COMM_CD_GRP_NM     = #{commCdGrpVO.commCdGrpNm}
+                ,LEN                = CAST(#{commCdGrpVO.len, jdbcType=VARCHAR} AS integer)
+                ,REF_CD1            = #{commCdGrpVO.refCd1}
+                ,REF_CD2            = #{commCdGrpVO.refCd2}
+                ,REF_CD3            = #{commCdGrpVO.refCd3}
+                ,RMRK               = #{commCdGrpVO.rmrk}
+                ,USE_YN             = #{commCdGrpVO.useYn}
+                ,INPT_MENU_ID       = #{commCdGrpVO.inptMenuId}
+                ,CHGR_ID            = #{commCdGrpVO.chgrId}
+                ,CHG_DATE            = #{commCdGrpVO.chgDate}
+        WHERE COMM_CD_GRP            = #{commCdGrpVO.commCdGrp}
+    </update>
+
+    <update id="updateCdGrpLang" parameterType="CommCdGrpLangVO">
+        UPDATE TSYCD_COMM_CD_GRP_LANG    /* CommCdMngMapper.updateCdGrpLang, 김정호, 2017.10.23 */
+            SET
+                 COMM_CD_GRP_NM    = #{commCdGrpLangVO.commCdGrpNm}
+                ,INPT_MENU_ID      = #{commCdGrpLangVO.inptMenuId}
+                ,CHGR_ID           = #{commCdGrpLangVO.chgrId}
+                ,CHG_DATE          = #{commCdGrpLangVO.chgDate}
+        WHERE LANG_TP              = #{commCdGrpLangVO.langTp}
+        AND   COMM_CD_GRP          = #{commCdGrpLangVO.commCdGrp}
+    </update>
+    
+    <delete id="deleteCdGrp" parameterType="CommCdGrpVO">
+        DELETE FROM TSYCD_COMM_CD_GRP    /* CommCdMngMapper.deleteCdGrp, 김정호, 2017.10.23 */
+        WHERE COMM_CD_GRP = #{commCdGrpVO.commCdGrp}
+    </delete>
+    
+    <delete id="deleteCdGrpLang" parameterType="CommCdGrpVO">
+        DELETE     /* CommCdMngMapper.deleteCdGrpLang, 김정호, 2017.10.23 */
+           FROM TSYCD_COMM_CD_GRP_LANG    
+        WHERE COMM_CD_GRP = #{commCdGrpVO.commCdGrp}
+    </delete>
+    
+    <delete id="deleteCd" parameterType="CommCdGrpVO">
+        DELETE     /* CommCdMngMapper.deleteCd, 김정호, 2017.10.23 */
+        FROM TSYCD_COMM_CD_DTL
+        WHERE COMM_CD_GRP = #{commCdGrpVO.commCdGrp}
+    </delete>
+    
+    <delete id="deleteCdLang" parameterType="CommCdGrpVO">
+        DELETE     /* CommCdMngMapper.deleteCdLang, 김정호, 2017.10.23 */
+        FROM TSYCD_COMM_CD_DTL_LANG
+        WHERE COMM_CD_GRP = #{commCdGrpVO.commCdGrp}
+    </delete>
+ 
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.main.MainMapper">
+
+    <select id="getRcptCount" resultType="int">
+        SELECT /* MainMapper.getRcptCount, 윤정환, 2019.04.15 */
+			COUNT(RCPT_ID)
+        FROM  TCMCS_CNSL_RCPT_INFO
+        WHERE  RCPT_DT  &lt;= #{date}
+		AND    RCPT_DT IS NOT NULL
+    </select>
+
+	<select id="getRcptCmplCount" resultType="int">
+		SELECT /* MainMapper.getRcptCmplCount, 윤정환, 2019.04.15 */
+			COUNT(RCPT_ID)
+		FROM  TCMCS_CNSL_RCPT_INFO
+		WHERE  CMPL_DT  &lt;= #{date}
+		AND    CMPL_DT IS NOT NULL
+	</select>
+
+	<select id="getNewRcptCount" resultType="int">
+		SELECT /* MainMapper.getNewRcptCount, 윤정환, 2019.04.15 */
+			COUNT(APPL_SEQ_NO)
+		FROM  TCMMB_CUST_SVC_APPL_INFO
+		WHERE  APPL_DT      &lt;= #{date}
+		AND    APPL_DT IS NOT NULL
+		AND    APPL_CL       = '00'
+		AND    APPL_STAT NOT IN ('05', '50')
+	</select>
+
+	<select id="getNewCmplCount" resultType="int">
+		SELECT /* MainMapper.getNewCmplCount, 윤정환, 2019.04.15 */
+			COUNT(APPL_SEQ_NO)
+		FROM  TCMMB_CUST_SVC_APPL_INFO
+		WHERE  PROC_CMPL_DT  &lt;= #{date}
+		AND    PROC_CMPL_DT IS NOT NULL
+		AND    APPL_CL        = '00'
+		AND    APPL_STAT      = '50'
+	</select>
+
+	<select id="getChgRcptCount" resultType="int">
+		SELECT /* MainMapper.getChgRcptCount, 윤정환, 2019.04.15 */
+			COUNT(APPL_SEQ_NO)
+		FROM  TCMMB_CUST_SVC_APPL_INFO
+		WHERE  APPL_DT      &lt;= #{date}
+		AND    APPL_DT IS NOT NULL
+		AND    APPL_CL NOT IN ('00')
+		AND    APPL_STAT NOT IN ('100')
+	</select>
+
+	<select id="getChgCmplCount" resultType="int">
+		SELECT /* MainMapper.getChgCmplCount, 윤정환, 2019.04.15 */
+			COUNT(APPL_SEQ_NO)
+		FROM  TCMMB_CUST_SVC_APPL_INFO
+		WHERE  PROC_CMPL_DT  &lt;= #{date}
+		AND    PROC_CMPL_DT IS NOT NULL
+		AND    APPL_CL NOT IN ('00')
+		AND    APPL_STAT = '100'
+	</select>
+</mapper>

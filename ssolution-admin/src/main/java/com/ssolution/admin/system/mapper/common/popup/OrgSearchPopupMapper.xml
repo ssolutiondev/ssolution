@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssolution.admin.system.mapper.common.popup.OrgSearchPopupMapper">
+
+    <!-- 권한 조직 조회 -->
+    <select id="getAuthOrgInfo" parameterType="OrgSearchPopupVO" resultType="OrgSearchPopupVO">
+        SELECT    /* OrganizationMngMapper.getAuthOrgInfo, JHLee, 2017.12.20 */
+            ORG.ORG_ID
+          , ORG.ORG_NM
+        FROM
+            TSYOR_ORG_INFO ORG
+        WHERE ORG.SO_ID = #{soId}
+        <if test="authOrgId != null and authOrgId != ''">
+          AND ORG.ORG_ID = #{authOrgId}
+        </if>
+        <if test="authOrgId == null or authOrgId eq ''">
+          AND ORG.ORG_ID = (SELECT ORG_ID_LVL1 FROM TSYOR_ORG_LYR_STRCT WHERE ORG_ID = #{userOrgId})
+        </if>
+    </select>
+
+    <!-- 조직권한으로 조직 목록 조회 -->
+    <select id="getOrgListByAuth" parameterType="OrgSearchPopupVO" resultType="OrgSearchPopupVO">
+        with recursive ORG_INFO(LVL,
+                                SO_ID,
+                                ORG_ID,
+                                ORG_NM,
+                                TP_CD,
+                                TP_NM ,
+                                TP_DTL_CD ,
+                                TP_DTL_NM,
+                                UPP_ORG_ID,
+                                UPP_ORG_NM,
+                                ORG_LVL_CD,
+                                ORG_LVL_NM) as (
+                select
+                    0 as LVL ,
+                    RORG.SO_ID ,
+                    RORG.ORG_ID ,
+                    RORG.ORG_NM ,
+                    RORG.TP_CD ,
+                    FSYCD_CODE_NAME('AW00001',
+                    RORG.TP_CD) as TP_NM ,
+                    RORG.TP_DTL_CD ,
+                    FSYCD_CODE_NAME('AW00002',
+                    RORG.TP_DTL_CD) as TP_DTL_NM ,
+                    RORG.UPP_ORG_ID ,
+                    (
+                    select ORG_NM
+                    from
+                    TSYOR_ORG_INFO
+                    where
+                    ORG_ID = RORG.UPP_ORG_ID
+                    and SO_ID = RORG.SO_ID) as UPP_ORG_NM ,
+                    RORG.ORG_LVL_CD ,
+                    FSYCD_CODE_NAME('AW00004',
+                    RORG.ORG_LVL_CD) as ORG_LVL_NM
+                from
+                    TSYOR_ORG_INFO RORG
+                where
+                        RORG.APLY_STRT_DT &lt;= TO_CHAR(now(),'YYYYMMDD')
+                    AND RORG.APLY_END_DT  &gt;= TO_CHAR(now(),'YYYYMMDD')
+                    AND RORG.SO_ID  = #{soId}
+                    AND RORG.ORG_ID = #{authOrgId}
+                union all
+                select
+                    LVL + 1 as LVL ,
+                    ORG.SO_ID ,
+                    ORG.ORG_ID ,
+                    ORG.ORG_NM ,
+                    ORG.TP_CD ,
+                    FSYCD_CODE_NAME('AW00001',
+                    ORG.TP_CD) as TP_NM ,
+                    ORG.TP_DTL_CD ,
+                    FSYCD_CODE_NAME('AW00002',
+                    ORG.TP_DTL_CD) as TP_DTL_NM ,
+                    ORG.UPP_ORG_ID ,
+                    (
+                    select ORG_NM
+                    from
+                    TSYOR_ORG_INFO
+                    where
+                    ORG_ID = ORG.UPP_ORG_ID
+                    and SO_ID = ORG.SO_ID) as UPP_ORG_NM ,
+                    ORG.ORG_LVL_CD ,
+                    FSYCD_CODE_NAME('AW00004',
+                    ORG.ORG_LVL_CD) as ORG_LVL_NM
+                from
+                    TSYOR_ORG_INFO ORG,
+                    ORG_INFO RORG
+                where
+                        ORG.APLY_STRT_DT &lt;= TO_CHAR(now(),'YYYYMMDD')
+                    AND ORG.APLY_END_DT  &gt;= TO_CHAR(now(),'YYYYMMDD')
+                    AND ORG.SO_ID         = #{soId}
+                    AND ORG.UPP_ORG_ID    = RORG.ORG_ID
+        )
+        select
+                (row_number() over()) as ROW_NO,
+                LVL,
+                SO_ID,
+                ORG_ID,
+                ORG_NM,
+                TP_CD,
+                TP_NM ,
+                TP_DTL_CD ,
+                TP_DTL_NM,
+                UPP_ORG_ID,
+                UPP_ORG_NM,
+                ORG_LVL_CD,
+                ORG_LVL_NM
+        from ORG_INFO ORG_INFO
+        WHERE 1 = 1
+        <if test="orgId != null and orgId != ''">
+          AND ORG_INFO.ORG_ID = #{orgId}
+        </if>
+        <if test="orgNm != null and orgNm != ''">
+          AND ORG_INFO.ORG_NM LIKE CONCAT(CONCAT('%', #{orgNm}), '%')
+        </if>
+        <if test="tpCd != null and tpCd != '' and tpCd != 'ALL'">
+          AND ORG_INFO.TP_CD = #{tpCd}
+        </if>
+        <if test="tpDtlCd != null and tpDtlCd != '' and tpDtlCd != 'ALL'">
+          AND ORG_INFO.TP_DTL_CD = #{tpDtlCd}
+        </if>
+        <if test="orgLvlCd != null and orgLvlCd != '' and orgLvlCd != 'ALL'">
+          AND ORG_INFO.ORG_LVL_CD = #{orgLvlCd}
+        </if>
+        ORDER BY ROW_NO
+    </select>
+
+    <!-- 조직권한으로 조직 목록 조회(For Tree) -->
+    <select id="getOrgListByAuthForTree" parameterType="OrgSearchPopupVO" resultType="hashmap">
+        with recursive ORG_INFO( LVL
+                                ,SO_ID
+                                ,ORG_ID
+                                ,ORG_NM
+                                ,TP_CD
+                                ,TP_NM
+                                ,TP_DTL_CD
+                                ,TP_DTL_NM
+                                ,UPP_ORG_ID
+                                ,UPP_ORG_NM
+                                ,ORG_LVL_CD
+                                ,ORG_LVL_NM) as (
+                    select
+                         0 as LVL
+                        ,RORG.SO_ID
+                        ,RORG.ORG_ID
+                        ,RORG.ORG_NM
+                        ,RORG.TP_CD
+                        ,FSYCD_CODE_NAME('AW00001',RORG.TP_CD) as TP_NM
+                        ,RORG.TP_DTL_CD
+                        ,FSYCD_CODE_NAME('AW00002',RORG.TP_DTL_CD) as TP_DTL_NM
+                        ,RORG.UPP_ORG_ID
+                        ,(
+                            select ORG_NM
+                            from
+                            TSYOR_ORG_INFO
+                            where
+                            ORG_ID = RORG.UPP_ORG_ID
+                            and SO_ID = RORG.SO_ID) as UPP_ORG_NM
+                        ,RORG.ORG_LVL_CD
+                        ,FSYCD_CODE_NAME('AW00004', RORG.ORG_LVL_CD) as ORG_LVL_NM
+                    from
+                        TSYOR_ORG_INFO RORG
+                    where
+                            RORG.APLY_STRT_DT &lt;= TO_CHAR(now(),'YYYYMMDD')
+                        AND RORG.APLY_END_DT  &gt;= TO_CHAR(now(),'YYYYMMDD')
+                        AND RORG.SO_ID         = #{soId}
+                        AND RORG.ORG_ID        = #{authOrgId}
+                    union all
+                    select
+                         LVL + 1 as LVL
+                        ,ORG.SO_ID
+                        ,ORG.ORG_ID
+                        ,ORG.ORG_NM
+                        ,ORG.TP_CD
+                        ,FSYCD_CODE_NAME('AW00001', ORG.TP_CD) as TP_NM
+                        ,ORG.TP_DTL_CD
+                        ,FSYCD_CODE_NAME('AW00002', ORG.TP_DTL_CD) as TP_DTL_NM
+                        ,ORG.UPP_ORG_ID
+                        ,(
+                            select ORG_NM
+                            from
+                            TSYOR_ORG_INFO
+                            where
+                            ORG_ID = ORG.UPP_ORG_ID
+                            and SO_ID = ORG.SO_ID) as UPP_ORG_NM
+                        ,ORG.ORG_LVL_CD
+                        ,FSYCD_CODE_NAME('AW00004', ORG.ORG_LVL_CD) as ORG_LVL_NM
+                    from
+                        TSYOR_ORG_INFO ORG,
+                        ORG_INFO RORG
+                    where
+                            ORG.APLY_STRT_DT &lt;= TO_CHAR(now(),'YYYYMMDD')
+                        AND ORG.APLY_END_DT  &gt;= TO_CHAR(now(),'YYYYMMDD')
+                        AND ORG.SO_ID         = #{soId}
+                        AND ORG.UPP_ORG_ID    = RORG.ORG_ID
+        )
+        SELECT
+             (row_number() over()) as ROW_NO
+            ,LVL
+            ,SO_ID
+            ,ORG_ID as ID
+            ,ORG_NM as TEXT
+            ,CONCAT(ORG_ID , ORG_NM) AS SEARCHKEY
+            ,(CASE WHEN
+                (
+                    SELECT COUNT(ORG_ID)
+                    FROM TSYOR_ORG_INFO
+                    WHERE SO_ID = ORG_INFO.SO_ID
+                    AND UPP_ORG_ID = ORG_INFO.ORG_ID) = CAST(0 as BIGINT) THEN 'fa fa-check'
+                    ELSE 'fa fa-folder'
+                    END
+                ) as ICON
+            ,TP_CD
+            ,TP_DTL_CD
+            ,UPP_ORG_ID
+            ,ORG_LVL_CD
+        FROM ORG_INFO ORG_INFO
+        WHERE 1 = 1
+        <if test="orgId != null and orgId != ''">
+          AND ORG_INFO.ORG_ID = #{orgId}
+        </if>
+        <if test="orgNm != null and orgNm != ''">
+          AND ORG_INFO.ORG_NM LIKE CONCAT(CONCAT( '%' , #{orgNm}), '%')
+        </if>
+        <if test="orgLvlCd != null and orgLvlCd != '' and orgLvlCd != 'ALL'">
+          AND ORG_INFO.ORG_LVL_CD = #{orgLvlCd}
+        </if>
+        <if test="uppOrgId != null and uppOrgId != ''">
+          AND ORG_INFO.UPP_ORG_ID = #{uppOrgId}
+        </if>
+        <if test="lvl != null and lvl != '' and lvl > 0">
+          AND ORG_INFO.LVL = #{lvl}
+        </if>
+        ORDER BY ROW_NO
+    </select>
+
+</mapper>

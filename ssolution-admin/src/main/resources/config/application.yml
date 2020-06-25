@@ -1,0 +1,71 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  #데이터베이스
+  datasource:
+    url: ${RDS_URL}
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    hikari:
+      maximumPoolSize: 50
+      minimumIdle : 10
+      connectionTimeout : 600000
+      connection-test-query : select 1
+
+  #메세지
+  messages:
+    basename: message/messages
+    cache-duration: 10
+    encoding: UTF-8
+
+  #Cache
+  cache:
+    ehcache:
+      config: classpath:/cache/ehcache.xml
+
+  #rabbit mq
+  rabbitmq:
+    host: ${RABBIT_HOST}
+    port: ${RABBIT_PORT}
+    username: ${RABBIT_USER}
+    password: ${RABBIT_PASSWORD}
+    virtual-host: mobile
+
+org:
+  springframework:
+    web:
+      filter:
+        CommonsRequestLoggingFilter: DEBUG
+
+#logback 설정
+logging:
+  config: classpath:logback/logback.xml
+
+# whitelabel error 설정
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: ${SERVER_PORT:8080}
+
+#myBatis
+mybatis:
+  type-aliases-package: com.ssolution.admin
+  configuration:
+    cacheEnabled: true
+    lazyLoadingEnabled : true
+    multipleResultSetsEnabled : true
+    useColumnLabel : true
+    jdbcTypeForNull : NULL
+    default-statement-timeout: 20
+    map-underscore-to-camel-case: true
+  configuration-properties:
+    dbmsType : MYSQL
+
+# Application Configuration
+app:
+  config:
+    login-fail-cnt : 9
+    is-avail-dup-login : false
